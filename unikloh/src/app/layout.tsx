@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto, Lato } from "next/font/google";
 import Header from './component/header/Header';
+import Footer from './component/footer/Footer';
 
 
 import "./globals.css";
@@ -45,8 +46,9 @@ export default function RootLayout({
       <body
         className={` ${roboto.className} antialiased bg-white text-black`}
       >
-        <Header />
+        <Header/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
