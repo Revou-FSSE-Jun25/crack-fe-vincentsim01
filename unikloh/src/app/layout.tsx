@@ -4,6 +4,7 @@ import Header from './component/header/Header';
 import Footer from './component/footer/Footer';
 import {UserProvider} from './context/userContext';
 import Link from "next/link";
+import {ThemeProvider} from './context/themeContext';
 
 
 import "./globals.css";
@@ -52,12 +53,14 @@ export default function RootLayout({
       </head>
       {/* ${geistSans.variable} ${geistMono.variable} */}
       <body
-        className={` ${roboto.className} antialiased bg-white text-black`}
+        className={` ${roboto.className} antialiased `}
       >
         <UserProvider>
-          <Header />
-          {children}
-          <Footer />
+          <ThemeProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ThemeProvider>
         </UserProvider>
 
       </body>
