@@ -24,16 +24,16 @@ const Page = () => {
         router.push("/");
     }
   return (
-    <div>
+    <div >
 
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className='flex flex-col items-center gap-4 border border-red-600 p-4 rounded shadow-md mt-20 mb-20'>
             <label htmlFor='username'>Username</label>
-            <input type='text' id='username' name='username' value={formData.username} onChange={handleChange} placeholder='username' required />
+            <input className='border border-black rounded-md text-center' type='text' id='username' name='username' value={formData.username} onChange={handleChange} placeholder='username' required />
             <br/>
             <label htmlFor='password'>Password</label>
-            <input type='password' id='password' name='password' value={formData.password} onChange={handleChange} placeholder='password' required />
+            <input className='border border-black rounded-md text-center' type='password' id='password' name='password' value={formData.password} onChange={handleChange} placeholder='password' required />
             <br/>
-            <button type='submit'>Login</button>
+            <button type='submit' className='border border-black rounded-md px-4 py-2 cursor-pointer shadow-md hover:scale-110 active:scale-95'>Login</button>
         </form>
       
     </div>
