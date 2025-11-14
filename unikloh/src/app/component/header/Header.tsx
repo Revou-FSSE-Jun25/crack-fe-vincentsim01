@@ -35,7 +35,8 @@ const Header = () => {
         </span> 
         <span className='mr-4'><Link href='/Contact/'>Contact Us</Link></span> 
         <span className='mr-4'>Profile</span>
-        <span className='mr-4'>Login</span>
+        <span className='mr-4'><Link href='/Login'>Login</Link></span>
+        <span className='mr-4'><Link href='/Signup'>Signup</Link></span>
             <button
               onClick={toggleTheme}
               className="px-4 py-2 rounded bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
