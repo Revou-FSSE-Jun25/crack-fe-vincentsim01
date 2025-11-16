@@ -5,6 +5,7 @@ import Footer from './component/footer/Footer';
 import {UserProvider} from './context/userContext';
 import Link from "next/link";
 import {ThemeProvider} from './context/themeContext';
+import { LoadingProvider } from './context/loadingContext';
 
 
 import "./globals.css";
@@ -56,11 +57,13 @@ export default function RootLayout({
         className={` ${roboto.className} antialiased `}
       >
         <UserProvider>
+          <LoadingProvider>
           <ThemeProvider>
             <Header />
             {children}
             <Footer />
           </ThemeProvider>
+          </LoadingProvider>
         </UserProvider>
 
       </body>
