@@ -22,7 +22,7 @@ const AddToCartButton = ({ title }: { title: string }) => {
   return (
     <div>
         <button 
-            className={`mt-2 p-2 bg-blue-500 text-white rounded ${isAdding ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`mt-2 p-2 bg-red-600 text-white rounded ${isAdding ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={() => handleAddToCart(title)}
             disabled={isAdding}
         >
