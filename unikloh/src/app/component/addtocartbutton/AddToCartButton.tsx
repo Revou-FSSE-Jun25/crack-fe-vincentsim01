@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState,useEffect} from 'react';
-import {Link} from 'next/link';
+// import {Link} from 'next/link';
 
 const AddToCartButton = ({ title }: { title: string }) => {
     const [isAdding, setIsAdding] = useState(false);
