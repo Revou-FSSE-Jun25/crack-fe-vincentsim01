@@ -21,6 +21,8 @@ const Header = () => {
         <span className='mr-4'><Link href="/">Home</Link></span>
         <span className='mr-4'><Link href='/Products'>Product</Link></span>
         <span className='mr-4'><Link href="/Photoshoot">Photoshoot</Link></span>
+        <span className='mr-4'><Link href="/Blog">Blog</Link></span>
+        <span className='mr-4'><Link href="/FAQ">FAQ</Link></span>
         <span className='mr-4'>
             <Link href='/   '>
                   <Image

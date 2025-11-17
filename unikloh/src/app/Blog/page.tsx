@@ -1,11 +1,32 @@
 import React from 'react'
 
-const page = () => {
-  return (
-    <div>
-      This is the blog page
-    </div>
+export default async function BlogPost({ params }: any) {
+  const post = await fetch(
+    `https://shrimo.com/fake-api/blog`,
+    { 
+        method: 'GET',
+        next: { revalidate: 86400 } }
   )
-}
+  .then(r => r.json())
+  .then(data => data.blogs)
+  ;
 
-export default page
+
+
+//   console.log(post);
+
+  return (
+    <article>
+        {post.map((item:any)=>{
+            return (
+                <div key={item.id}>
+                    <h1>{item.title}</h1>
+                    <p>{item.content}</p>
+                    <p>{item.author}</p>
+                </div>
+            )
+        })}
+
+    </article>
+  );
+}

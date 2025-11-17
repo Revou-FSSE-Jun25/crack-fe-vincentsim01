@@ -7,6 +7,7 @@ const Footer = () => {
       <span className='mr-4'>Privacy Policy</span>
       <span className='mr-4'>Terms of Service</span>
       <span className='mr-4'>Contact Us</span>
+      <span className='mr-4'>FAQ</span>
     </div>
   )
 }
