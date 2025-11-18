@@ -6,6 +6,7 @@ import {UserProvider} from './context/userContext';
 import Link from "next/link";
 import {ThemeProvider} from './context/themeContext';
 import { LoadingProvider } from './context/loadingContext';
+import {AuthProvider} from './context/authContext';
 
 
 import "./globals.css";
@@ -59,9 +60,11 @@ export default function RootLayout({
         <UserProvider>
           <LoadingProvider>
           <ThemeProvider>
+            <AuthProvider>
             <Header />
             {children}
             <Footer />
+            </AuthProvider>
           </ThemeProvider>
           </LoadingProvider>
         </UserProvider>
