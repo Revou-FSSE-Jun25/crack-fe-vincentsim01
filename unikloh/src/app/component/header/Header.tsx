@@ -1,30 +1,43 @@
 "use client";
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
-import { ThemeContext } from "../../context/themeContext";
+// import { ThemeContext } from "../../context/themeContext";
 import {useAuth} from '../../context/authContext';
-import HeaderClient from './HeaderUsername';
+import ThemeToggle from "@/app/component/themeToggle/themeToggle";
+// import HeaderClient from './HeaderUsername';
 // import { cookies } from "next/headers";
 // import { getCookie} from '../../../lib/auth/auth';
 
 const Header = () => {
-  const themeContext = useContext(ThemeContext);
+  // const themeContext = useContext(ThemeContext);
   const authContext = useAuth();
 
-  const { isAuthenticated, logout } = authContext;
-
+  const [username, setUsername] = useState<string | null>(null);
+  const { user, isAuthenticated, logout } = useAuth();
   // const username = getCookie('username');
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      setUsername(user.name);
+      console.log('✅ Header updated with user:', user.name);
+    } else {
+      setUsername(null);
+      console.log('👤 Header showing guest');
+    }
+  }, [isAuthenticated, user]);
 
+  const handleLogout = () => {
+    logout();
+  };
 
-  if (!themeContext) {
-    // optional: throw error if ThemeProvider is missing
-    throw new Error("ThemeToggle must be used within ThemeProvider");
-  }
+  // if (!themeContext) {
+  //   // optional: throw error if ThemeProvider is missing
+  //   throw new Error("ThemeToggle must be used within ThemeProvider");
+  // }
 
-   const { theme, toggleTheme } = themeContext;
+  //  const { theme, toggleTheme } = themeContext;
 
   return (
     <div  className='sticky top-0 z-50 shadow h-[10vh] bg-red-600 flex items-center justify-center text-white font-bold'>
@@ -49,24 +62,33 @@ const Header = () => {
         <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/Contact/'>Contact Us</Link></span> 
         {/* <span className='mr-4 cursor-pointer hover:underline active:scale-95'>{username}</span> */}
         {/* <span className='mr-4'><Link href='/Signup'>Signup</Link></span> */}
+        <Link href='/user'>
+          {username ? (
+            <span className='hidden md:inline mr-2 hover:underline'>Hello, {username}</span>
+          ) : (
+            <span className='hidden md:inline mr-2 hover:underline'>Hello, Guest</span>
+          )}
+        </Link>
 
         {!isAuthenticated ?         
-          <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/Login'>Login</Link></span> :
+          <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/login'>Login</Link></span> :
           <div>
             {/* <span className='mr-4 cursor-pointer hover:underline active:scale-95'>Hi,</span>         */}
-            <span><HeaderClient/></span>
+            {/* <span><HeaderClient/></span> */}
             <span className='mr-4 cursor-pointer hover:underline active:scale-95' onClick={logout}>Logout</span>
           </div>
         }
+
+        <ThemeToggle></ThemeToggle>
       
 
 
-        <button
+        {/* <button
               onClick={toggleTheme}
               className="px-4 py-2 rounded bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
         >
             Switch to {theme === "light" ? "Dark" : "Light"} Mode
-        </button>
+        </button> */}
     </div>
   )
 }
