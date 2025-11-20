@@ -2,6 +2,8 @@
 
 import React,{useState, useEffect} from 'react';
 import { useRouter } from "next/navigation";
+import { useAuth } from '../context/authContext';
+import {setCookie} from '../../lib/auth/auth'
 
 const Page = () => {
     const router = useRouter();
@@ -9,6 +11,8 @@ const Page = () => {
         username: 'Arthur',
         password: 'arthur123'
     }
+
+    const { login } = useAuth();
 
     const [formData, setFormData] = useState(initialValue);
 
@@ -20,7 +24,9 @@ const Page = () => {
 
     function handleLogin(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
+        setCookie('username', formData.username, 60);
         console.log("Form submitted:", formData);
+        login();
         router.push("/");
     }
   return (
