@@ -7,6 +7,7 @@ import Link from "next/link";
 import {ThemeProvider} from './context/themeContext';
 import { LoadingProvider } from './context/loadingContext';
 import {AuthProvider} from './context/authContext';
+import { CartProvider } from "./context/cartContext";
 
 
 import "./globals.css";
@@ -57,17 +58,21 @@ export default function RootLayout({
       <body
         className={` ${roboto.className} antialiased `}
       >
+
         <UserProvider>
           <LoadingProvider>
           <ThemeProvider>
             <AuthProvider>
+                      <CartProvider>
             <Header />
             {children}
             <Footer />
+            </CartProvider>
             </AuthProvider>
           </ThemeProvider>
           </LoadingProvider>
         </UserProvider>
+ 
 
       </body>
     </html>

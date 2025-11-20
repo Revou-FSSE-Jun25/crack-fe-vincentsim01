@@ -7,6 +7,7 @@ import { useContext } from "react";
 // import { ThemeContext } from "../../context/themeContext";
 import {useAuth} from '../../context/authContext';
 import ThemeToggle from "@/app/component/themeToggle/themeToggle";
+import CartIcon from "@/app/component/CartIcon";
 // import HeaderClient from './HeaderUsername';
 // import { cookies } from "next/headers";
 // import { getCookie} from '../../../lib/auth/auth';
@@ -68,6 +69,9 @@ const Header = () => {
           ) : (
             <span className='hidden md:inline mr-2 hover:underline'>Hello, Guest</span>
           )}
+        </Link>
+          <Link href='/AddToCart/'>
+          <CartIcon className="ml-2" />
         </Link>
 
         {!isAuthenticated ?         

@@ -3,6 +3,7 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import CartIcon from "@/app/component/CartIcon";
 
 interface User {
   id: number;
