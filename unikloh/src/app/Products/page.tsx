@@ -5,16 +5,14 @@ import Link from "next/link";
 
 
 const page = async () => {
-
   const fetchedData = await api.getProducts(10);
-
   console.log('this is fetchedData' + fetchedData)
   
   return (
     <div>
 
         This is the Products page.
-      <div className='flex flex-wrap '>
+        <div className='flex flex-wrap '>
         {fetchedData.map((item:any)=>{
               function handleAddToCart(itemId: number) {
                 console.log(`Add to cart clicked for item with ID: ${itemId}`);
@@ -23,7 +21,7 @@ const page = async () => {
               }
           return (
             <div className='m-5 p-5 border-2 border-black w-[30%]' key={item.id}>
-              <Link href={`/products/${item.id}`}>              
+              <Link href={`/Products/${item.id}`}>              
                 <h2 key={item.id}>{item.title}</h2>              
                 <div key={item.id}>{item.title}</div>
                 <div key={item.id}>{item.description}</div>
@@ -32,7 +30,7 @@ const page = async () => {
               </Link>
 
               <br></br>
-              <AddToCartButton title={item.title} />
+              {/* <AddToCartButton title={item.title} /> */}
               {/* <button className='mt-2 p-2 bg-blue-500 text-white rounded'>Add to Cart</button> */}
             </div>
           )

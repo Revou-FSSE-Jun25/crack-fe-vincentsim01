@@ -126,6 +126,7 @@ export default function ProductClient({ product, id }: { product: Product; id: n
             alt={product?.title || "Product image"}
             width={400}
             height={400}
+            unoptimized
             className="my-4 rounded-lg"
           />
 
