@@ -39,7 +39,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
   // Fetch data on the server for ISR
   const product: Product = await api.getProduct(id);
-
+  console.log(product)
   if (!product) {
     return (
       <div className="text-center py-12">

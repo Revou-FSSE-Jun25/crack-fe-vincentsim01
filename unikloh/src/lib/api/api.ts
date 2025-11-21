@@ -29,14 +29,14 @@ export interface ProductFormData {
 
 export const api = {
   getProducts: async (limit: number = 10) => {
-    const response = await fetch(`${BASE_URL}/products?limit=${limit}`);
+    const response = await fetch(`${BASE_URL}products?limit=${limit}`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
 
     const data = await response.json();
-    return data.products;
+    return data;
   },
 
   getProduct: async (id: number): Promise<Product> => {
