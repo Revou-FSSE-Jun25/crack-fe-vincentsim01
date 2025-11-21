@@ -63,7 +63,7 @@ export default function RootLayout({
           <LoadingProvider>
           <ThemeProvider>
             <AuthProvider>
-                      <CartProvider>
+            <CartProvider>
             <Header />
             {children}
             <Footer />

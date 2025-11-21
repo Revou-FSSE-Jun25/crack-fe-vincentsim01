@@ -12,7 +12,8 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({children}:{children: ReactNode}) => {
-    const [theme, setTheme] = useState<Theme>('light');
+    const [theme, setTheme] = useState<Theme>('light');  
+    const html = document.documentElement;
 
     useEffect(() =>{
         const body = document.body;
@@ -20,7 +21,7 @@ export const ThemeProvider = ({children}:{children: ReactNode}) => {
         const storedTheme = localStorage.getItem('theme') as Theme;
         if(storedTheme){
             setTheme(storedTheme);
-            body.classList.add(storedTheme);
+            html.classList.add(storedTheme);
             header?.classList.add(storedTheme);
         }
     }, []);
@@ -28,8 +29,8 @@ export const ThemeProvider = ({children}:{children: ReactNode}) => {
     useEffect(() =>{
         const body = document.body;
         const header = document.getElementById('headerId');
-        body.classList.remove(theme === "light" ? "dark" : "light");
-        body.classList.add(theme);
+        html.classList.remove(theme === "light" ? "dark" : "light");
+        html.classList.add(theme);
         header?.classList.remove(theme === "light" ? "dark" : "light");
         header?.classList.add(theme);
         
