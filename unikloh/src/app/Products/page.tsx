@@ -17,20 +17,24 @@ const page = async () => {
               function handleAddToCart(itemId: number) {
                 console.log(`Add to cart clicked for item with ID: ${itemId}`);
                 sessionStorage.setItem("title", "item.title");
+
                 // Here you would typically also update the cart state/context
               }
+
+              const param = item.id;
+              // console.log(param+typeof(param))
           return (
             <div className='m-5 p-5 border-2 border-black w-[30%]' key={item.id}>
-              <Link href={`/Products/${item.id}`}>              
-                <h2 key={item.id}>{item.title}</h2>              
-                <div key={item.id}>{item.title}</div>
-                <div key={item.id}>{item.description}</div>
-                <div key={item.id}>${item.price}</div>
-                <img key={item.id} src={item.images[0]} alt={item.title} width={200} height={200}/>
+              <Link href={`/products/${param}`}>              
+                <h2 >{item.title}</h2>              
+                <div>{item.title}</div>
+                <div>{item.description}</div>
+                <div>${item.price}</div>
+                <img src={item.images[0]} alt={item.title} width={200} height={200}/>
               </Link>
 
               <br></br>
-              {/* <AddToCartButton title={item.title} /> */}
+              <AddToCartButton product={item.title} />
               {/* <button className='mt-2 p-2 bg-blue-500 text-white rounded'>Add to Cart</button> */}
             </div>
           )

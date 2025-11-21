@@ -40,9 +40,11 @@ export const api = {
   },
 
   getProduct: async (id: number): Promise<Product> => {
-    const response = await fetch(`${BASE_URL}products/9`);
 
-    // console.log(await response.json());
+    console.log('the id is '+ id)
+    const response = await fetch(`${BASE_URL}products/${id}`);
+
+    console.log( response);
 
     if (!response.ok) {
       throw new Error('Failed to fetch product');

@@ -44,7 +44,7 @@ const Header = () => {
   return (
     <div id='headerId'  className='sticky top-0 z-50 shadow h-[10vh]  flex items-center justify-center  font-bold'>
         <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href="/">Home</Link></span>
-        <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/Products'>Product</Link></span>
+        <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/products'>Product</Link></span>
         <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href="/Photoshoot">Photoshoot</Link></span>
         <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href="/Blog">Blog</Link></span>
         <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href="/FAQ">FAQ</Link></span>

@@ -35,10 +35,13 @@ export interface ProductFormData {
 
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
-  const id = Number(params.id);
-
   // Fetch data on the server for ISR
-  const product: Product = await api.getProduct(id);
+
+  console.log(params.id)
+  const id = Number(params.id);
+  const product: Product = await api.getProduct(19);
+
+  // console.log("Response status:", res.status);
   console.log(product)
   if (!product) {
     return (
