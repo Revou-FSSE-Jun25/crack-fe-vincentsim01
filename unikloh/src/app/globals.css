@@ -21,14 +21,29 @@
 
 /* Default: light mode */
 :root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+/* .headerIdlight {
   --background: #fa1919;
   --foreground: #000000;
 }
+
+.headerIddark {
+  --background: #ffffff;
+  --foreground: #000000;
+} */
 
 /* Dark mode */
 .dark {
   --background: #000000;
   --foreground: #ffffff;
+}
+
+.light {
+  --background: lab(49.68% 68.04 46.99);
+  --foreground: #000000;
 }
 
 .headfootdark{

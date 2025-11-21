@@ -8,6 +8,7 @@ import { useContext } from "react";
 import {useAuth} from '../../context/authContext';
 import ThemeToggle from "@/app/component/themeToggle/themeToggle";
 import CartIcon from "@/app/component/CartIcon";
+// import "../globals.css";
 // import HeaderClient from './HeaderUsername';
 // import { cookies } from "next/headers";
 // import { getCookie} from '../../../lib/auth/auth';
