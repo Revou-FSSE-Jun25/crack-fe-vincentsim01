@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const page = async () => {
   const fetchedData = await api.getProducts(10);
-  console.log('this is fetchedData' + fetchedData)
+  // console.log('this is fetchedData' + fetchedData)
   
   return (
     <div>
@@ -25,7 +25,7 @@ const page = async () => {
               // console.log(param+typeof(param))
           return (
             <div className='m-5 p-5 border-2 border-black w-[30%]' key={item.id}>
-              <Link href={`/products/${param}`}>              
+              <Link href={`/products/${item.id}`}>              
                 <h2 >{item.title}</h2>              
                 <div>{item.title}</div>
                 <div>{item.description}</div>

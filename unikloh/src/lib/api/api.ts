@@ -1,4 +1,5 @@
 const BASE_URL = 'https://api.escuelajs.co/api/v1/';
+import axios from 'axios';
 
 export interface Product{
     id:number;
@@ -27,6 +28,18 @@ export interface ProductFormData {
     // images:string[];
 }
 
+export async function getProduct(id:number):Promise<Product>{
+    try{
+        const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
+        console.log("from getproductid"+response)
+        return response.data;
+    }catch(error){
+        console.error("Error Fetching Product", error);
+        throw new Error('Failed to fetch product');
+
+    }
+  }
+
 export const api = {
   getProducts: async (limit: number = 10) => {
     const response = await fetch(`${BASE_URL}products?limit=${limit}`);
@@ -41,15 +54,18 @@ export const api = {
 
   getProduct: async (id: number): Promise<Product> => {
 
-    console.log('the id is '+ id)
-    const response = await fetch(`${BASE_URL}products/${id}`);
+    console.log(typeof(id))
+    const response = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`);
 
     console.log( response);
 
     if (!response.ok) {
       throw new Error('Failed to fetch product');
     }
+    const data = await response.json();
 
-    return response.json();
+    console.log(data)
+    return data;
+    // return response.json();
   }
 }
