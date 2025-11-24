@@ -70,7 +70,7 @@ export default function CartPage() {
 
                     <br></br><br></br>
 
-          <button onClick={openPhotoShoot}>Add On Extra Photoshoot Session</button>
+          <button className='border border-black px-4 py-2 rounded bg-white cursor-pointer hover:scale-110 active:scale-90' onClick={openPhotoShoot}>Add On Extra Photoshoot Session</button>
 
           {isPhotoShootAdded ? (<><CheckoutPhotoShoot /> <button onClick={closePhotoShoot}>Close</button></>) : null}
 

@@ -34,7 +34,7 @@ const page = async () => {
               </Link>
 
               <br></br>
-              <AddToCartButton product={item.title} />
+              <AddToCartButton product={item} />
               {/* <button className='mt-2 p-2 bg-blue-500 text-white rounded'>Add to Cart</button> */}
             </div>
           )

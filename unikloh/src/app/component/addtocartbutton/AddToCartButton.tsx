@@ -4,10 +4,10 @@ import React from "react";
 import { useCart } from "@/app/context/cartContext";
 
 interface Product {
-  id: number;
-  title: string;
-  price: number;
-  images: string[];
+  id?: number;
+  title?: string;
+  price?: number;
+  images?: string[];
   // totalItems: number;
 }
 
@@ -17,6 +17,7 @@ interface Props {
 
 export default function AddToCartButton({ product }: Props) {
   const { addToCart } = useCart();
+  console.log(product + "from props")
   const handleAddToCart = () => {
     // Get existing cart items or create empty array
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
