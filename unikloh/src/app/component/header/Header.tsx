@@ -8,6 +8,7 @@ import { useContext } from "react";
 import {useAuth} from '../../context/authContext';
 import ThemeToggle from "@/app/component/themeToggle/themeToggle";
 import CartIcon from "@/app/component/CartIcon";
+import AdminProduct from '@/app/adminProduct/page';
 // import "../globals.css";
 // import HeaderClient from './HeaderUsername';
 // import { cookies } from "next/headers";
@@ -18,7 +19,7 @@ const Header = () => {
   const authContext = useAuth();
 
   const [username, setUsername] = useState<string | null>(null);
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout, userRole } = useAuth();
   // const username = getCookie('username');
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -83,6 +84,9 @@ const Header = () => {
             <span className='mr-4 cursor-pointer hover:underline active:scale-95' onClick={logout}>Logout</span>
           </div>
         }
+        {userRole === 'admin' && (
+          <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/adminProduct'>Admin Dashboard</Link></span>
+        )}
 
         <ThemeToggle></ThemeToggle>
       
