@@ -12,6 +12,7 @@ type Product = {
 export default function CheckoutPage() {
   const [checkoutItems, setCheckoutItems] = useState<Product[]>([]);
   const [total, setTotal] = useState<number>(0);
+  const [isPhotoShootAdded, setIsPhotoShootAdded] = useState<boolean>(false);
 
   useEffect(() => {
     const storedItems = localStorage.getItem("checkoutItems");
@@ -25,6 +26,14 @@ export default function CheckoutPage() {
       setTotal(totalPrice);
     }
   }, []);
+
+  function openPhotoShoot() {
+    setIsPhotoShootAdded(true);
+  }
+
+  function closePhotoShoot() {
+    setIsPhotoShootAdded(false);
+  }
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
@@ -50,7 +59,10 @@ export default function CheckoutPage() {
 
           <br></br><br></br>
 
-              <CheckoutPhotoShoot/>
+          <button onClick={openPhotoShoot}>Add On Extra Photoshoot Session</button>
+
+          {isPhotoShootAdded ? (<><CheckoutPhotoShoot /> <button onClick={closePhotoShoot}>Close</button></>) : null}
+  
 
 
           <div className="mt-4 text-right text-lg font-semibold">
