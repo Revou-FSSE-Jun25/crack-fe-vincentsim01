@@ -3,11 +3,23 @@
 import { useState } from "react";
 import { useCart } from "@/app/context/cartContext";
 import { useRouter } from "next/navigation";
+import { useLoading } from '@/app/context/loadingContext';
+import CheckoutPhotoShoot from "@/app/component/checkoutPhotoShoot/page";  
 
 export default function CartPage() {
-  const { cart, removeFromCart, getTotal, clearCart } = useCart();
+  const { cart, removeFromCart, getTotal, clearCart, addToCart } = useCart();
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const router = useRouter();
+    const [isPhotoShootAdded, setIsPhotoShootAdded] = useState<boolean>(false);
+
+      function openPhotoShoot() {
+    setIsPhotoShootAdded(true);
+  }
+
+  function closePhotoShoot() {
+    setIsPhotoShootAdded(false);
+  }
+
 
   const handleSelectItem = (id: number) => {
     setSelectedItems((prev) =>
@@ -55,6 +67,12 @@ export default function CartPage() {
               </button>
             </div>
           ))}
+
+                    <br></br><br></br>
+
+          <button onClick={openPhotoShoot}>Add On Extra Photoshoot Session</button>
+
+          {isPhotoShootAdded ? (<><CheckoutPhotoShoot /> <button onClick={closePhotoShoot}>Close</button></>) : null}
 
           <h2 className="text-xl mt-4 font-semibold">
             Total: ${getTotal().toFixed(2)}

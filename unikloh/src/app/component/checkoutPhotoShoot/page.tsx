@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import { useLoading } from '@/app/context/loadingContext';
+import { useCart } from '@/app/context/cartContext';
 
 const CheckoutPhotoShoot = () => {
 
       const { isLoading, setIsLoading } = useLoading();
+      const { addToCart } = useCart();
     
       const initialValue = {
         photoshootDate: '1 January 2024',
@@ -13,7 +15,15 @@ const CheckoutPhotoShoot = () => {
         package: 'premium',
         phone: '12345678'
       };
-    
+
+      type Product = {
+        id: number;
+        title: string;
+        price: number;
+        quantity?: number;
+        // totalItems: number;
+        };
+            
       const [formData, setFormData] = useState(initialValue);
     
       const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -24,6 +34,14 @@ const CheckoutPhotoShoot = () => {
       function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
         setIsLoading(true);
+        if (formData.package === 'basic') {
+          addToCart({id: 101, title: 'Basic Photoshoot Package', price: 100, quantity: 1});
+        } else if (formData.package === 'premium') {
+          addToCart({id: 102, title: 'Premium Photoshoot Package', price: 200, quantity: 1});
+        } else if (formData.package === 'deluxe') {
+          addToCart({id: 103, title: 'Deluxe Photoshoot Package', price: 300, quantity: 1});
+        }
+        setIsLoading(false);
       }
     
       if (isLoading) {

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import CheckoutPhotoShoot from "../component/checkoutPhotoShoot/page";  
+import CheckoutPhotoShoot from "@/app/component/checkoutPhotoShoot/page";  
 
 type Product = {
   id: number;
@@ -12,7 +12,7 @@ type Product = {
 export default function CheckoutPage() {
   const [checkoutItems, setCheckoutItems] = useState<Product[]>([]);
   const [total, setTotal] = useState<number>(0);
-  const [isPhotoShootAdded, setIsPhotoShootAdded] = useState<boolean>(false);
+  // const [isPhotoShootAdded, setIsPhotoShootAdded] = useState<boolean>(false);
 
   useEffect(() => {
     const storedItems = localStorage.getItem("checkoutItems");
@@ -27,13 +27,13 @@ export default function CheckoutPage() {
     }
   }, []);
 
-  function openPhotoShoot() {
-    setIsPhotoShootAdded(true);
-  }
+  // function openPhotoShoot() {
+  //   setIsPhotoShootAdded(true);
+  // }
 
-  function closePhotoShoot() {
-    setIsPhotoShootAdded(false);
-  }
+  // function closePhotoShoot() {
+  //   setIsPhotoShootAdded(false);
+  // }
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
@@ -57,11 +57,11 @@ export default function CheckoutPage() {
             </div>
           ))}
 
-          <br></br><br></br>
+          {/* <br></br><br></br>
 
           <button onClick={openPhotoShoot}>Add On Extra Photoshoot Session</button>
 
-          {isPhotoShootAdded ? (<><CheckoutPhotoShoot /> <button onClick={closePhotoShoot}>Close</button></>) : null}
+          {isPhotoShootAdded ? (<><CheckoutPhotoShoot /> <button onClick={closePhotoShoot}>Close</button></>) : null} */}
   
 
 
