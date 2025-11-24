@@ -52,7 +52,7 @@ export default function CheckoutPage() {
           </div>
 
           <button
-            onClick={() => (window.location.href = "/payment")}
+            onClick={() => (window.location.href = "/Payment")}
             className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
           >
             Proceed to Payment

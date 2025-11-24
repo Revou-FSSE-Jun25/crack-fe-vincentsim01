@@ -20,7 +20,7 @@ export default function CartPage() {
       selectedItems.includes(item.id)
     );
     localStorage.setItem("checkoutItems", JSON.stringify(selectedProducts));
-    router.push("/checkout");
+    router.push("/Checkout");
   };
 
   return (
