@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import CheckoutPhotoShoot from "../component/checkoutPhotoShoot/page";  
 
 type Product = {
   id: number;
@@ -46,6 +47,11 @@ export default function CheckoutPage() {
               <span>${item.price * (item.quantity || 1)}</span>
             </div>
           ))}
+
+          <br></br><br></br>
+
+              <CheckoutPhotoShoot/>
+
 
           <div className="mt-4 text-right text-lg font-semibold">
             Total: ${total.toFixed(2)}
