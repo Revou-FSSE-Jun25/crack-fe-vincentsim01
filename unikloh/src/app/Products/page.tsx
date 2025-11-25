@@ -1,12 +1,41 @@
+// "use client";
+
 import React from 'react'
-import { api } from '@/lib/api/api';
+import { api, Product } from '@/lib/api/api';
 import AddToCartButton from '../component/addtocartbutton/AddToCartButton';
 import Link from "next/link";
+// import {useAuth} from '@/app/context/authContext';
+import FormDeleteProduct from '@/app/component/formDeleteProduct/page';
 
 
 const page = async () => {
+  // const { userRole } = useAuth();
   const fetchedData = await api.getProducts(10);
+    // const [products, setProducts] = useState<Product[]>([]);
   // console.log('this is fetchedData' + fetchedData)
+
+//   const fetchProducts = () => {
+
+//   fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`)
+//     .then(res => res.json())
+//     .then(data => setProducts(data));
+// };
+
+//   function handleDeleteProduct(productId: number) {
+//   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
+//     method: "DELETE",
+//   })
+//     .then((res) => {
+//       if (!res.ok) throw new Error("Failed to delete");
+
+//       // Remove product from state → triggers re-render
+//       setProducts((prev) => prev.filter((p) => p.id !== productId));
+
+//       console.log(`Product ${productId} deleted`);
+//       fetchProducts();
+//     })
+//     .catch((err) => console.error(err));
+// }
   
   return (
     <div>
@@ -35,6 +64,9 @@ const page = async () => {
 
               <br></br>
               <AddToCartButton product={item} />
+
+
+              <FormDeleteProduct productId={item.id} />
               {/* <button className='mt-2 p-2 bg-blue-500 text-white rounded'>Add to Cart</button> */}
             </div>
           )
