@@ -194,9 +194,10 @@ function handleEditProduct(productId: number) {
             <button className='border p-2 rounded bg-yellow-500 text-white' onClick={() => openUpdateProductModal()}>Edit</button>
             <button className='border p-2 rounded bg-red-500 text-white' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
           
-          <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='updateProductModal'>
+          <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='updateProductModal'>
           <h2>Update Product</h2>
-          <button onClick={() => openUpdateProductModal()}>Close</button>
+          <br></br>
+          <button className='border p-2 rounded bg-red-500 text-white absolute top-2 right-2' onClick={() => openUpdateProductModal()}>Close</button>
             <form onSubmit={(e) => { e.preventDefault(); handleEditProduct(product.id); }}>
               <label htmlFor='title'>Title:</label>
               <input
