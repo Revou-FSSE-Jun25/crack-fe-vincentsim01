@@ -25,7 +25,9 @@ const AdminProduct = () => {
   const [formData, setFormData] = useState<ProductFormData>(initialAddProduct);
 
 
-  function handleAddProduct() {
+  function handleAddProduct(e:any) {
+    e.preventDefault();
+    alert("Adding Product: " + JSON.stringify(formData));
     // Logic to add a new product
     fetch("https://api.escuelajs.co/api/v1/products", {
       method: "POST",
@@ -55,11 +57,11 @@ function openAddProductModal() {
   return (
     <div>
       Product Admin
-        <button className='border p-2 rounded bg-blue-500 text-white' onClick={openAddProductModal}>Add New Product</button>
+        <button className='border p-2 rounded bg-blue-500 text-white z-50' onClick={openAddProductModal}>Add New Product</button>
 
-          <div className='hidden absolute top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center' id='addProductModal'>
+          <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='addProductModal'>
           <h2>Add New Product</h2>
-            <form onSubmit={(e) => { e.preventDefault(); handleAddProduct(); }}>
+            <form onSubmit={(e) => {  handleAddProduct(e); }}>
               <label htmlFor='title'>Title:</label>
               <input
                 type='text'
@@ -93,18 +95,20 @@ function openAddProductModal() {
               />
               <br />
 
-              <button type="submit">Submit</button>
+              <button onClick={handleAddProduct} type="submit">Submit</button>
             </form>
         </div>
 
 
         {products.map(product => (
-          <div key={product.id}>
+          <div key={product.id} className='border p-4 m-4'>
             <h2>{product.title}</h2>
-            <img src={product.images[0]} alt={product.title} />
+            <img className='w-[40px] h-[40px] object-cover' src={product.images[0]} alt={product.title} />
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
-            <button>Edit</button>
+            <br></br>
+            <button className='border p-2 rounded bg-yellow-500 text-white'>Edit</button>
+            <button className='border p-2 rounded bg-red-500 text-white'>Delete</button>
           </div>
         ))}
 
