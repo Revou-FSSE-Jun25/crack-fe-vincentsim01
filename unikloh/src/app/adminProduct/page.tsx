@@ -139,12 +139,13 @@ function handleEditProduct(productId: number) {
         <button className='border p-2 rounded bg-blue-500 text-white z-50' onClick={openAddProductModal}>Add New Product</button>
         <button className='border p-2 rounded bg-green-500 text-white m-2' onClick={previousPagination}>Previous</button>
         <button className='border p-2 rounded bg-green-500 text-white' onClick={nextPagination}>Next</button>
-          <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='addProductModal'>
+          <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='addProductModal'>
           <h2>Add New Product</h2>
-          <button onClick={() => openAddProductModal()}>Close</button>
+          <button className='border p-2 rounded bg-red-500 text-white absolute top-2 right-2' onClick={() => openAddProductModal()}>Close</button>
             <form onSubmit={(e) => {  handleAddProduct(e); }}>
               <label htmlFor='title'>Title:</label>
               <input
+                className='border p-1 m-1'
                 type='text'
                 id='title'
                 value={formData.title}
@@ -153,6 +154,7 @@ function handleEditProduct(productId: number) {
               <br />
               <label htmlFor='price'>Price:</label>
               <input
+                className='border p-1 m-1'
                 type='number'
                 id='price'
                 value={formData.price}
@@ -162,6 +164,7 @@ function handleEditProduct(productId: number) {
               <br />
               <label htmlFor='description'>Description:</label>
               <textarea
+                className='border p-1 m-1'
                 id='description'
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -169,6 +172,7 @@ function handleEditProduct(productId: number) {
               <br />
               <label htmlFor='categoryId'>Category ID:</label>
               <input
+                className='border p-1 m-1'
                 type='number'
                 id='categoryId'
                 value={formData.categoryId}
@@ -176,7 +180,7 @@ function handleEditProduct(productId: number) {
               />
               <br />
 
-              <button onClick={handleAddProduct} type="submit">Submit</button>
+              <button className='border p-2 rounded bg-green-500 text-white' onClick={handleAddProduct} type="submit">Submit</button>
             </form>
         </div>
 
@@ -201,6 +205,7 @@ function handleEditProduct(productId: number) {
             <form onSubmit={(e) => { e.preventDefault(); handleEditProduct(product.id); }}>
               <label htmlFor='title'>Title:</label>
               <input
+                className='border p-1 m-1'
                 type='text'
                 id='title'
                 value={updateProducts?.title ?? product.title}
@@ -209,6 +214,7 @@ function handleEditProduct(productId: number) {
               <br />
               <label htmlFor='price'>Price:</label>
               <input
+                className='border p-1 m-1'
                 type='number'
                 id='price'
                 value={updateProducts?.price ?? product.price}
@@ -218,6 +224,7 @@ function handleEditProduct(productId: number) {
               <br />
               <label htmlFor='description'>Description:</label>
               <textarea
+                className='border p-1 m-1'
                 id='description'
                 value={updateProducts?.description ?? product.description}
                 onChange={(e) => setUpdateProducts({ ...updateProducts, description: e.target.value })}
@@ -225,6 +232,7 @@ function handleEditProduct(productId: number) {
               <br />
               <label htmlFor='categoryId'>Category ID:</label>
               <input
+                className='border p-1 m-1'
                 type='number'
                 id='categoryId'
                 value={updateProducts?.categoryId ?? product.categoryId}
@@ -232,7 +240,7 @@ function handleEditProduct(productId: number) {
               />
               <br />
 
-              <button onClick={() =>handleEditProduct(Number(product.id))} type="submit">Submit</button>
+              <button className='border p-2 rounded bg-green-500 text-white' onClick={() =>handleEditProduct(Number(product.id))} type="submit">Submit</button>
             </form>
         </div>
           
