@@ -12,6 +12,8 @@ export interface Product{
 export interface updateProduct{
     title?:string;
     price?:number;
+    description?:string;
+    categoryId?:number ;
 
 }
 

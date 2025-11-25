@@ -11,6 +11,8 @@ const AdminProduct = () => {
   let updateInitialProduct: updateProduct = {
     title: "Shirt To Update",
     price: 7373,
+    description: "A shirt that is made for Update",
+    categoryId: 1,
   }
   const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(updateInitialProduct);
   useEffect(() => {
@@ -92,7 +94,8 @@ function handleEditProduct(productId: number) {
     body: JSON.stringify(
       {
         // id: productId, 
-        ...updateProducts
+        ...updateProducts,
+        images: ["https://placehold.co/600x400"]
 
       })
   })
@@ -183,22 +186,22 @@ function handleEditProduct(productId: number) {
                 onChange={(e) => setUpdateProducts({ ...updateProducts, price: Number(e.target.value) })}
               />
 
-              {/* <br />
+              <br />
               <label htmlFor='description'>Description:</label>
               <textarea
                 id='description'
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                value={updateProducts?.description ?? product.description}
+                onChange={(e) => setUpdateProducts({ ...updateProducts, description: e.target.value })}
               />
-              <br /> */}
-              {/* <label htmlFor='categoryId'>Category ID:</label>
+              <br />
+              <label htmlFor='categoryId'>Category ID:</label>
               <input
                 type='number'
                 id='categoryId'
-                value={formData.categoryId}
-                onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
+                value={updateProducts?.categoryId ?? product.categoryId}
+                onChange={(e) => setUpdateProducts({ ...updateProducts, categoryId: Number(e.target.value) })}
               />
-              <br /> */}
+              <br />
 
               <button onClick={() =>handleEditProduct(Number(product.id))} type="submit">Submit</button>
             </form>
