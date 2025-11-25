@@ -54,6 +54,22 @@ function openAddProductModal() {
     modal?.classList.toggle('hidden');
   
 }
+
+function handleDeleteProduct(productId: number) {
+  fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
+    method: "DELETE",
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to delete");
+
+      // Remove product from state → triggers re-render
+      setProducts((prev) => prev.filter((p) => p.id !== productId));
+
+      console.log(`Product ${productId} deleted`);
+    })
+    .catch((err) => console.error(err));
+}
+
   return (
     <div>
       Product Admin
@@ -108,7 +124,7 @@ function openAddProductModal() {
             <p>Price: ${product.price}</p>
             <br></br>
             <button className='border p-2 rounded bg-yellow-500 text-white'>Edit</button>
-            <button className='border p-2 rounded bg-red-500 text-white'>Delete</button>
+            <button className='border p-2 rounded bg-red-500 text-white' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
           </div>
         ))}
 
