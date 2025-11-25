@@ -2,10 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
-import {Product, ProductFormData} from '@/types/product';
+import {Product, ProductFormData, updateProduct} from '@/types/product';
+
 
 const AdminProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
+
+  let updateInitialProduct: updateProduct = {
+    title: "Shirt To Update",
+    price: 7373,
+  }
+  const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(updateInitialProduct);
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=10", {
       method: "GET",
@@ -55,6 +62,11 @@ function openAddProductModal() {
   
 }
 
+function openUpdateProductModal() {
+  const modal = document.getElementById('updateProductModal');
+  modal?.classList.toggle('hidden');
+}
+
 function handleDeleteProduct(productId: number) {
   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
     method: "DELETE",
@@ -72,6 +84,20 @@ function handleDeleteProduct(productId: number) {
 
 function handleEditProduct(productId: number) {
   // Logic to edit a product
+  fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(
+      {
+        // id: productId, 
+        ...updateProducts
+
+      })
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Product updated:", data);
+    });
   alert("Editing Product ID: " + productId);
 }
 
@@ -121,45 +147,7 @@ function handleEditProduct(productId: number) {
         </div>
 
 
-                  <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='updateProductModal'>
-          <h2>Update Product</h2>
-            <form onSubmit={(e) => { e.preventDefault(); handleEditProduct(); }}>
-              <label htmlFor='title'>Title:</label>
-              <input
-                type='text'
-                id='title'
-                value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              />
-              <br />
-              <label htmlFor='price'>Price:</label>
-              <input
-                type='number'
-                id='price'
-                value={formData.price}
-                onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-              />
 
-              <br />
-              <label htmlFor='description'>Description:</label>
-              <textarea
-                id='description'
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              />
-              <br />
-              <label htmlFor='categoryId'>Category ID:</label>
-              <input
-                type='number'
-                id='categoryId'
-                value={formData.categoryId}
-                onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
-              />
-              <br />
-
-              <button onClick={handleAddProduct} type="submit">Submit</button>
-            </form>
-        </div>
 
 
         {products.map(product => (
@@ -169,8 +157,49 @@ function handleEditProduct(productId: number) {
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
             <br></br>
-            <button className='border p-2 rounded bg-yellow-500 text-white'>Edit</button>
+            <button className='border p-2 rounded bg-yellow-500 text-white' onClick={() => openUpdateProductModal()}>Edit</button>
             <button className='border p-2 rounded bg-red-500 text-white' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+          
+          <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='updateProductModal'>
+          <h2>Update Product</h2>
+            <form onSubmit={(e) => { e.preventDefault(); handleEditProduct(product.id); }}>
+              <label htmlFor='title'>Title:</label>
+              <input
+                type='text'
+                id='title'
+                value={updateProducts?.title}
+                onChange={(e) => setUpdateProducts({ ...updateProducts, title: e.target.value })}
+              />
+              <br />
+              <label htmlFor='price'>Price:</label>
+              <input
+                type='number'
+                id='price'
+                value={updateProducts?.price}
+                onChange={(e) => setUpdateProducts({ ...updateProducts, price: Number(e.target.value) })}
+              />
+
+              {/* <br />
+              <label htmlFor='description'>Description:</label>
+              <textarea
+                id='description'
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              />
+              <br /> */}
+              {/* <label htmlFor='categoryId'>Category ID:</label>
+              <input
+                type='number'
+                id='categoryId'
+                value={formData.categoryId}
+                onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
+              />
+              <br /> */}
+
+              <button onClick={handleAddProduct} type="submit">Submit</button>
+            </form>
+        </div>
+          
           </div>
         ))}
 

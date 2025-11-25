@@ -9,6 +9,12 @@ export interface Product{
     totalItems?:number;
 }
 
+export interface updateProduct{
+    title?:string;
+    price?:number;
+
+}
+
 export interface ProductsResponse {
   products: Product[];
   total: number;
