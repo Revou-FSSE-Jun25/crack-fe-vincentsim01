@@ -70,6 +70,11 @@ function handleDeleteProduct(productId: number) {
     .catch((err) => console.error(err));
 }
 
+function handleEditProduct(productId: number) {
+  // Logic to edit a product
+  alert("Editing Product ID: " + productId);
+}
+
   return (
     <div>
       Product Admin
@@ -78,6 +83,47 @@ function handleDeleteProduct(productId: number) {
           <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='addProductModal'>
           <h2>Add New Product</h2>
             <form onSubmit={(e) => {  handleAddProduct(e); }}>
+              <label htmlFor='title'>Title:</label>
+              <input
+                type='text'
+                id='title'
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              />
+              <br />
+              <label htmlFor='price'>Price:</label>
+              <input
+                type='number'
+                id='price'
+                value={formData.price}
+                onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+              />
+
+              <br />
+              <label htmlFor='description'>Description:</label>
+              <textarea
+                id='description'
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              />
+              <br />
+              <label htmlFor='categoryId'>Category ID:</label>
+              <input
+                type='number'
+                id='categoryId'
+                value={formData.categoryId}
+                onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
+              />
+              <br />
+
+              <button onClick={handleAddProduct} type="submit">Submit</button>
+            </form>
+        </div>
+
+
+                  <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='updateProductModal'>
+          <h2>Update Product</h2>
+            <form onSubmit={(e) => { e.preventDefault(); handleEditProduct(); }}>
               <label htmlFor='title'>Title:</label>
               <input
                 type='text'
