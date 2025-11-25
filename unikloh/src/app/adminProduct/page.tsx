@@ -84,6 +84,8 @@ function handleDeleteProduct(productId: number) {
 
 function handleEditProduct(productId: number) {
   // Logic to edit a product
+
+  console.log(updateProducts)
   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
@@ -108,6 +110,7 @@ function handleEditProduct(productId: number) {
 
           <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='addProductModal'>
           <h2>Add New Product</h2>
+          <button onClick={() => openAddProductModal()}>Close</button>
             <form onSubmit={(e) => {  handleAddProduct(e); }}>
               <label htmlFor='title'>Title:</label>
               <input
@@ -162,12 +165,13 @@ function handleEditProduct(productId: number) {
           
           <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='updateProductModal'>
           <h2>Update Product</h2>
+          <button onClick={() => openUpdateProductModal()}>Close</button>
             <form onSubmit={(e) => { e.preventDefault(); handleEditProduct(product.id); }}>
               <label htmlFor='title'>Title:</label>
               <input
                 type='text'
                 id='title'
-                value={updateProducts?.title}
+                value={updateProducts?.title ?? product.title}
                 onChange={(e) => setUpdateProducts({ ...updateProducts, title: e.target.value })}
               />
               <br />
@@ -175,7 +179,7 @@ function handleEditProduct(productId: number) {
               <input
                 type='number'
                 id='price'
-                value={updateProducts?.price}
+                value={updateProducts?.price ?? product.price}
                 onChange={(e) => setUpdateProducts({ ...updateProducts, price: Number(e.target.value) })}
               />
 
@@ -196,7 +200,7 @@ function handleEditProduct(productId: number) {
               />
               <br /> */}
 
-              <button onClick={handleAddProduct} type="submit">Submit</button>
+              <button onClick={() =>handleEditProduct(Number(product.id))} type="submit">Submit</button>
             </form>
         </div>
           
