@@ -7,6 +7,8 @@ import {Product, ProductFormData, updateProduct} from '@/types/product';
 
 const AdminProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(10);
 
   let updateInitialProduct: updateProduct = {
     title: "Shirt To Update",
@@ -14,14 +16,22 @@ const AdminProduct = () => {
     description: "A shirt that is made for Update",
     categoryId: 1,
   }
+
+
+const fetchProducts = () => {
+  fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`)
+    .then(res => res.json())
+    .then(data => setProducts(data));
+};
+
   const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(updateInitialProduct);
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=10", {
+    fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`, {
       method: "GET",
       headers: {}})
       .then(response => response.json())
       .then(data => setProducts(data));
-  }, []);
+  }, [offset, limit]);
 
     let initialAddProduct: ProductFormData = {
     title: "Shirt A",
@@ -33,6 +43,20 @@ const AdminProduct = () => {
 
   const [formData, setFormData] = useState<ProductFormData>(initialAddProduct);
 
+  function nextPagination (){
+
+    setOffset(offset + limit);
+    setLimit(limit + 10);
+
+  }
+
+  function previousPagination (){
+    if (offset === 0) {
+      return;
+    }
+    setOffset(offset - limit);
+    setLimit(limit - 10);
+  }
 
   function handleAddProduct(e:any) {
     e.preventDefault();
@@ -54,6 +78,7 @@ const AdminProduct = () => {
   }) .then(res => res.json())
   .then(data => {
     console.log("Product created:", data);
+    fetchProducts();
   })
 }
 
@@ -80,6 +105,7 @@ function handleDeleteProduct(productId: number) {
       setProducts((prev) => prev.filter((p) => p.id !== productId));
 
       console.log(`Product ${productId} deleted`);
+      fetchProducts();
     })
     .catch((err) => console.error(err));
 }
@@ -104,13 +130,15 @@ function handleEditProduct(productId: number) {
       console.log("Product updated:", data);
     });
   alert("Editing Product ID: " + productId);
+  fetchProducts();
 }
 
   return (
     <div>
       Product Admin
         <button className='border p-2 rounded bg-blue-500 text-white z-50' onClick={openAddProductModal}>Add New Product</button>
-
+        <button className='border p-2 rounded bg-green-500 text-white m-2' onClick={previousPagination}>Previous</button>
+        <button className='border p-2 rounded bg-green-500 text-white' onClick={nextPagination}>Next</button>
           <div className='hidden absolute top-30 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex items-center justify-center' id='addProductModal'>
           <h2>Add New Product</h2>
           <button onClick={() => openAddProductModal()}>Close</button>
