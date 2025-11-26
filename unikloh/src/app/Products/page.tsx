@@ -6,11 +6,23 @@ import AddToCartButton from '../component/addtocartbutton/AddToCartButton';
 import Link from "next/link";
 // import {useAuth} from '@/app/context/authContext';
 import FormDeleteProduct from '@/app/component/formDeleteProduct/page';
+  // import { revalidatePath } from "next/cache";
 
+export async function deleteProductAction(id: number) {
+  await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
+    method: "DELETE",
+  });
 
+  // Refresh the server-side products page
+  // revalidatePath("/products");
+}
 const page = async () => {
   // const { userRole } = useAuth();
   const fetchedData = await api.getProducts(10);
+
+
+
+
     // const [products, setProducts] = useState<Product[]>([]);
   // console.log('this is fetchedData' + fetchedData)
 

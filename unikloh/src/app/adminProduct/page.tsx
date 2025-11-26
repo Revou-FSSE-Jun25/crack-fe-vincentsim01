@@ -37,7 +37,7 @@ const fetchProducts = () => {
     title: "Shirt A",
     price: 100,
     description: "A shirt that is made for A",
-    categoryId: 1,
+    categoryId: 79,
    
   }
 
@@ -58,28 +58,38 @@ const fetchProducts = () => {
     setLimit(limit - 10);
   }
 
-  function handleAddProduct(e:any) {
-    e.preventDefault();
-    alert("Adding Product: " + JSON.stringify(formData));
-    // Logic to add a new product
-    fetch("https://api.escuelajs.co/api/v1/products", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-          },
-      body: JSON.stringify({
-      // Add product data here
-          title: formData.title,
-          price: formData.price,
-          description: formData.description,
-          categoryId: formData.categoryId,
-          images: ["https://placehold.co/600x400"]
-      })
-  }) .then(res => res.json())
-  .then(data => {
-    console.log("Product created:", data);
-    fetchProducts();
+function handleAddProduct(e: any) {
+  e.preventDefault();
+
+  fetch("https://api.escuelajs.co/api/v1/products", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: formData.title,
+      price: formData.price,
+      description: formData.description,
+      categoryId: formData.categoryId,
+      images: ["https://placehold.co/600x400"]
+    }),
   })
+    .then(async (res) => {
+      const body = await res.json();
+
+      // 🔥 THIS WILL SHOW THE REAL ERROR
+      console.log("STATUS:", res.status);
+      console.log("RESPONSE BODY:", body);
+
+      if (!res.ok) {
+        alert("API Error: " + JSON.stringify(body));
+        return;
+      }
+
+      console.log("Product created:", body);
+      fetchProducts();
+    })
+    .catch((err) => console.error("Network error:", err));
 }
 
 function openAddProductModal() {
@@ -180,7 +190,7 @@ function handleEditProduct(productId: number) {
               />
               <br />
 
-              <button className='border p-2 rounded bg-green-500 text-white' onClick={handleAddProduct} type="submit">Submit</button>
+              <button className='border p-2 rounded bg-green-500 text-white' type="submit">Submit</button>
             </form>
         </div>
 
