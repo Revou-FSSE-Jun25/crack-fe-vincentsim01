@@ -5,18 +5,30 @@ import Image from "next/image";
 import AddToCartButton from "@/app/component/addtocartbutton/AddToCartButton";
 import { useCart } from "@/app/context/cartContext";
 import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdateProduct'
+import { useRouter } from "next/navigation";
+
 
   export function handleEditProduct(productId: number, data: any) {
+
+  // const router = useRouter();
+  
   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...data }),
   })
     .then(res => res.json())
-    .then(res => console.log("Product updated:", res))
+    .then(() => {
+      router.refresh();  // Next.js 13+
+    })
     .catch(err => console.error(err));
+
+
 }
 export default function ProductClient({ product, id }: { product: Product; id: number }) {
+
+  
+  const router = useRouter();
   const { addToCart } = useCart();
   const [showAct, setshowAct] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -117,21 +129,21 @@ export default function ProductClient({ product, id }: { product: Product; id: n
 
           <div className="flex justify-center items-center mt-4">
             {product && <AddToCartButton product={product} />}
-            {showAct && (
+            {/* {showAct && (
               <button
                 className="border border-black rounded-md m-2 text-sm p-2 shadow-xl cursor-pointer hover:scale-110 active:scale-90 transition-transform"
                 onClick={() => (window.location.href = `/products/${id}/edit`)}
               >
                 Edit Product
               </button>
-            )}
+            )} */}
 
               <FormUpdateProduct 
                   productId={product?.id} 
                   productTitle={product?.title} 
                   productPrice={product?.price} 
                   productDescription={product?.description} 
-                  productCategoryId={product?.categoryId}   
+                  // productCategoryId={product?.category.id}   
               />
 
             

@@ -13,7 +13,7 @@ interface Props {
   productTitle: string;
   productPrice: number;
   productDescription: string;
-  productCategoryId: number;
+  // productCategoryId: number;
 //   getFromChild: (data: updateProduct) => void; // callback from parent
 }
 
@@ -30,14 +30,14 @@ const productId = Number(props.productId);
 const productTitle = String(props.productTitle);
 const productPrice = Number(props.productPrice);
 const productDescription = String(props.productDescription);
-const productCategoryId = Number(props.productCategoryId);
+// const productCategoryId = Number(props.productCategoryId);
 
 
 const [updateProducts, setUpdateProducts] = useState({
         title: productTitle,
       price: productPrice,
       description: productDescription,
-      categoryId: productCategoryId,
+      // categoryId: productCategoryId,
       images: ["https://placehold.co/600x400"],
 })
 
@@ -63,10 +63,11 @@ function openUpdateProductModal() {
       title: updateProducts.title,
       price: updateProducts.price,
       description: updateProducts.description,
-      categoryId: updateProducts.categoryId,
+      // categoryId: updateProducts.categoryId,
       images: ["https://placehold.co/600x400"],
     };
-        handleEditProduct(productId, updated);
+        handleEditProduct(productId, updated)
+
 }
 
 // async function getFromChild() {
@@ -79,7 +80,7 @@ function openUpdateProductModal() {
           <h2>Update Product</h2>
           <br></br>
           <button className='border p-2 rounded bg-red-500 text-white absolute top-2 right-2' onClick={() => openUpdateProductModal()}>Close</button>
-            <form onSubmit={(e) => { e.preventDefault(); handleUpdateClick; }}>
+            <form onSubmit={(e) => { e.preventDefault(); handleUpdateClick(); }}>
               <label htmlFor='title'>Title:</label>
               <input
                 className='border p-1 m-1'
@@ -107,14 +108,14 @@ function openUpdateProductModal() {
                 onChange={(e) => setUpdateProducts({ ...updateProducts, description: e.target.value })}
               />
               <br />
-              <label htmlFor='categoryId'>Category ID:</label>
+              {/* <label htmlFor='categoryId'>Category ID:</label>
               <input
                 className='border p-1 m-1'
                 type='number'
                 id='categoryId'
                 value={updateProducts?.categoryId}
                 onChange={(e) => setUpdateProducts({ ...updateProducts, categoryId: Number(e.target.value) })}
-              />
+              /> */}
               <br />
 
               <button className='border p-2 rounded bg-green-500 text-white' type="submit">Submit</button>
