@@ -1,11 +1,14 @@
 // "use client";
 
 import React from 'react'
+// import {useState} from 'react';
 import { api, Product } from '@/lib/api/api';
 import AddToCartButton from '../component/addtocartbutton/AddToCartButton';
 import Link from "next/link";
 // import {useAuth} from '@/app/context/authContext';
 import FormDeleteProduct from '@/app/component/formDeleteProduct/page';
+import { updateProduct } from '@/types/product';
+import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdateProduct';
   // import { revalidatePath } from "next/cache";
 
 export async function deleteProductAction(id: number) {
@@ -16,38 +19,21 @@ export async function deleteProductAction(id: number) {
   // Refresh the server-side products page
   // revalidatePath("/products");
 }
+
+// const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(null);
+export function handleEditProduct(productId: number, data: any) {
+  fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...data }),
+  })
+    .then(res => res.json())
+    .then(res => console.log("Product updated:", res))
+    .catch(err => console.error(err));
+}
 const page = async () => {
   // const { userRole } = useAuth();
   const fetchedData = await api.getProducts(10);
-
-
-
-
-    // const [products, setProducts] = useState<Product[]>([]);
-  // console.log('this is fetchedData' + fetchedData)
-
-//   const fetchProducts = () => {
-
-//   fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`)
-//     .then(res => res.json())
-//     .then(data => setProducts(data));
-// };
-
-//   function handleDeleteProduct(productId: number) {
-//   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
-//     method: "DELETE",
-//   })
-//     .then((res) => {
-//       if (!res.ok) throw new Error("Failed to delete");
-
-//       // Remove product from state → triggers re-render
-//       setProducts((prev) => prev.filter((p) => p.id !== productId));
-
-//       console.log(`Product ${productId} deleted`);
-//       fetchProducts();
-//     })
-//     .catch((err) => console.error(err));
-// }
   
   return (
     <div>
@@ -65,7 +51,7 @@ const page = async () => {
               const param = item.id;
               // console.log(param+typeof(param))
           return (
-            <div className='m-5 p-5 border-2 border-black w-[30%]' key={item.id}>
+            <div className='m-5 p-5 border-2 border-black w-[30%] relative' key={item.id}>
               <Link href={`/products/${item.id}`}>              
                 <h2 >{item.title}</h2>              
                 <div>{item.title}</div>
@@ -79,7 +65,18 @@ const page = async () => {
 
 
               <FormDeleteProduct productId={item.id} />
-              {/* <button className='mt-2 p-2 bg-blue-500 text-white rounded'>Add to Cart</button> */}
+              {/* <FormUpdateProduct 
+                  productId={item.id} 
+                  productTitle={item.title} 
+                  productPrice={item.price} 
+                  productDescription={item.description} 
+                  productCategoryId={item.category.id}   
+                  /> */}
+
+                                  <Link href={`/products/${item.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium text-center">
+                                Edit
+                                </Link>
+
             </div>
           )
 

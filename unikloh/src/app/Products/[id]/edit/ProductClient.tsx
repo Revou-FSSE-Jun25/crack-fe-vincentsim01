@@ -1,44 +1,26 @@
 "use client";
 import React, { useState, useEffect } from "react";
-// import { Product } from "../../types/product";
+import { Product } from "@/types/product";
 import Image from "next/image";
 import AddToCartButton from "@/app/component/addtocartbutton/AddToCartButton";
 import { useCart } from "@/app/context/cartContext";
 import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdateProduct'
 
-export interface Product{
-    id:number;
-    title:string;
-    slug:string;
-    price:number;
-    description:string;
-    categoryId:number ;
-    images:string[];
-    totalItems?:number;
-}
-
-export interface ProductsResponse {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
-}
-
-
-export interface ProductFormData {
-    title:string;
-    price:number;
-    description:string;
-    categoryId:number;
-    // images:string[];
+  export function handleEditProduct(productId: number, data: any) {
+  fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...data }),
+  })
+    .then(res => res.json())
+    .then(res => console.log("Product updated:", res))
+    .catch(err => console.error(err));
 }
 export default function ProductClient({ product, id }: { product: Product; id: number }) {
   const { addToCart } = useCart();
   const [showAct, setshowAct] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(id);
-
-  
 
   useEffect(() => {
     setLoading(true);
@@ -58,6 +40,8 @@ export default function ProductClient({ product, id }: { product: Product; id: n
     const timeout = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timeout);
   }, []);
+
+
 
   const nextPage = () => {
     const newPage = currentPage + 1;
@@ -127,8 +111,8 @@ export default function ProductClient({ product, id }: { product: Product; id: n
             alt={product?.title || "Product image"}
             width={400}
             height={400}
-            unoptimized
             className="my-4 rounded-lg"
+            unoptimized
           />
 
           <div className="flex justify-center items-center mt-4">
@@ -142,7 +126,15 @@ export default function ProductClient({ product, id }: { product: Product; id: n
               </button>
             )}
 
+              <FormUpdateProduct 
+                  productId={product?.id} 
+                  productTitle={product?.title} 
+                  productPrice={product?.price} 
+                  productDescription={product?.description} 
+                  productCategoryId={product?.categoryId}   
+              />
 
+            
           </div>
         </div>
 

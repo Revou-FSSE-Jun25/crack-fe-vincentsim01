@@ -24,7 +24,7 @@ const fetchProducts = () => {
     .then(data => setProducts(data));
 };
 
-  const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(updateInitialProduct);
+
   useEffect(() => {
     fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`, {
       method: "GET",
@@ -32,7 +32,7 @@ const fetchProducts = () => {
       .then(response => response.json())
       .then(data => setProducts(data));
   }, [offset, limit]);
-
+    const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(updateInitialProduct);
     let initialAddProduct: ProductFormData = {
     title: "Shirt A",
     price: 100,
@@ -123,7 +123,7 @@ function handleDeleteProduct(productId: number) {
 function handleEditProduct(productId: number) {
   // Logic to edit a product
 
-  console.log(updateProducts)
+  // console.log(updateProducts)
   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},

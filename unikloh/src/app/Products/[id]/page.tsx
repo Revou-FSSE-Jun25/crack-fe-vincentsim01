@@ -1,4 +1,4 @@
-import { api, getProduct } from "@/lib/api/api";
+import { api } from "@/lib/api/api";
 import { Product } from "@/types/product";
 import ProductClient from "./ProductClient"; // Client-side component for cart/admin logic
 
@@ -47,7 +47,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   // const product = await getProduct(id);
 
   // console.log("Response status:", res.status);
-  console.log(product)
+  // console.log(product)
   if (!product) {
     return (
       <div className="text-center py-12">
