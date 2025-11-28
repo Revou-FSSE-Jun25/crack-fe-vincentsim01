@@ -39,17 +39,16 @@ const page = async () => {
   // const fetchedData = await api.getProducts(10);
 
   return (
-    <div>
+    <div className='bg-white'>
         <div className='flex flex-wrap '>
               {MockProducts.map((item:any)=>{
                     return (
-                      <div className='m-5 p-5 border-2 border-black w-[30%] relative' key={item.id}>
+                      <div className='m-5 p-5 border-2 border-black w-[30%] relative flex flex-col items-center' key={item.id}>
                         <Link href={`/products/${item.id}`}>              
-                          <h2 >{item.title}</h2>              
-                          <div>{item.title}</div>
-                          <div>{item.description}</div>
-                          <div>${item.price}</div>
-                          <img src={item.images} alt={item.title} width={200} height={200}/>
+                          <h2 className='text-4xl font-bold flex justify-center'>{item.title.toUpperCase()}</h2>              
+                          <img className='mx-auto' src={item.images} alt={item.title} width={200} height={200}/>
+                          <div className='flex justify-center'>{item.description}</div>
+                          <div className='flex justify-center text-2xl'>${item.price}</div>
                         </Link>
                         <br></br>
                         <AddToCartButton product={item} />
