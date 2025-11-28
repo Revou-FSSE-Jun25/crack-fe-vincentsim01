@@ -2,19 +2,25 @@
 
 import React from 'react'
 // import {useState} from 'react';
-import { api, Product } from '@/lib/api/api';
+import { api } from '@/lib/api/api';
 import AddToCartButton from '../component/addtocartbutton/AddToCartButton';
 import Link from "next/link";
+import {Product} from '@/types/product'
 // import {useAuth} from '@/app/context/authContext';
 import FormDeleteProduct from '@/app/component/formDeleteProduct/page';
 import { updateProduct } from '@/types/product';
 import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdateProduct';
+import {MockProducts} from '@/app/data/Product';
   // import { revalidatePath } from "next/cache";
+
+
 
 export async function deleteProductAction(id: number) {
   await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
     method: "DELETE",
   });
+
+
 
   // Refresh the server-side products page
   // revalidatePath("/products");
@@ -65,13 +71,6 @@ const page = async () => {
 
 
               <FormDeleteProduct productId={item.id} />
-              {/* <FormUpdateProduct 
-                  productId={item.id} 
-                  productTitle={item.title} 
-                  productPrice={item.price} 
-                  productDescription={item.description} 
-                  productCategoryId={item.category.id}   
-                  /> */}
 
                                   <Link href={`/products/${item.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium text-center">
                                 Edit
@@ -85,6 +84,21 @@ const page = async () => {
         })}
 
         </div>
+
+
+        {MockProducts.map((item) =>{
+          return(
+            <div>
+              {item.title}
+              <br></br>
+              {item.category.name}
+              <br></br>
+              {item.description}
+              <br></br>
+              <img src={item.images}></img>
+            </div>
+          )
+        })}
       
     </div>
   )

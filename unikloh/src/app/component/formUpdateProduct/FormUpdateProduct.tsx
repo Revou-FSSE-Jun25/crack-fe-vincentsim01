@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { handleEditProduct } from "@/app/products/[id]/edit/ProductClient";
 
 
+
 interface Props {
   productId: number;
   productTitle: string;
@@ -66,7 +67,8 @@ function openUpdateProductModal() {
       // categoryId: updateProducts.categoryId,
       images: ["https://placehold.co/600x400"],
     };
-        handleEditProduct(productId, updated)
+        handleEditProduct(productId, updated).then(() => {
+    router.refresh();   })
 
 }
 

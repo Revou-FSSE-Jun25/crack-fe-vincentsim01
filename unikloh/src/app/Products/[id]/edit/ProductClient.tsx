@@ -18,9 +18,6 @@ import { useRouter } from "next/navigation";
     body: JSON.stringify({ ...data }),
   })
     .then(res => res.json())
-    .then(() => {
-      router.refresh();  // Next.js 13+
-    })
     .catch(err => console.error(err));
 
 
