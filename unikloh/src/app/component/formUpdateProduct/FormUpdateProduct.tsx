@@ -35,7 +35,7 @@ const productDescription = String(props.productDescription);
 
 
 const [updateProducts, setUpdateProducts] = useState({
-        title: productTitle,
+      title: productTitle,
       price: productPrice,
       description: productDescription,
       // categoryId: productCategoryId,
@@ -72,9 +72,6 @@ function openUpdateProductModal() {
 
 }
 
-// async function getFromChild() {
-//     return beforeUpdateProducts;
-//   } 
     return (
     <div>
         {userRole === 'admin' && <button className='p-2 bg-blue-500 text-white rounded cursor-pointer hover:scale-105 active:90' onClick={() => openUpdateProductModal()}>Update</button>}

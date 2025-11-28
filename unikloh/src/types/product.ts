@@ -1,3 +1,9 @@
+export interface Category {
+  id: number;
+  name: string;
+}
+
+
 export interface Product{
     id:number;
     title:string;
@@ -8,6 +14,18 @@ export interface Product{
     images:string[];
     totalItems?:number;
 }
+
+export interface ProductMock{
+    id:number;
+    title:string;
+    slug:string;
+    price:number;
+    description:string;
+    category:Category;
+    images:string;
+    totalItems?:number;
+}
+
 
 export interface updateProduct{
     title?:string;

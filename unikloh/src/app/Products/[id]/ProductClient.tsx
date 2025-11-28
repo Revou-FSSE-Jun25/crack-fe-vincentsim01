@@ -4,7 +4,9 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import AddToCartButton from "@/app/component/addtocartbutton/AddToCartButton";
 import { useCart } from "@/app/context/cartContext";
-import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdateProduct'
+import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdateProduct';
+import {MockProducts} from '@/app/data/Product';
+import {ProductMock} from '@/types/product';
 
 export interface Product{
     id:number;
@@ -32,7 +34,9 @@ export interface ProductFormData {
     categoryId:number;
     // images:string[];
 }
-export default function ProductClient({ product, id }: { product: Product; id: number }) {
+// export default function ProductClient({ product, id }: { product: Product; id: number }) {
+
+export default function ProductClient({ product, id }: { product: ProductMock; id: number }) {
   const { addToCart } = useCart();
   const [showAct, setshowAct] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -122,8 +126,17 @@ export default function ProductClient({ product, id }: { product: Product; id: n
           <p className="text-lg">${product?.price}</p>
           <p className="text-gray-600 mt-2">{product?.description}</p>
 
-          <Image
+          {/* <Image
             src={product?.images?.[0] || "/placeholder.png"}
+            alt={product?.title || "Product image"}
+            width={400}
+            height={400}
+            unoptimized
+            className="my-4 rounded-lg"
+          /> */}
+
+          <Image
+            src={product?.images || "/placeholder.png"}
             alt={product?.title || "Product image"}
             width={400}
             height={400}

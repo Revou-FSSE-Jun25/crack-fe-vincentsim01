@@ -14,40 +14,19 @@ const FormDeleteProduct = (props: any) => {
   const [limit, setLimit] = useState(10);
   const { userRole, isLoading } = useAuth();
 
-
-// const fetchProducts = () => {
-//   fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`)
-//     .then(res => res.json())
-//     .then(data => setProducts(data));
-// };
   const router = useRouter();
 
-const productId = Number(props.productId);
+  const productId = Number(props.productId);
 
-async function handleDeleteProduct(productId: number) {
-
-        await deleteProductAction(productId);
-        router.refresh(); 
-  // fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
-  //   method: "DELETE",
-  // })
-  //   .then((res) => {
-  //     if (!res.ok) throw new Error("Failed to delete");
-
-
-
-  //     alert(`Product ${productId} deleted`);
-  //     // fetchProducts();
-      
-  //   })
-  //   .catch((err) => console.error(err));
-}
+  async function handleDeleteProduct(productId: number) {
+          await deleteProductAction(productId);
+          router.refresh(); 
+  }
 
 
   return (
     <div>
         {userRole === 'admin' && <button className='p-2 bg-red-500 text-white rounded cursor-pointer hover:scale-105 active:90' onClick={() => handleDeleteProduct(productId)}>Delete</button>}
-
     </div>
 
   )

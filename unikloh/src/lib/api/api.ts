@@ -1,4 +1,5 @@
 const BASE_URL = 'https://api.escuelajs.co/api/v1/';
+import { MockProducts } from '@/app/data/Product';
 import axios from 'axios';
 
 export interface Product{
@@ -35,7 +36,7 @@ export interface ProductFormData {
 //         return response.data;
 //     }catch(error){
 //         console.error("Error Fetching Product", error);
-//         throw new Error('Failed to fetch product');
+//         throw new Error('Failed to fetch product');  
 
 //     }
 //   }
@@ -49,6 +50,28 @@ export const api = {
     }
 
     const data = await response.json();
+    return data;
+  },
+
+    getProductsMock: async (limit: number = 10) => {
+    const response = MockProducts;
+
+    if (!response) {
+      throw new Error('Failed to fetch products');
+    }
+
+    const data = await response.slice(0,limit);
+    return data;
+  },
+
+  getProductMock: async (id: number = 1) => {
+    const response = MockProducts.find((p) => p.id === id);
+
+    if (!response) {
+      throw new Error('Failed to fetch products');
+    }
+
+    const data = await response;
     return data;
   },
 
