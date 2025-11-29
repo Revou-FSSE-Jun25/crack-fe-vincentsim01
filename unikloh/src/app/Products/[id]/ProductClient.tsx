@@ -1,48 +1,34 @@
 "use client";
 import React, { useState, useEffect } from "react";
-// import { Product } from "../../types/product";
+import { Product } from "@/types/product";
 import Image from "next/image";
 import AddToCartButton from "@/app/component/addtocartbutton/AddToCartButton";
 import { useCart } from "@/app/context/cartContext";
 import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdateProduct';
 import {MockProducts} from '@/app/data/Product';
 import {ProductMock} from '@/types/product';
-
-export interface Product{
-    id:number;
-    title:string;
-    slug:string;
-    price:number;
-    description:string;
-    categoryId:number ;
-    images:string[];
-    totalItems?:number;
-}
-
-export interface ProductsResponse {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
-}
+import { useAuth } from "@/app/context/authContext";
 
 
-export interface ProductFormData {
-    title:string;
-    price:number;
-    description:string;
-    categoryId:number;
-    // images:string[];
-}
-// export default function ProductClient({ product, id }: { product: Product; id: number }) {
+// export function handleEditProduct(productId: number, data: any) {
+//   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
+//     method: "PUT",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ ...data }),
+//   })
+//     .then(res => res.json())
+//     .then(res => console.log("Product updated:", res))
+//     .catch(err => console.error(err));
+// }
 
-export default function ProductClient({ product, id }: { product: ProductMock; id: number }) {
+export default function ProductClient({ product, id }: { product: Product; id: number }) {
+
+// export default function ProductClient({ product, id }: { product: ProductMock; id: number }) {
   const { addToCart } = useCart();
+  const {userRole} = useAuth();
   const [showAct, setshowAct] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(id);
-
-  
 
   useEffect(() => {
     setLoading(true);
@@ -53,7 +39,7 @@ export default function ProductClient({ product, id }: { product: ProductMock; i
       .find((row) => row.startsWith("user-role="))
       ?.split("=")[1];
 
-    if (!userRole || userRole === "null") {
+    if (!userRole || userRole === "null" || userRole === 'user') {
       setshowAct(false);
     } else {
       setshowAct(true);
@@ -111,13 +97,13 @@ export default function ProductClient({ product, id }: { product: ProductMock; i
             disabled={currentPage <= 1}
             className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
           >
-            Previous
+            Previous Item
           </button>
           <button
             onClick={nextPage}
             className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
           >
-            Next
+            Next Item
           </button>
         </div>
 
@@ -126,8 +112,17 @@ export default function ProductClient({ product, id }: { product: ProductMock; i
           <p className="text-lg">${product?.price}</p>
           <p className="text-gray-600 mt-2">{product?.description}</p>
 
-          {/* <Image
+          <Image
             src={product?.images?.[0] || "/placeholder.png"}
+            alt={product?.title || "Product image"}
+            width={400}
+            height={400}
+            unoptimized
+            className="my-4 rounded-lg"
+          />
+
+          {/* <Image
+            src={product?.images || "/placeholder.png"}
             alt={product?.title || "Product image"}
             width={400}
             height={400}
@@ -135,14 +130,7 @@ export default function ProductClient({ product, id }: { product: ProductMock; i
             className="my-4 rounded-lg"
           /> */}
 
-          <Image
-            src={product?.images || "/placeholder.png"}
-            alt={product?.title || "Product image"}
-            width={400}
-            height={400}
-            unoptimized
-            className="my-4 rounded-lg"
-          />
+
 
           <div className="flex justify-center items-center mt-4">
             {product && <AddToCartButton product={product} />}
@@ -155,8 +143,23 @@ export default function ProductClient({ product, id }: { product: ProductMock; i
               </button>
             )}
 
-
           </div>
+            <br></br><br></br>
+          <div className="flex justify-center gap-4 mb-6">
+            <button
+              onClick={prevPage}
+              disabled={currentPage <= 1}
+              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+            >
+              Previous Item
+            </button>
+            <button
+              onClick={nextPage}
+              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+            >
+              Next Item
+            </button>
+        </div>
         </div>
 
         <div className="text-center mt-6">

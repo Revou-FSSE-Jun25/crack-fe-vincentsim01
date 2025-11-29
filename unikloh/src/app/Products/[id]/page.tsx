@@ -9,15 +9,14 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const resolvedParams = await params;   // <- unwrap the Promise
   const id = Number(resolvedParams.id);
 
-  // const product: Product = await api.getProduct(id);
+  const product: Product = await api.getProduct(id);
 
 
-  const product2: ProductMock = await api.getProductMock(id);
+  // const product2: ProductMock = await api.getProductMock(id);
   // const product = await getProduct(id);
 
-  // console.log("Response status:", res.status);
-  // console.log(product)
-  if (!product2) {
+
+  if (!product) {
     return (
       <div className="text-center py-12">
         <p className="text-gray-500 text-lg">Product not found.</p>
@@ -25,6 +24,17 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
     );
   }
 
+
+
+  // if (!product2) {
+  //   return (
+  //     <div className="text-center py-12">
+  //       <p className="text-gray-500 text-lg">Product not found.</p>
+  //     </div>
+  //   );
+  // }
+
   // Pass product data to the client-side component
-  return <ProductClient product={product2} id={id} />;
+    return <ProductClient product={product} id={id} />;
+  // return <ProductClient product={product2} id={id} />;
 }

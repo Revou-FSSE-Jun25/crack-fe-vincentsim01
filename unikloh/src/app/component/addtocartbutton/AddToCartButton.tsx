@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useCart } from "@/app/context/cartContext";
+import CartIcon from "@/app/component/CartIcon";
 
 interface Product {
   id?: number;
@@ -17,7 +18,7 @@ interface Props {
 
 export default function AddToCartButton({ product }: Props) {
   const { addToCart } = useCart();
-  console.log(product + "from props")
+  // console.log(product + "from props")
   const handleAddToCart = () => {
     // Get existing cart items or create empty array
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -44,9 +45,9 @@ export default function AddToCartButton({ product }: Props) {
   return (
     <button
       onClick={handleAddToCart}
-      className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-transform"
+      className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-transform"
     >
-      Add to Cart
+      Add to Cart <CartIcon/>
     </button>
   );
 }

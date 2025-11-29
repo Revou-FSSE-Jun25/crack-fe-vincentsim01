@@ -7,8 +7,6 @@ import {useAuth} from '@/app/context/authContext';
 import { useRouter } from "next/navigation";
 import { handleEditProduct } from "@/app/products/[id]/edit/ProductClient";
 
-
-
 interface Props {
   productId: number;
   productTitle: string;
@@ -59,7 +57,6 @@ function openUpdateProductModal() {
 
 
   const handleUpdateClick = () => {
-    // Build the updated product object
     const updated = {
       title: updateProducts.title,
       price: updateProducts.price,
@@ -67,15 +64,13 @@ function openUpdateProductModal() {
       // categoryId: updateProducts.categoryId,
       images: ["https://placehold.co/600x400"],
     };
-        handleEditProduct(productId, updated).then(() => {
-    router.refresh();   })
-
+        handleEditProduct(productId, updated)
 }
 
     return (
     <div>
         {userRole === 'admin' && <button className='p-2 bg-blue-500 text-white rounded cursor-pointer hover:scale-105 active:90' onClick={() => openUpdateProductModal()}>Update</button>}
-  <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='updateProductModal'>
+          <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='updateProductModal'>
           <h2>Update Product</h2>
           <br></br>
           <button className='border p-2 rounded bg-red-500 text-white absolute top-2 right-2' onClick={() => openUpdateProductModal()}>Close</button>

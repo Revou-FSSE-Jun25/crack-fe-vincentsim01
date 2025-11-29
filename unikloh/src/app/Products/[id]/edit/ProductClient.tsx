@@ -8,10 +8,7 @@ import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdatePro
 import { useRouter } from "next/navigation";
 
 
-  export function handleEditProduct(productId: number, data: any) {
-
-  // const router = useRouter();
-  
+export function handleEditProduct(productId: number, data: any) {
   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -19,12 +16,8 @@ import { useRouter } from "next/navigation";
   })
     .then(res => res.json())
     .catch(err => console.error(err));
-
-
 }
 export default function ProductClient({ product, id }: { product: Product; id: number }) {
-
-  
   const router = useRouter();
   const { addToCart } = useCart();
   const [showAct, setshowAct] = useState<boolean>(false);
@@ -33,7 +26,6 @@ export default function ProductClient({ product, id }: { product: Product; id: n
 
   useEffect(() => {
     setLoading(true);
-
     // Check user role from cookie
     const userRole = document.cookie
       .split("; ")
@@ -145,6 +137,22 @@ export default function ProductClient({ product, id }: { product: Product; id: n
 
             
           </div>
+        </div>
+
+                <div className="flex justify-center gap-4 mb-6">
+          <button
+            onClick={prevPage}
+            disabled={currentPage <= 1}
+            className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+          >
+            Previous
+          </button>
+          <button
+            onClick={nextPage}
+            className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+          >
+            Next
+          </button>
         </div>
 
         <div className="text-center mt-6">

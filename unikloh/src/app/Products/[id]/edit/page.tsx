@@ -1,7 +1,3 @@
-
-
-
-
 import { api } from "@/lib/api/api";
 import { Product } from "@/types/product";
 import ProductClient from "./ProductClient"; // Client-side component for cart/admin logic
