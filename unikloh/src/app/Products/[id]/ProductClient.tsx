@@ -8,21 +8,7 @@ import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdatePro
 import {MockProducts} from '@/app/data/Product';
 import {ProductMock} from '@/types/product';
 import { useAuth } from "@/app/context/authContext";
-
-
-// export function handleEditProduct(productId: number, data: any) {
-//   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ ...data }),
-//   })
-//     .then(res => res.json())
-//     .then(res => console.log("Product updated:", res))
-//     .catch(err => console.error(err));
-// }
-
 export default function ProductClient({ product, id }: { product: Product; id: number }) {
-
 // export default function ProductClient({ product, id }: { product: ProductMock; id: number }) {
   const { addToCart } = useCart();
   const {userRole} = useAuth();
@@ -32,7 +18,6 @@ export default function ProductClient({ product, id }: { product: Product; id: n
 
   useEffect(() => {
     setLoading(true);
-
     // Check user role from cookie
     const userRole = document.cookie
       .split("; ")
@@ -95,22 +80,79 @@ export default function ProductClient({ product, id }: { product: Product; id: n
           <button
             onClick={prevPage}
             disabled={currentPage <= 1}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+            className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-md"
           >
             Previous Item
           </button>
           <button
             onClick={nextPage}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+            className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-md"
           >
             Next Item
           </button>
         </div>
 
+
+<div className="max-w-5xl mx-auto mt-8 p-6 bg-white rounded-xl shadow-lg">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    {/* LEFT: IMAGE */}
+    <div className="flex justify-center">
+      <Image
+        src={product?.images?.[0] || "/placeholder.png"}
+        alt={product?.title || "Product image"}
+        width={400}
+        height={400}
+        unoptimized
+        className="rounded-xl shadow transition-transform duration-300 hover:scale-105"
+      />
+
+        {/* <Image
+            src={product?.images || "/placeholder.png"}
+            alt={product?.title || "Product image"}
+            width={400}
+            height={400}
+            unoptimized
+            className="my-4 rounded-lg"
+          /> */}
+    </div>
+
+    {/* RIGHT: DETAILS */}
+    <div className="flex flex-col justify-center space-y-4">
+      <h1 className="text-4xl font-bold">{product?.title}</h1>
+
+      <p className="text-gray-600">{product?.description}</p>
+
+      <p className="text-3xl font-semibold text-gray-900">${product?.price}</p>
+
+      <div className="flex gap-4 mt-4">
+        {product && <AddToCartButton product={product} />}
+        {showAct && (
+          <button
+            className="border border-gray-800 rounded-md px-4 py-2 text-sm shadow hover:scale-105 active:scale-95 transition-transform"
+            onClick={() => (window.location.href = `/products/${id}/edit`)}
+          >
+            Edit Product
+          </button>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{/* 
         <div className="m-2 p-5 border border-gray-200 shadow-lg rounded-lg flex flex-col items-center">
           <h1 className="text-4xl font-bold">{product?.title}</h1>
-          <p className="text-lg">${product?.price}</p>
-          <p className="text-gray-600 mt-2">{product?.description}</p>
+
+
 
           <Image
             src={product?.images?.[0] || "/placeholder.png"}
@@ -120,6 +162,8 @@ export default function ProductClient({ product, id }: { product: Product; id: n
             unoptimized
             className="my-4 rounded-lg"
           />
+          <p className="text-gray-600 mt-2">{product?.description}</p>
+          <p className="text-lg text-2xl">${product?.price}</p> */}
 
           {/* <Image
             src={product?.images || "/placeholder.png"}
@@ -132,7 +176,7 @@ export default function ProductClient({ product, id }: { product: Product; id: n
 
 
 
-          <div className="flex justify-center items-center mt-4">
+          {/* <div className="flex justify-center items-center mt-4">
             {product && <AddToCartButton product={product} />}
             {showAct && (
               <button
@@ -143,26 +187,28 @@ export default function ProductClient({ product, id }: { product: Product; id: n
               </button>
             )}
 
-          </div>
-            <br></br><br></br>
+          </div> */}
+        <br></br><br></br>
+
+        </div>
+
+        <div className="text-center mt-6">
+
           <div className="flex justify-center gap-4 mb-6">
             <button
               onClick={prevPage}
               disabled={currentPage <= 1}
-              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+              className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-md"
             >
               Previous Item
             </button>
             <button
               onClick={nextPage}
-              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+              className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-md"
             >
               Next Item
             </button>
         </div>
-        </div>
-
-        <div className="text-center mt-6">
           <a
             href="/products"
             className="text-gray-400 hover:text-black transition-colors inline-flex items-center"
@@ -178,7 +224,9 @@ export default function ProductClient({ product, id }: { product: Product; id: n
             Back to Products
           </a>
         </div>
+
+        
       </div>
-    </div>
+    // </div>
   );
 }
