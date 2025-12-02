@@ -40,11 +40,11 @@ const Header = () => {
   //   throw new Error("ThemeToggle must be used within ThemeProvider");
   // }
 
-  //  const { theme, toggleTheme } = themeContext; bg-red-600 text-white
+  //  const { theme, toggleTheme } = themeContext; bg-red-600 text-white id='headerId' 
 
   return (
-    <div id='headerId'  className='sticky top-0 z-50 shadow h-[10vh]  flex items-center justify-center  font-bold'>
-        <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href="/">Home</Link></span>
+    <div  className='sticky top-0 z-[999] header text-black shadow h-[10vh] flex items-center justify-center  font-bold'>
+        <span className='mr-4 cursor-p ointer hover:underline active:scale-95'><Link href="/">Home</Link></span>
         <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/products'>Product</Link></span>
         <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href="/Photoshoot">Photoshoot</Link></span>
         <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href="/Blog">Blog</Link></span>

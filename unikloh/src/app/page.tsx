@@ -4,15 +4,12 @@ import BestSelling from "./component/banner/BestSelling";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-red font-sans text-black">
+    <div className="flex min-h-screen items-center justify-center font-sans">
 
-      <main className="flex min-h-screen w-full flex-col items-center justify-between bg-white sm:items-start">
+      <main className="flex min-h-screen w-full flex-col items-center justify-between sm:items-start">
         <Banner />
         <BestSelling />
 
-       UNIK LOH!
-       <br></br>
-       Welcome to Unikloh.
       </main>
     </div>
   );

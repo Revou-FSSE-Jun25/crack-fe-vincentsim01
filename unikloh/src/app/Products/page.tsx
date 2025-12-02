@@ -29,7 +29,12 @@ export async function deleteProductAction(id: number) {
 const page = async () => {
   const fetchedData = await api.getProducts(10);
   return (
-    <div className='bg-white'>
+    <div className='m-4'   
+    style={{
+      background: "var(--background)",
+      color: "var(--foreground)",
+    }}
+    >
         <div className='flex flex-wrap '>
             {/* {MockProducts.map((item:any)=>{
                     return (
@@ -55,16 +60,25 @@ const page = async () => {
 
         {fetchedData.map((item:any)=>{
           return (
-            <div className='m-5 p-10 border-2 border-black w-[30%] relative flex flex-col items-center rounded-md hover:scale-105 active:scale-95 transition-transform duration-300' key={item.id}>
-              <Link href={`/products/${item.id}`}>              
-                <h2 className='text-4xl font-bold text-center'>{item.title}</h2>  
+            <div className='m-5 p-6 w-[30%] flex flex-col items-center rounded-xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-transform duration-300' key={item.id}>
+              <Link href={`/products/${item.id}`} className="w-full text-center mb-5">              
+
+                <img className='w-full h-full object-cover rounded-lg' src={item.images[0]} alt={item.title} width={200} height={200}/> 
                 <br></br>  
-                <img className='mx-auto' src={item.images[0]} alt={item.title} width={200} height={200}/> 
+                <h2 className="text-2xl font-semibold text-gray-800 mb-2 hover:text-red-600 transition-colors duration-200">{item.title}</h2>  
+
                 <br></br>         
-                <div className='flex justify-center text-2xl'>${item.price}</div>
+                <div className="text-xl font-bold text-gray-900 mb-8">${item.price}</div>
               </Link>
               <br></br>
-              <AddToCartButton product={item} />
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+                <div className="mt-4 mb-4 w-full text-center">
+                    <AddToCartButton product={item} />
+                </div>
               <FormDeleteProduct productId={item.id} />
               {/* <FormUpdateProduct
                   productId={item?.id} 

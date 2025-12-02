@@ -23,7 +23,7 @@ export const ThemeProvider = ({children}:{children: ReactNode}) => {
         if(storedTheme){
             setTheme(storedTheme);
             html.classList.add(storedTheme);
-            header?.classList.add(`headerId${storedTheme}`);
+            // header?.classList.add(`headerId${storedTheme}`);
         }
     }, []);
 
@@ -33,8 +33,8 @@ export const ThemeProvider = ({children}:{children: ReactNode}) => {
         const header = document.getElementById('headerId');
         html.classList.remove(theme === "light" ? "dark" : "light");
         html.classList.add(theme);
-        header?.classList.remove(theme === "light" ? "headerIddark" : "headerIdlight");
-        header?.classList.add(`headerId${theme}`);
+        // header?.classList.remove(theme === "light" ? "headerIddark" : "headerIdlight");
+        // header?.classList.add(`headerId${theme}`);
         
         localStorage.setItem('theme', theme);
     },[theme]);

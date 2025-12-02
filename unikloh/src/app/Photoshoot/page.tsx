@@ -32,8 +32,12 @@ const page = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-        <h1>Photoshoot Page</h1>
+    <div id="photoshootContainer" className='mt-5'   
+      style={{
+      background: "var(--background)",
+      color: "var(--foreground)",
+    }}>
+        <h1 className='text-center text-4xl text-black bold'>BOOK A PHOTO SESSION HERE</h1>
         <form className='m-10 p-10 border-2 border-gray-300 rounded-lg flex flex-col gap-4 flex flex-col justify-center' onSubmit={handleSubmit}>
             <label htmlFor="photoshootDate">Select Photoshoot Date:</label>
             <input type="date" id="photoshootDate" name="photoshootDate" onChange={handleChange} value={formData.photoshootDate} className='border p-2 rounded'/>

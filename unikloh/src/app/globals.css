@@ -35,6 +35,11 @@
   --foreground: #000000;
 } */
 
+/* .headfootdark{
+  --background: #7c1a1a;
+  --foreground: #ffffff;
+} */
+
 /* Dark mode */
 .dark {
   --background: #000000;
@@ -46,13 +51,15 @@
   --foreground: #000000;
 }
 
-.headfootdark{
-  --background: #7c1a1a;
-  --foreground: #ffffff;
+
+.header {
+  background: var(--foreground);
+  color: var(--background);
 }
+
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Helvetica, sans-serif;
 }
