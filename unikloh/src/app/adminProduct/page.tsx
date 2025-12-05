@@ -152,58 +152,84 @@ function handleEditProduct(productId: number) {
       </div>
       <br></br><br></br>
       <div className='flex justify-center items-center'>
-        <button className='border p-2 rounded bg-green-500 text-white m-2' onClick={previousPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Previous</button>
-        <button className='border p-2 rounded bg-green-500 text-white' onClick={nextPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Next</button>
+        <button className='border p-2 rounded bg-green-500 text-white m-2' onClick={previousPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Previous Page</button>
+        <button className='border p-2 rounded bg-green-500 text-white' onClick={nextPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Next Page</button>
       </div>
 
 
 
 
-          <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='addProductModal'>
-          <h2>Add New Product</h2>
-          <button className='border p-2 rounded bg-red-500 text-white absolute top-2 right-2' onClick={() => openAddProductModal()}>Close</button>
-            <form onSubmit={(e) => {  handleAddProduct(e); }}>
-              <label htmlFor='title'>Title:</label>
-              <input
-                className='border p-1 m-1'
-                type='text'
-                id='title'
-                value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              />
-              <br />
-              <label htmlFor='price'>Price:</label>
-              <input
-                className='border p-1 m-1'
-                type='number'
-                id='price'
-                value={formData.price}
-                onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-              />
+<div
+  id="addProductModal"
+  className="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center transition-all duration-300"
+  style={{background:"var(--foreground)", color:"var(--background)"}}
+>
+  <div className="bg-white w-[400px] rounded-xl p-6 shadow-xl relative animate-fadeIn">
 
-              <br />
-              <label htmlFor='description'>Description:</label>
-              <textarea
-                className='border p-1 m-1'
-                id='description'
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              />
-              <br />
-              <label htmlFor='categoryId'>Category ID:</label>
-              <input
-                className='border p-1 m-1'
-                type='number'
-                id='categoryId'
-                value={formData.categoryId}
-                onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
-              />
-              <br />
+    {/* Title */}
+    <h2 className="text-xl font-semibold mb-4">Add New Product</h2>
 
-              <button className='border p-2 rounded bg-green-500 text-white' type="submit">Submit</button>
-            </form>
-        </div>
+    {/* Close Button */}
+    <button
+      onClick={() => openAddProductModal()}
+      className="absolute top-3 right-3 text-red-500 font-bold text-lg hover:text-red-700 transition"
+    >
+      ✕
+    </button>
 
+    {/* FORM */}
+    <form onSubmit={handleAddProduct} className="flex flex-col gap-3">
+
+      <div>
+        <label className="text-sm font-medium">Title:</label>
+        <input
+          className="border rounded p-2 w-full"
+          type="text"
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+        />
+      </div>
+
+      <div>
+        <label className="text-sm font-medium">Price:</label>
+        <input
+          className="border rounded p-2 w-full"
+          type="number"
+          value={formData.price}
+          onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+        />
+      </div>
+
+      <div>
+        <label className="text-sm font-medium">Description:</label>
+        <textarea
+          className="border rounded p-2 w-full"
+          rows={3}
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+        ></textarea>
+      </div>
+
+      <div>
+        <label className="text-sm font-medium">Category ID:</label>
+        <input
+          className="border rounded p-2 w-full"
+          type="number"
+          value={formData.categoryId}
+          onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="mt-2 bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+      >
+        Submit
+      </button>
+
+    </form>
+  </div>
+</div>
 
 
 
@@ -218,57 +244,96 @@ function handleEditProduct(productId: number) {
             <button className='border p-2 rounded' style={{background:"var(--foreground)", color:"var(--background)"}} onClick={() => openUpdateProductModal()}>Edit</button>
             <button className='border p-2 rounded' style={{background:"var(--foreground)", color:"var(--background)"}} onClick={() => handleDeleteProduct(product.id)}>Delete</button>
           
-          <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='updateProductModal'>
-          <h2>Update Product</h2>
-          <br></br>
-          <button className='border p-2 rounded bg-red-500 text-white absolute top-2 right-2' onClick={() => openUpdateProductModal()}>Close</button>
-            <form onSubmit={(e) => { e.preventDefault(); handleEditProduct(product.id); }}>
-              <label htmlFor='title'>Title:</label>
-              <input
-                className='border p-1 m-1'
-                type='text'
-                id='title'
-                value={updateProducts?.title ?? product.title}
-                onChange={(e) => setUpdateProducts({ ...updateProducts, title: e.target.value })}
-              />
-              <br />
-              <label htmlFor='price'>Price:</label>
-              <input
-                className='border p-1 m-1'
-                type='number'
-                id='price'
-                value={updateProducts?.price ?? product.price}
-                onChange={(e) => setUpdateProducts({ ...updateProducts, price: Number(e.target.value) })}
-              />
+          <div
+              id="updateProductModal"
+              className="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+              style={{background:"var(--foreground)", color:"var(--background)"}}
+            >
+              <div className="bg-white w-[400px] rounded-xl shadow-xl p-6 relative animate-scaleIn">
+                
+                <button
+                  onClick={() => openUpdateProductModal()}
+                  className="absolute top-3 right-3 text-gray-500 hover:text-red-500 transition"
+                >
+                  ✕
+                </button>
 
-              <br />
-              <label htmlFor='description'>Description:</label>
-              <textarea
-                className='border p-1 m-1'
-                id='description'
-                value={updateProducts?.description ?? product.description}
-                onChange={(e) => setUpdateProducts({ ...updateProducts, description: e.target.value })}
-              />
-              <br />
-              <label htmlFor='categoryId'>Category ID:</label>
-              <input
-                className='border p-1 m-1'
-                type='number'
-                id='categoryId'
-                value={updateProducts?.categoryId ?? product.categoryId}
-                onChange={(e) => setUpdateProducts({ ...updateProducts, categoryId: Number(e.target.value) })}
-              />
-              <br />
+                <h2 className="text-xl font-bold mb-4 text-center">Update Product</h2>
 
-              <button className='border p-2 rounded bg-green-500 text-white' onClick={() =>handleEditProduct(Number(product.id))} type="submit">Submit</button>
-            </form>
-        </div>
+                <form
+                  className="flex flex-col gap-3"
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    handleEditProduct(product.id)
+                  }}
+                >
+                  <label className="text-sm font-semibold">Title</label>
+                  <input
+                    className="border p-2 rounded w-full"
+                    type="text"
+                    value={updateProducts?.title ?? product.title}
+                    onChange={(e) =>
+                      setUpdateProducts({ ...updateProducts, title: e.target.value })
+                    }
+                  />
+
+                  <label className="text-sm font-semibold">Price</label>
+                  <input
+                    className="border p-2 rounded w-full"
+                    type="number"
+                    value={updateProducts?.price ?? product.price}
+                    onChange={(e) =>
+                      setUpdateProducts({
+                        ...updateProducts,
+                        price: Number(e.target.value),
+                      })
+                    }
+                  />
+
+                  <label className="text-sm font-semibold">Description</label>
+                  <textarea
+                    className="border p-2 rounded w-full"
+                    rows={4}
+                    value={updateProducts?.description ?? product.description}
+                    onChange={(e) =>
+                      setUpdateProducts({
+                        ...updateProducts,
+                        description: e.target.value,
+                      })
+                    }
+                  />
+
+                  <label className="text-sm font-semibold">Category ID</label>
+                  <input
+                    className="border p-2 rounded w-full"
+                    type="number"
+                    value={updateProducts?.categoryId ?? product.categoryId}
+                    onChange={(e) =>
+                      setUpdateProducts({
+                        ...updateProducts,
+                        categoryId: Number(e.target.value),
+                      })
+                    }
+                  />
+
+                  <button
+                    type="submit"
+                    className="mt-4 bg-green-600 hover:bg-green-700 text-white p-2 rounded transition"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
           
           </div>
         ))}
 
       
-      
+      <div className='flex justify-center items-center'>
+        <button className='border p-2 rounded bg-green-500 text-white m-2' onClick={previousPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Previous Page</button>
+        <button className='border p-2 rounded bg-green-500 text-white' onClick={nextPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Next Page</button>
+      </div>
     </div>
   )
 }
