@@ -1,17 +1,19 @@
+"use client"
+
 import React from 'react'
 import { useState } from 'react';
 import { useLoading } from '@/app/context/loadingContext';
 import { useCart } from '@/app/context/cartContext';
 import { useAuth } from '@/app/context/authContext'
 
-  const getCookie = (name: string): string | null => {
-    return document.cookie
-      .split('; ')
-      .find(row => row.startsWith(`${name}=`))
-      ?.split('=')[1] || null;
-  };
+  // const getCookie = (name: string): string | null => {
+  //   return document.cookie
+  //     .split('; ')
+  //     .find(row => row.startsWith(`${name}=`))
+  //     ?.split('=')[1] || null;
+  // };
 
-  const email = getCookie('email');
+  // const email = getCookie('email');
 const CheckoutPhotoShoot = () => {
 
       const { isLoading, setIsLoading } = useLoading();
@@ -22,7 +24,7 @@ const CheckoutPhotoShoot = () => {
       const initialValue = {
         photoshootDate: '1 January 2024',
         name: user?.name,
-        email: email,
+        email: user?.email,
         package: 'premium',
         // phone: '12345678'
       };
@@ -60,9 +62,9 @@ const CheckoutPhotoShoot = () => {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 photoshootDate: formData.photoshootDate,
-                name:name,
+                name:user?.name,
 
-                email:email,
+                email:user?.email,
                 package:formData.package,
                 expiresInMins: 30,
               }),
