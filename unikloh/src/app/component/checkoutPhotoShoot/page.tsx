@@ -49,11 +49,16 @@ const CheckoutPhotoShoot = () => {
       }
   return (
     <div>
-      Let's Schedule Your Photoshoot!
+
 
           <div>
-        <h1>Photoshoot Page</h1>
-        <form className='m-10 p-10 border-2 border-gray-300 rounded-lg flex flex-col gap-4 flex flex-col justify-center' onSubmit={handleSubmit}>
+
+        <form className="max-w-xl mx-auto m-8 p-10 rounded-xl flex flex-col gap-6 shadow-md transition-colors duration-300"
+            style={{
+              border: "2px solid var(--foreground)",
+              background: "var(--background)",
+              color: "var(--foreground)",
+            }} onSubmit={handleSubmit}>
             <label htmlFor="photoshootDate">Select Photoshoot Date:</label>
             <input type="date" id="photoshootDate" name="photoshootDate" onChange={handleChange} value={formData.photoshootDate} className='border p-2 rounded'/>
             <br></br>
@@ -73,7 +78,15 @@ const CheckoutPhotoShoot = () => {
             <label htmlFor='phone'>Phone Number:</label>
             <input type="tel" id="phone" name="phone" onChange={handleChange} value={formData.phone} className='border p-2 rounded' placeholder='+1234567890'/>
             <br></br>
-            <button type="submit" className='bg-red-600 text-white px-4 py-2 rounded'>Submit</button>
+            <button type="submit" className='bg-red-600 text-white px-4 py-2 rounded'
+
+              style={{
+                background: "var(--foreground)",
+                color: "var(--background)",
+                borderColor: "var(--foreground)",
+              }}
+            
+            >Submit</button>
         </form>
       
     </div>

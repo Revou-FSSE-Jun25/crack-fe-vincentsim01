@@ -4,6 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useLoading } from '../context/loadingContext';
 import PhotoshootBanner from '../component/photoshootBanner/PhotoshootBanner';
+import CheckoutPhotoShoot from "@/app/component/checkoutPhotoShoot/page";  
 
 const page = () => {
 
@@ -93,8 +94,10 @@ const page = () => {
       BOOK A PHOTO SESSION HERE
     </h1>
 
+    <CheckoutPhotoShoot/>
+
     {/* FORM */}
-    <form
+    {/* <form
       className="max-w-xl mx-auto m-8 p-10 rounded-xl flex flex-col gap-6 shadow-md transition-colors duration-300"
       style={{
         border: "2px solid var(--foreground)",
@@ -204,7 +207,7 @@ const page = () => {
         />
       </div>
 
-      {/* SUBMIT BUTTON */}
+
       <button
         type="submit"
         className="px-4 py-3 rounded-lg border font-medium mt-4 active:scale-95 transition-all duration-200"
@@ -216,7 +219,7 @@ const page = () => {
       >
         Submit
       </button>
-    </form>
+    </form> */}
   </div>
 );
 }

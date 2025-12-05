@@ -119,7 +119,7 @@ export default function LoginPage() {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: "5px" }}
+            style={{ width: "100%", padding: "5px", background: "var(--foreground)",color: "var(--background)", }}
             required
           />
         </div>
@@ -131,18 +131,25 @@ export default function LoginPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: "5px" }}
+            style={{ width: "100%", padding: "5px", background: "var(--foreground)",color: "var(--background)", }}
+            
             required
           />
         </div>
+
+                      {/* style={{
+                background: "var(--foreground)",
+                color: "var(--background)",
+                borderColor: "var(--foreground)",
+              }} */}
 
         <button
           type="submit"
           disabled={isLoading}
           style={{
             padding: "10px 20px",
-            backgroundColor: isLoading ? "#ccc" : "#0070f3",
-            color: "white",
+            backgroundColor: isLoading ? "var(--background)" : "var(--foreground)",
+            color: isLoading ? "var(--foreground)" : "var(--background)",
             border: "none",
             borderRadius: "4px",
             cursor: isLoading ? "not-allowed" : "pointer"
