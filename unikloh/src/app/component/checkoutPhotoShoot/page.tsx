@@ -2,18 +2,29 @@ import React from 'react'
 import { useState } from 'react';
 import { useLoading } from '@/app/context/loadingContext';
 import { useCart } from '@/app/context/cartContext';
+import { useAuth } from '@/app/context/authContext'
 
+  const getCookie = (name: string): string | null => {
+    return document.cookie
+      .split('; ')
+      .find(row => row.startsWith(`${name}=`))
+      ?.split('=')[1] || null;
+  };
+
+  const email = getCookie('email');
 const CheckoutPhotoShoot = () => {
 
       const { isLoading, setIsLoading } = useLoading();
       const { addToCart } = useCart();
+      const { user, logout } = useAuth();
+      
     
       const initialValue = {
         photoshootDate: '1 January 2024',
-        name: 'arthur',
-        email: 'arthur@gmail.com',
+        name: user?.name,
+        email: email,
         package: 'premium',
-        phone: '12345678'
+        // phone: '12345678'
       };
 
       type Product = {
@@ -31,17 +42,45 @@ const CheckoutPhotoShoot = () => {
         setFormData({ ...formData, [name]: value });
       }
     
-      function handleSubmit(event: React.FormEvent) {
+      async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
         setIsLoading(true);
-        if (formData.package === 'basic') {
-          addToCart({id: 101, title: 'Basic Photoshoot Package', price: 100, quantity: 1});
-        } else if (formData.package === 'premium') {
-          addToCart({id: 102, title: 'Premium Photoshoot Package', price: 200, quantity: 1});
-        } else if (formData.package === 'deluxe') {
-          addToCart({id: 103, title: 'Deluxe Photoshoot Package', price: 300, quantity: 1});
+        try{
+            if (formData.package === 'basic') {
+              addToCart({id: 101, title: 'Basic Photoshoot Package', price: 100, quantity: 1});
+            } else if (formData.package === 'premium') {
+              addToCart({id: 102, title: 'Premium Photoshoot Package', price: 200, quantity: 1});
+            } else if (formData.package === 'deluxe') {
+              addToCart({id: 103, title: 'Deluxe Photoshoot Package', price: 300, quantity: 1});
+            }
+            setIsLoading(false);
+
+            const response = await fetch('https://api', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                photoshootDate: formData.photoshootDate,
+                name:name,
+
+                email:email,
+                package:formData.package,
+                expiresInMins: 30,
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error('Invalid credentials');
+            }
+
         }
-        setIsLoading(false);
+        catch (error) {
+            console.error('❌ Login failed:', error);
+
+        } finally {
+            setIsLoading(false);
+        }
+
+
       }
     
       if (isLoading) {
@@ -62,12 +101,12 @@ const CheckoutPhotoShoot = () => {
             <label htmlFor="photoshootDate">Select Photoshoot Date:</label>
             <input type="date" id="photoshootDate" name="photoshootDate" onChange={handleChange} value={formData.photoshootDate} className='border p-2 rounded'/>
             <br></br>
-            <label htmlFor="name">Name:</label>
+            {/* <label htmlFor="name">Name:</label>
             <input type="text" id="name" name="name" onChange={handleChange} value={formData.name} className='border p-2 rounded' placeholder='Arthur'/>
             <br></br>
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" onChange={handleChange} value={formData.email}   className='border p-2 rounded' placeholder='arthur@example.com'/>
-            <br></br>
+            <br></br> */}
             <label htmlFor="package">Select Package:</label>
             <select id="package" name="package" onChange={handleChange} value={formData.package} className='border p-2 rounded'>
                 <option value="basic">Basic</option>
@@ -75,9 +114,9 @@ const CheckoutPhotoShoot = () => {
                 <option value="deluxe">Deluxe</option>
             </select>
             <br></br>
-            <label htmlFor='phone'>Phone Number:</label>
+            {/* <label htmlFor='phone'>Phone Number:</label>
             <input type="tel" id="phone" name="phone" onChange={handleChange} value={formData.phone} className='border p-2 rounded' placeholder='+1234567890'/>
-            <br></br>
+            <br></br> */}
             <button type="submit" className='bg-red-600 text-white px-4 py-2 rounded'
 
               style={{

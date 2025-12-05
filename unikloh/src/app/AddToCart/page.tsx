@@ -2,23 +2,25 @@
 "use client";
 import { useState } from "react";
 import { useCart } from "@/app/context/cartContext";
+import { useAuth } from '@/app/context/authContext'
 import { useRouter } from "next/navigation";
 import { useLoading } from '@/app/context/loadingContext';
 import CheckoutPhotoShoot from "@/app/component/checkoutPhotoShoot/page";  
 
 export default function CartPage() {
+  const { user, logout, isLoading } = useAuth();
   const { cart, removeFromCart, getTotal, clearCart, addToCart } = useCart();
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const router = useRouter();
     const [isPhotoShootAdded, setIsPhotoShootAdded] = useState<boolean>(false);
 
-      function openPhotoShoot() {
-    setIsPhotoShootAdded(true);
-  }
+    function openPhotoShoot() {
+      setIsPhotoShootAdded(true);
+    }
 
-  function closePhotoShoot() {
-    setIsPhotoShootAdded(false);
-  }
+    function closePhotoShoot() {
+      setIsPhotoShootAdded(false);
+    }
 
 
   const handleSelectItem = (id: number) => {
@@ -70,7 +72,17 @@ export default function CartPage() {
 
                     <br></br><br></br>
 
-          <button className='border border-black px-4 py-2 rounded bg-white cursor-pointer hover:scale-110 active:scale-90' onClick={openPhotoShoot}>Add On Extra Photoshoot Session</button>
+          <button 
+            className='border border-black px-4 py-2 rounded cursor-pointer hover:scale-110 active:scale-90'
+             onClick={openPhotoShoot}
+            style={{
+              border: "2px solid var(--foreground)",
+              background: "var(--foreground)",
+              color: "var(--background)",
+            }}
+          >
+              Add On Extra Photoshoot Session
+          </button>
 
           {isPhotoShootAdded ? (<><CheckoutPhotoShoot /> <button onClick={closePhotoShoot}>Close</button></>) : null}
 
