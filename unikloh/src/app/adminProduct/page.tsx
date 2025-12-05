@@ -144,11 +144,21 @@ function handleEditProduct(productId: number) {
 }
 
   return (
-    <div>
-      Product Admin
-        <button className='border p-2 rounded bg-blue-500 text-white z-50' onClick={openAddProductModal}>Add New Product</button>
-        <button className='border p-2 rounded bg-green-500 text-white m-2' onClick={previousPagination}>Previous</button>
-        <button className='border p-2 rounded bg-green-500 text-white' onClick={nextPagination}>Next</button>
+    <div className='mt-5'>
+      <h1 className='text-4xl text-center font-bold'>PRODUCT ADMIN</h1>
+      <br></br>
+      <div className='flex justify-center items-center'>
+        <button className='border p-2 rounded bg-blue-500 text-white z-50' onClick={openAddProductModal} style={{background:"var(--foreground)", color:"var(--background)"}}>Add New Product</button>
+      </div>
+      <br></br><br></br>
+      <div className='flex justify-center items-center'>
+        <button className='border p-2 rounded bg-green-500 text-white m-2' onClick={previousPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Previous</button>
+        <button className='border p-2 rounded bg-green-500 text-white' onClick={nextPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Next</button>
+      </div>
+
+
+
+
           <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='addProductModal'>
           <h2>Add New Product</h2>
           <button className='border p-2 rounded bg-red-500 text-white absolute top-2 right-2' onClick={() => openAddProductModal()}>Close</button>
@@ -199,14 +209,14 @@ function handleEditProduct(productId: number) {
 
 
         {products.map(product => (
-          <div key={product.id} className='border p-4 m-4'>
-            <h2>{product.title}</h2>
-            <img className='w-[40px] h-[40px] object-cover' src={product.images[0]} alt={product.title} />
+          <div key={product.id} className='border rounded-lg p-5 m-4 shadow-sm hover:shadow-md transition-shadow' style={{background:"var(--background)", color:"var(--foreground)"}}>
+            <h2 className="text-xl font-semibold mb-2">{product.title}</h2>
+            <img className='w-20 h-20 object-cover rounded mb-3' src={product.images[0]} alt={product.title} />
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
             <br></br>
-            <button className='border p-2 rounded bg-yellow-500 text-white' onClick={() => openUpdateProductModal()}>Edit</button>
-            <button className='border p-2 rounded bg-red-500 text-white' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+            <button className='border p-2 rounded' style={{background:"var(--foreground)", color:"var(--background)"}} onClick={() => openUpdateProductModal()}>Edit</button>
+            <button className='border p-2 rounded' style={{background:"var(--foreground)", color:"var(--background)"}} onClick={() => handleDeleteProduct(product.id)}>Delete</button>
           
           <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='updateProductModal'>
           <h2>Update Product</h2>

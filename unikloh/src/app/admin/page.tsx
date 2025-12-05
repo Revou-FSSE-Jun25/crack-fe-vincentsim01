@@ -21,7 +21,8 @@ export default function AdminPage() {
 
         {user && (
           <div style={{
-            backgroundColor: '#f5f5f5',
+            backgroundColor: "var(--foreground)",
+            color: "var(--background)",
             padding: '20px',
             borderRadius: '8px',
             marginBottom: '20px',
