@@ -7,6 +7,7 @@ import FormDeleteProduct from '@/app/component/formDeleteProduct/page';
 import { updateProduct } from '@/types/product';
 import {FormUpdateProduct} from '@/app/component/formUpdateProduct/FormUpdateProduct';
 import {MockProducts} from '@/app/data/Product';
+import BannerCosplayNight from '../component/banner/BannerCosplayNight';
 
 export async function deleteProductAction(id: number) {
   await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
@@ -29,6 +30,9 @@ export async function deleteProductAction(id: number) {
 const page = async () => {
   const fetchedData = await api.getProducts(10);
   return (
+    <>
+    <BannerCosplayNight></BannerCosplayNight>
+
     <div className='m-4'   
     style={{
       background: "var(--background)",
@@ -93,6 +97,7 @@ const page = async () => {
         </div>
       
     </div>
+        </>
   )
 }
 

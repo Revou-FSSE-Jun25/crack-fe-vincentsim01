@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import BannerBlog from '../component/banner/BannerBlog';
 
 export default async function BlogPost({ params }: any) {
   const post = await fetch(
@@ -16,7 +17,8 @@ export default async function BlogPost({ params }: any) {
 //   console.log(post);
 
   return (
-
+    <>
+    <BannerBlog></BannerBlog>
     <article className='mt-6 mb-6 p-5 '>
       <h1 className='m-5 mx-auto text-4xl font-bold text-center '>OUR BLOG</h1>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
@@ -32,5 +34,6 @@ export default async function BlogPost({ params }: any) {
         ))}
       </div>
     </article>
+  </>
   );
 }
