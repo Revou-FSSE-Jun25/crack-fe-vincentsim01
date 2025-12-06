@@ -1,7 +1,10 @@
 import React from 'react'
+import BannerContact from '../component/banner/bannerContact'
 
 const Contact = () => {
   return (
+    <>
+    <BannerContact></BannerContact>
 <div className="w-full max-w-lg mx-auto p-6 rounded-xl shadow-lg flex flex-col gap-6 mt-8 mb-8"
     style={{
       background: "var(--foreground)",
@@ -86,6 +89,7 @@ const Contact = () => {
     </button>
   </form>
 </div>
+</>
   )
 }
 

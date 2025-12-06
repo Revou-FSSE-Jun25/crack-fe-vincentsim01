@@ -8,8 +8,8 @@ const PhotoshootBanner = () => {
 
     const images = [
         "/cosplaybanner.png",
-        "/balibanner.png",
-        "/europeanbanner.png",
+        "/wedding.webp",
+        "/banner5.jpg",
     ];
 
     const [index, setIndex] = useState(0);
