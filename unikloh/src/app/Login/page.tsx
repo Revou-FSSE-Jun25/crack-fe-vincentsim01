@@ -118,6 +118,7 @@ export default function LoginPage() {
           <input
             type="text"
             value={email}
+            className='rounded-md'
             onChange={(e) => setEmail(e.target.value)}
             style={{ width: "100%", padding: "5px", background: "var(--foreground)",color: "var(--background)", }}
             required
@@ -130,6 +131,7 @@ export default function LoginPage() {
           <input
             type="password"
             value={password}
+            className='rounded-md'
             onChange={(e) => setPassword(e.target.value)}
             style={{ width: "100%", padding: "5px", background: "var(--foreground)",color: "var(--background)", }}
             
