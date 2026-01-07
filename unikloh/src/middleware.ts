@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Define public routes that don't require authentication
-  const publicRoutes = ["/login", "/", "/products", "/FAQ", "/Photoshoot", "/Blog", "/Contact", "/Signup"];
+  const publicRoutes = ["/Login", "/", "/products", "/FAQ", "/Photoshoot", "/Blog", "/Contact", "/Signup"];
 
   // Check if the route is public
   if (publicRoutes.includes(pathname)) {
@@ -38,7 +38,7 @@ export function middleware(request: NextRequest) {
 
   // If no token, redirect to login
   if (!token || !email) {
-    const loginUrl = new URL("/login", request.url);
+    const loginUrl = new URL("/Login", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     loginUrl.searchParams.set("error", "login-required");
     return NextResponse.redirect(loginUrl);
