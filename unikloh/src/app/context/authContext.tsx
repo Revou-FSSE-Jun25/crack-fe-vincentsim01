@@ -20,7 +20,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  userRole: 'admin' | 'user' | null;
+  userRole: 'admin' | 'user' | 'customer' | null;
   logout: () => void;
   refreshUser: () => void;
 }
@@ -122,7 +122,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Re-check auth when pathname changes (after navigation)
   useEffect(() => {
-    if (pathname !== '/login') {
+    if (pathname !== '/Login') {
       console.log('📍 Route changed to:', pathname);
       // Small delay to ensure cookies are readable
       setTimeout(() => {

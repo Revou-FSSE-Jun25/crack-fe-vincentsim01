@@ -86,12 +86,13 @@ export default function LoginPage() {
 
       const userRole = getUserRole(email);
       const redirect = userRole === "admin" ? "/admin" : "/user";
+      console.log('the value of redirect is '+redirect)
       setTimeout(() => {console.log('🚀 Redirecting to:', redirect)},300)
 
       
       // Wait a bit to ensure cookies are written
       await new Promise(resolve => setTimeout(resolve, 800));
-      
+      console.log('redirect'+redirect);
       router.push(redirect);
 
     } catch (error) {

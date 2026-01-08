@@ -5,6 +5,7 @@ import {useRouter} from 'next/navigation';
 
 const Page = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
     const router = useRouter();
 
     const setCookie = (name: string, value: string, minutes: number = 30) => {
@@ -38,10 +39,48 @@ const Page = () => {
         setFormData({...formData, [name]:value});
     }
 
-    function handleSubmit(e:React.FormEvent<HTMLFormElement>){
+    async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         setIsLoading(true);
+
+            try {
+      console.log('🔑 Attempting signup...');
+      
+      const response = await fetch('localhost:3001/user/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          role,
+          // expiresInMins: 30,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Invalid credentials');
+      }
+
+      const data = await response.json();
+      console.log('✅ Sign up API successful');
+
+
+   
+
+      // Get user profile
+
+
+
+
+    } catch (error) {
+      console.error('❌ Signup failed:', error);
+      setError("Signup failed. Please check your credentials.");
+    } finally {
+      setIsLoading(false);
+    }
         console.log("Form submitted");
+
         router.push('/');
     }
   return (
@@ -54,7 +93,7 @@ const Page = () => {
       >
       <div  style={{ marginBottom: "10px" }}>
         <label htmlFor='name'>Username</label>
-        <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} placeholder='username' required className='border border-black rounded-md text-center' style={{ width: "100%", padding: "5px", background: "var(--foreground)",color: "var(--background)", }}/>
+        <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} placeholder='name' required className='border border-black rounded-md text-center' style={{ width: "100%", padding: "5px", background: "var(--foreground)",color: "var(--background)", }}/>
       </div>
 
 
