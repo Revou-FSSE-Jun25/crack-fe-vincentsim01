@@ -76,11 +76,16 @@ const Header = () => {
           <Link href='/AddToCart/'>
           <CartIcon className="ml-2" />
         </Link>
+        {/* <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/Signup'>Signup</Link></span>  */}
 
 
 
-        {!isAuthenticated ?         
-          <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/Login'>Login</Link></span> :
+        {!isAuthenticated ? 
+          <div>
+            <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/Signup'>Signup</Link></span>
+           <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/Login'>Login</Link></span>
+           </div>        
+          :
           <div>
             {/* <span className='mr-4 cursor-pointer hover:underline active:scale-95'>Hi,</span>         */}
             {/* <span><HeaderClient/></span> */}
