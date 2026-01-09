@@ -16,6 +16,19 @@ console.log(getUserRole())
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Handle CORS preflight for API routes
+  if (pathname.startsWith('/api')) {
+    if (request.method === 'OPTIONS') {
+      const response = new NextResponse(null, { status: 204 });
+      response.headers.set('Access-Control-Allow-Origin', '*');
+      response.headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+      response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      response.headers.set('Access-Control-Allow-Credentials', 'true');
+      return response;
+    }
+    return NextResponse.next();
+  }
+
   // Define public routes that don't require authentication
   const publicRoutes = ["/Login", "/", "/Products", "/FAQ", "/Photoshoot", "/Blog", "/Contact", "/Signup"];
 
@@ -94,6 +107,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - public folder
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|public).*)",
+    "/((?!_next/static|_next/image|favicon.ico|public).*)",
   ],
 };

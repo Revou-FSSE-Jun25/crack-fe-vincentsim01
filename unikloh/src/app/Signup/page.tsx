@@ -46,14 +46,14 @@ const Page = () => {
             try {
       console.log('🔑 Attempting signup...');
       
-      const response = await fetch('localhost:3001/user/signup', {
+      const response = await fetch('http://localhost:3001/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name,
-          email,
-          password,
-          role,
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: formData.role,
           // expiresInMins: 30,
         }),
       });
@@ -81,7 +81,7 @@ const Page = () => {
     }
         console.log("Form submitted");
 
-        router.push('/');
+        router.push('/Login');
     }
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
