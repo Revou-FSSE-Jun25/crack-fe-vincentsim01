@@ -83,14 +83,17 @@ export default function LoginPage() {
       setCookie('user-role', getUserRole(email), 30);
       if (userId) setCookie('user-id', userId.toString(), 30);
 
+      console.log(getCookie('auth-token'));
 
-      const userResponse = await fetch(`http://localhost:3001/user/${userId || 'me'}/`, {
+
+      const userResponse = await fetch(`http://localhost:3001/user/id/${userId || 'me'}/`, {
         headers: {
-          'Authorization': `Bearer ${data.access_token}`,
+          'Authorization': `Bearer ${getCookie('auth-token')}`,
         },
       });
 
-      console.log("userResponse content is "+userResponse);
+      console.log("userResponse content is "+userResponse.status);
+      console.log("acccess token content is "+data.access_token);
 
       if (userResponse.ok) {
         const userData = await userResponse.json();
