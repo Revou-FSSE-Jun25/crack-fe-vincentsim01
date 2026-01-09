@@ -20,7 +20,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  userRole: 'admin' | 'user' | 'customer' | null;
+  userRole: 'ADMIN' | 'USER'| null;
   logout: () => void;
   refreshUser: () => void;
 }
@@ -45,16 +45,16 @@ const deleteCookie = (name: string) => {
   document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
 };
 
-const getUserRole = (email?: string): 'admin' | 'user' => {
-  // if (!email) return 'user'; 
-  return email === 'john@mail.com' ? 'admin' : 'user';
+const getUserRole = (email?: string): 'ADMIN' | 'USER' => {
+  // if (!email) return 'USER'; 
+  return email === 'john@gmail.com' ? 'ADMIN' : 'USER';
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userRole, setUserRole] = useState<'admin' | 'user' | null>(null);
+  const [userRole, setUserRole] = useState<'ADMIN' | 'USER' | null>(null);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -141,7 +141,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(null);
     setIsAuthenticated(false);
     setUserRole(null);
-    router.push('/login');
+    router.push('/Login');
   };
 
   const refreshUser = (): void => {

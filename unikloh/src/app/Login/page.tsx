@@ -3,10 +3,11 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("john@mail.com");
-  const [password, setPassword] = useState("changeme");
+  const [email, setEmail] = useState("john@gmail.com");
+  const [password, setPassword] = useState("john");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -25,8 +26,8 @@ export default function LoginPage() {
       ?.split('=')[1] || null;
   };
 
-  const getUserRole = (email: string): 'admin' | 'user' => {
-    return email === 'john@mail.com' ? 'admin' : 'user';
+  const getUserRole = (email: string): 'ADMIN' | 'USER' => {
+    return email === 'john@gmail.com' ? 'ADMIN' : 'USER';
   };
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function LoginPage() {
     const savedEmail = getCookie('email');
     if (token && savedEmail) {
       const userRole = getUserRole(savedEmail);
-      const redirect = userRole === "admin" ? "/admin" : "/user";
+      const redirect = userRole === "ADMIN" ? "/admin" : "/user";
       console.log('Already logged in, redirecting to:', redirect);
       router.push(redirect);
     }
@@ -48,13 +49,13 @@ export default function LoginPage() {
     try {
       console.log('🔑 Attempting login...');
       
-      const response = await fetch('https://api.escuelajs.co/api/v1/auth/login', {
+      const response = await fetch('http://localhost:3001/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
           password,
-          expiresInMins: 30,
+          // expiresInMins: 30,
         }),
       });
 
@@ -65,18 +66,31 @@ export default function LoginPage() {
       const data = await response.json();
       console.log('✅ Login API successful');
 
+      // Decode the access token to get user ID
+      let userId = null;
+      try {
+        const decoded: any = jwtDecode(data.access_token);
+        userId = decoded.sub || decoded.id || decoded.userId;
+        console.log('📋 User ID from token:', userId);
+      } catch (decodeError) {
+        console.error('Failed to decode token:', decodeError);
+      }
+
       // Set cookies
       setCookie('auth-token', data.access_token, 30);
       setCookie('refresh-token', data.refresh_token, 30);
       setCookie('email', email, 30);
       setCookie('user-role', getUserRole(email), 30);
+      if (userId) setCookie('user-id', userId.toString(), 30);
 
-      // Get user profile
-      const userResponse = await fetch('https://api.escuelajs.co/api/v1/auth/profile', {
+
+      const userResponse = await fetch(`http://localhost:3001/user/${userId || 'me'}/`, {
         headers: {
           'Authorization': `Bearer ${data.access_token}`,
         },
       });
+
+      console.log("userResponse content is "+userResponse);
 
       if (userResponse.ok) {
         const userData = await userResponse.json();
@@ -85,7 +99,7 @@ export default function LoginPage() {
       }
 
       const userRole = getUserRole(email);
-      const redirect = userRole === "admin" ? "/admin" : "/user";
+      const redirect = userRole === "ADMIN" ? "/admin" : "/user";
       console.log('the value of redirect is '+redirect)
       setTimeout(() => {console.log('🚀 Redirecting to:', redirect)},300)
 
@@ -164,8 +178,8 @@ export default function LoginPage() {
 
       <div style={{ marginTop: "20px", fontSize: "12px" }}>
         <p><strong>Platzi Test Credentials:</strong></p>
-        <p>Email: <code>john@mail.com</code></p>
-        <p>Password: <code>changeme</code></p>
+        <p>Email: <code>john@gmail.com</code></p>
+        <p>Password: <code>john</code></p>
         <p style={{ marginTop: "10px", fontSize: "11px", color: "#666" }}>
           Note: This will login as 'John' with admin privileges
         </p>

@@ -8,8 +8,8 @@ interface JWTPayload {
 }
 
 // Helper function to determine user role from email
-function getUserRole(email?: string): 'admin' | 'user' {
-  return email === 'john@mail.com' ? 'admin' : 'user';
+function getUserRole(email?: string): 'ADMIN' | 'USER' {
+  return email === 'john@gmail.com' ? 'ADMIN' : 'USER';
 } 
 console.log(getUserRole())
 
@@ -64,14 +64,14 @@ export function middleware(request: NextRequest) {
     console.log('User role in middleware:', userRole);
 
     // Role-based access control
-    if (pathname.startsWith("/admin") && userRole !== "admin") {
-      const accessDeniedUrl = new URL("/login", request.url);
+    if (pathname.startsWith("/admin") && userRole !== "ADMIN") {
+      const accessDeniedUrl = new URL("/Login", request.url);
       accessDeniedUrl.searchParams.set("error", "admin-required");
       return NextResponse.redirect(accessDeniedUrl);
     }
 
     // Redirect admin away from user routes
-    if (pathname.startsWith("/user") && userRole === "admin") {
+    if (pathname.startsWith("/user") && userRole === "ADMIN") {
       console.log('this path')
       return NextResponse.redirect(new URL("/admin", request.url));
     }
@@ -85,7 +85,7 @@ export function middleware(request: NextRequest) {
 
   } catch (error) {
     // JWT decode failed, clear tokens and redirect
-    const loginUrl = new URL("/login", request.url);
+    const loginUrl = new URL("/Login", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     loginUrl.searchParams.set("error", "validation-error");
 

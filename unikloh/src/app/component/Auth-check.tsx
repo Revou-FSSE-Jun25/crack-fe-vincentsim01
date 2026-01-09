@@ -8,12 +8,12 @@ import { useAuth } from '@/app/context/authContext';
 
 interface AuthCheckProps {
   children: React.ReactNode
-  requiredRole?: 'user' | 'admin'
+  requiredRole?: 'USER' | 'ADMIN'
 }
 
 export default function AuthCheck({
   children,
-  requiredRole = 'user'
+  requiredRole = 'USER'
 }: AuthCheckProps) {
   const router = useRouter()
   const { isAuthenticated, userRole, isLoading } = useAuth()
@@ -29,13 +29,13 @@ export default function AuthCheck({
 
     if (!isAuthenticated) {
       console.log('❌ Not authenticated, redirecting to login');
-      router.push('/login')
+      router.push('/Login')
       return
     }
 
-    if (requiredRole === 'admin' && userRole !== 'admin') {
+    if (requiredRole === 'ADMIN' && userRole !== 'ADMIN') {
       console.log('❌ Insufficient permissions, redirecting to login');
-      router.push('/login')
+      router.push('/Login')
       return
     }
 
@@ -56,7 +56,7 @@ export default function AuthCheck({
     )
   }
 
-  if (!isAuthenticated || (requiredRole === 'admin' && userRole !== 'admin')) {
+  if (!isAuthenticated || (requiredRole === 'ADMIN' && userRole !== 'ADMIN')) {
     return (
       <div style={{
         display: 'flex',
