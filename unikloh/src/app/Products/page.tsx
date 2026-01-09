@@ -67,7 +67,7 @@ const page = async () => {
             <div className='m-5 p-6 w-[30%] flex flex-col items-center rounded-xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-transform duration-300' key={item.id}>
               <Link href={`/products/${item.id}`} className="w-full text-center mb-5">              
 
-                <img className='w-full h-full object-cover rounded-lg' src={item.images[0]} alt={item.title} width={200} height={200}/> 
+                <img className='w-full h-full object-cover rounded-lg' src={item.image} alt={item.title} width={200} height={200}/> 
                 <br></br>  
                 <h2 className="text-2xl font-semibold text-gray-800 mb-2 hover:text-red-600 transition-colors duration-200">{item.title}</h2>  
 

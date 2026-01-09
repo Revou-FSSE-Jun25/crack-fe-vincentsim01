@@ -1,4 +1,5 @@
-const BASE_URL = 'https://api.escuelajs.co/api/v1/';
+// const BASE_URL = 'https://api.escuelajs.co/api/v1/';
+const BASE_URL = 'http://localhost:3001/';
 import { MockProducts } from '@/app/data/Product';
 import axios from 'axios';
 
@@ -43,7 +44,7 @@ export interface ProductFormData {
 
 export const api = {
   getProducts: async (limit: number = 10) => {
-    const response = await fetch(`${BASE_URL}products?limit=${limit}`);
+    const response = await fetch(`${BASE_URL}products`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch products');
