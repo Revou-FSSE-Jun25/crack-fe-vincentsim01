@@ -1,0 +1,98 @@
+'use client'
+
+import { useAuth } from '@/app/context/authContext'
+import AuthCheck from '@/app/component/Auth-check'
+
+export default function AdminPage() {
+  const { user, logout, isLoading } = useAuth();
+  const getCookie = (name: string): string | null => {
+  if (typeof document === 'undefined') return null;
+  return document.cookie
+    .split('; ')
+    .find(row => row.startsWith(`${name}=`))
+    ?.split('=')[1] || null;
+};
+ const userDataCookie = getCookie('user-data');
+
+  return (
+    <AuthCheck requiredRole="admin">
+      <div style={{ padding: '20px', textAlign: 'center' }}>
+        <h1>Admin Dashboard</h1>
+
+        {user && (
+          <div style={{
+            backgroundColor: "var(--foreground)",
+            color: "var(--background)",
+            padding: '20px',
+            borderRadius: '8px',
+            marginBottom: '20px',
+            textAlign: 'left',
+            maxWidth: '600px',
+            margin: '0 auto 20px'
+          }}>
+            <h3>Admin Profile</h3>
+            <p><strong>ID:</strong> {user.id}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Name:</strong> {user.name} </p>
+          <p><strong>Role:</strong> <span style={{ color: '#d97706', fontWeight: 'bold' }}>ADMIN</span></p>
+
+            {user.avatar && (
+              <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                <img
+                  src={user.avatar}
+                  alt="Profile"
+                  style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        )}
+
+        <div style={{ marginBottom: '20px' }}>
+          <p>This is a protected admin page.</p>
+          <p>Only users with admin privileges can access this dashboard.</p>
+        </div>
+
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button
+            onClick={logout}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#dc2626',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Logout
+          </button>
+
+          <a
+            href="/user"
+            style={{
+              display: 'inline-block',
+              padding: '10px 20px',
+              backgroundColor: '#059669',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px'
+            }}
+          >
+            Go to User Page
+          </a>
+        </div>
+
+        <div style={{ marginTop: '30px', fontSize: '14px', color: '#666' }}>
+          <p>🔒 Protected Route - Admin Access Required</p>
+          <p>👤 Logged in as: {user?.name}</p>
+        </div>
+      </div>
+    </AuthCheck>
+  )
+}
