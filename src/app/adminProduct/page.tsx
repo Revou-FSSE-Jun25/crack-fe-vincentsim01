@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import {Product, ProductFormData, updateProduct} from '@/types/product';
+import { api } from '@/lib/api/api';
 
 
 const AdminProduct = () => {
@@ -14,30 +15,37 @@ const AdminProduct = () => {
     title: "Shirt To Update",
     price: 7373,
     description: "A shirt that is made for Update",
-    categoryId: 1,
+    stock: 1,
   }
 
 
 const fetchProducts = () => {
-  fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`)
+  fetch(`https://revoubackend6-production.up.railway.app/products`)
     .then(res => res.json())
     .then(data => setProducts(data));
 };
 
 
   useEffect(() => {
-    fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`, {
-      method: "GET",
-      headers: {}})
-      .then(response => response.json())
-      .then(data => setProducts(data));
-  }, [offset, limit]);
+    const fetchProducts = async () => {
+      const data = await api.getProducts(limit);
+      setProducts(data);
+    };
+
+    fetchProducts();
+    // fetch(`https://revoubackend6-production.up.railway.app/products`, {
+    //   method: "GET",
+    //   headers: {}})
+    //   .then(response => response.json())
+    //   .then(data => setProducts(data));
+    }, [offset, limit]);
     const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(updateInitialProduct);
     let initialAddProduct: ProductFormData = {
     title: "Shirt A",
     price: 100,
     description: "A shirt that is made for A",
-    categoryId: 79,
+    image: "https://placehold.co/600x400",
+    stock: 10
    
   }
 
@@ -61,7 +69,7 @@ const fetchProducts = () => {
 function handleAddProduct(e: any) {
   e.preventDefault();
 
-  fetch("https://api.escuelajs.co/api/v1/products", {
+  fetch("https://revoubackend6-production.up.railway.app/products", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -70,8 +78,8 @@ function handleAddProduct(e: any) {
       title: formData.title,
       price: formData.price,
       description: formData.description,
-      categoryId: formData.categoryId,
-      images: ["https://placehold.co/600x400"]
+      stock: formData.stock,
+      image: "https://placehold.co/600x400"
     }),
   })
     .then(async (res) => {
@@ -105,7 +113,7 @@ function openUpdateProductModal() {
 }
 
 function handleDeleteProduct(productId: number) {
-  fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
+  fetch(`https://revoubackend6-production.up.railway.app/products/${productId}`, {
     method: "DELETE",
   })
     .then((res) => {
@@ -124,14 +132,14 @@ function handleEditProduct(productId: number) {
   // Logic to edit a product
 
   // console.log(updateProducts)
-  fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
+  fetch(`https://revoubackend6-production.up.railway.app/products/${productId}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(
       {
         // id: productId, 
         ...updateProducts,
-        images: ["https://placehold.co/600x400"]
+        image: "https://placehold.co/600x400"
 
       })
   })
@@ -211,12 +219,22 @@ function handleEditProduct(productId: number) {
       </div>
 
       <div>
-        <label className="text-sm font-medium">Category ID:</label>
+        <label className="text-sm font-medium">Image:</label>
         <input
           className="border rounded p-2 w-full"
-          type="number"
-          value={formData.categoryId}
-          onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
+          type="text"
+          value={formData.image}
+          onChange={(e) => setFormData({ ...formData, image: Number(e.target.value) })}
+        />
+      </div>
+
+      <div>
+        <label className="text-sm font-medium">Stock:</label>
+        <input
+          className="border rounded p-2 w-full"
+          type="text"
+          value={formData.image}
+          onChange={(e) => setFormData({ ...formData, stock: Number(e.target.value) })}
         />
       </div>
 
@@ -299,6 +317,19 @@ function handleEditProduct(productId: number) {
                       setUpdateProducts({
                         ...updateProducts,
                         description: e.target.value,
+                      })
+                    }
+                  />
+
+                                    <label className="text-sm font-semibold">Price</label>
+                  <input
+                    className="border p-2 rounded w-full"
+                    type="number"
+                    value={updateProducts?.stock ?? product.stock}
+                    onChange={(e) =>
+                      setUpdateProducts({
+                        ...updateProducts,
+                        stock: Number(e.target.value),
                       })
                     }
                   />

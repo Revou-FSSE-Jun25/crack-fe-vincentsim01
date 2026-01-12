@@ -1,7 +1,10 @@
+
+"use client";
 // const BASE_URL = 'https://api.escuelajs.co/api/v1/';
-const BASE_URL = 'http://localhost:3001/';
+const BASE_URL = 'https://revoubackend6-production.up.railway.app/';
 import { MockProducts } from '@/app/data/Product';
 import axios from 'axios';
+import {useState, useEffect} from 'react';
 
 export interface Product{
     id:number;
@@ -44,6 +47,9 @@ export interface ProductFormData {
 //     }
 //   }
 
+  // const [offset, setOffset] = useState(0);
+  // const [limit, setLimit] = useState(10);
+
 export const api = {
   getProducts: async (limit: number = 10) => {
     const response = await fetch(`${BASE_URL}products`);
@@ -52,8 +58,10 @@ export const api = {
       throw new Error('Failed to fetch products');
     }
 
+    const start = Math.max(0, limit - 10);
+
     const data = await response.json();
-    return data.slice(0, limit);
+    return data.slice(start, limit);
   },
 
     getProductsMock: async (limit: number = 10) => {

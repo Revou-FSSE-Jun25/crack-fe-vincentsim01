@@ -32,7 +32,8 @@ export interface updateProduct{
     title?:string;
     price?:number;
     description?:string;
-    categoryId?:number ;
+    image?:string;
+    stock?:number ;
 
 }
 
@@ -48,6 +49,7 @@ export interface ProductFormData {
     title:string;
     price:number;
     description:string;
-    categoryId:number;
+    image:string;
+    stock:number;
     // images:string[];
 }
