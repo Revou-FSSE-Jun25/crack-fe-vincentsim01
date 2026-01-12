@@ -15,7 +15,7 @@ export default function AdminPage() {
  const userDataCookie = getCookie('user-data');
 
   return (
-    <AuthCheck requiredRole="admin">
+    <AuthCheck requiredRole="ADMIN">
       <div style={{ padding: '20px', textAlign: 'center' }}>
         <h1>Admin Dashboard</h1>
 

@@ -1,6 +1,7 @@
-// "use client";
+"use client";
 import { api } from '@/lib/api/api';
 import AddToCartButton from '../component/addtocartbutton/AddToCartButton';
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import {Product} from '@/types/product'
 import FormDeleteProduct from '@/app/component/formDeleteProduct/page';
@@ -15,23 +16,49 @@ export async function deleteProductAction(id: number) {
   });
 }
 
-// const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(null);
-// export function handleEditProduct(productId: number, data: any) {
-//   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ ...data }),
-//   })
-//     .then(res => res.json())
-//     .then(res => console.log("Product updated:", res))
-//     .catch(err => console.error(err));
-// }
+const page = () => {
+  const [limit, setLimit] = useState(10);
+  const [fetchedData, setFetchedData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
-const page = async () => {
-  const fetchedData = await api.getProducts(10);
+  useEffect(() => {
+    const loadProducts = async () => {
+      setLoading(true);
+      try {
+        const data = await api.getProducts(limit);
+        setFetchedData(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, [limit]);
+
   return (
     <>
     <BannerCosplayNight></BannerCosplayNight>
+
+    <div className='m-4 flex gap-4 justify-center'>
+      <button 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50" 
+        onClick={() => setLimit(Math.max(10, limit - 10))}
+        disabled={limit <= 10}
+      >
+        Previous (Show {Math.max(10, limit - 10)})
+      </button>
+      <span className='flex items-center font-bold text-lg'>Showing: {limit}</span>
+      <button 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+        onClick={() => setLimit(limit + 10)}
+      >
+        Next (Show {limit + 10})
+      </button>
+    </div>
+
+    {loading && <div className='text-center m-4'>Loading products...</div>}
 
     <div className='m-4'   
     style={{
@@ -40,6 +67,7 @@ const page = async () => {
     }}
     >
         <div className='flex flex-wrap '>
+
             {/* {MockProducts.map((item:any)=>{
                     return (
                       <div className='m-5 p-5 border-2 border-black w-[30%] relative flex flex-col items-center' key={item.id}>
@@ -60,19 +88,20 @@ const page = async () => {
                         />
                       </div>
                     )
-            })} */}
+            })} */}al;sdkf;alskdjf;laskdjf;laksdjf;lk
 
         {fetchedData.map((item:any)=>{
           return (
             <div className='m-5 p-6 w-[30%] flex flex-col items-center rounded-xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-transform duration-300' key={item.id}>
-              <Link href={`/Products/${item.id}`} className="w-full text-center mb-5">              
+      
+              <Link href={`/Products/${item.id}`} className="w-full text-center mb-5">             ZAKLHD;aLKHSEH         
 
                 <img className='w-full h-full object-cover rounded-lg' src={item.image} alt={item.title} width={200} height={200}/> 
                 <br></br>  
                 <h2 className="text-2xl font-semibold text-gray-800 mb-2 hover:text-red-600 transition-colors duration-200">{item.title}</h2>  
-
+                <p className="text-gray-600 mb-4">HEPI YAYAYAYA HEPI YEYEYEYE</p>
                 <br></br>         
-                <div className="text-xl font-bold text-gray-900 mb-8">${item.price}</div>
+                <div className="text-xl font-bold text-gray-900 mb-8">${item.price}        ZAKLHD;aLKHSEH</div>
               </Link>
               <br></br>
               <br></br>

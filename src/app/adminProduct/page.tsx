@@ -237,7 +237,7 @@ function handleEditProduct(productId: number) {
         {products.map(product => (
           <div key={product.id} className='border rounded-lg p-5 m-4 shadow-sm hover:shadow-md transition-shadow' style={{background:"var(--background)", color:"var(--foreground)"}}>
             <h2 className="text-xl font-semibold mb-2">{product.title}</h2>
-            <img className='w-20 h-20 object-cover rounded mb-3' src={product.images[0]} alt={product.title} />
+            <img className='w-20 h-20 object-cover rounded mb-3' src={product.image} alt={product.title} />
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
             <br></br>

@@ -1,6 +1,7 @@
-// "use client";
+"use client";
 import { api } from '@/lib/api/api';
 import AddToCartButton from '../component/addtocartbutton/AddToCartButton';
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import {Product} from '@/types/product'
 import FormDeleteProduct from '@/app/component/formDeleteProduct/page';
@@ -15,20 +16,28 @@ export async function deleteProductAction(id: number) {
   });
 }
 
-// const [updateProducts, setUpdateProducts] = useState<updateProduct | null>(null);
-// export function handleEditProduct(productId: number, data: any) {
-//   fetch(`https://api.escuelajs.co/api/v1/products/${productId}`, {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ ...data }),
-//   })
-//     .then(res => res.json())
-//     .then(res => console.log("Product updated:", res))
-//     .catch(err => console.error(err));
-// }
+const page = () => {
+  const [limit, setLimit] = useState(10);
+  const [fetchedData, setFetchedData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-const page = async () => {
-  const fetchedData = await api.getProducts(10);
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await api.getProducts(limit);
+        setFetchedData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch products');
+        console.error('Error loading products:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, [limit]);
   return (
     <>
     <BannerCosplayNight></BannerCosplayNight>
@@ -39,6 +48,26 @@ const page = async () => {
       color: "var(--foreground)",
     }}
     >
+    <div className='m-4 flex gap-4 justify-center'>
+      <button 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50" 
+        onClick={() => setLimit(Math.max(10, limit - 10))}
+        disabled={limit <= 10}
+      >
+        Previous (Show {Math.max(10, limit - 10)})
+      </button>
+      <span className='flex items-center font-bold text-lg'>Showing: {limit}</span>
+      <button 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+        onClick={() => setLimit(limit + 10)}
+      >
+        Next (Show {limit + 10})
+      </button>
+    </div>
+
+    {loading && <div className='text-center py-8 text-lg'>Loading products...</div>}
+    {error && <div className='text-center py-8 text-lg text-red-600'>Error: {error}</div>}
+
         <div className='flex flex-wrap '>
             {/* {MockProducts.map((item:any)=>{
                     return (
