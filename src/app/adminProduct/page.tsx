@@ -224,7 +224,7 @@ function handleEditProduct(productId: number) {
           className="border rounded p-2 w-full"
           type="text"
           value={formData.image}
-          onChange={(e) => setFormData({ ...formData, image: Number(e.target.value) })}
+          onChange={(e) => setFormData({ ...formData, image: e.target.value })}
         />
       </div>
 
