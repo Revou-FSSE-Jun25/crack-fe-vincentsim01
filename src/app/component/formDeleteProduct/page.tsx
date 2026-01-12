@@ -5,7 +5,7 @@ import Link from "next/link";
 import {Product, ProductFormData, updateProduct} from '@/types/product';
 import {useAuth} from '@/app/context/authContext';
 import { useRouter } from "next/navigation";
-import { deleteProductAction } from "@/app/products/page";
+import { deleteProductAction } from "./../../Products/page";
 
 
 const FormDeleteProduct = (props: any) => {
@@ -26,7 +26,7 @@ const FormDeleteProduct = (props: any) => {
 
   return (
     <div>
-        {userRole === 'admin' && <button className='p-2 bg-red-500 text-white rounded cursor-pointer hover:scale-105 active:90' onClick={() => handleDeleteProduct(productId)}>Delete</button>}
+        {userRole === 'ADMIN' && <button className='p-2 bg-red-500 text-white rounded cursor-pointer hover:scale-105 active:90' onClick={() => handleDeleteProduct(productId)}>Delete</button>}
     </div>
 
   )

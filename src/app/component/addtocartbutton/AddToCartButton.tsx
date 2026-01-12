@@ -4,9 +4,9 @@ import React from "react";
 import { useCart } from "@/app/context/cartContext";
 
 interface Product {
-  id?: number;
-  title?: string;
-  price?: number;
+  id: number;
+  title: string;
+  price: number;
   images?: string[];
   // totalItems: number;
 }

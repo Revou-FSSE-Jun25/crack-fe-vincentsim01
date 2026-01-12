@@ -171,7 +171,7 @@ const page = () => {
                   <div className='flex flex-col flex-start'>
                       {pack.service.map((item) => {
                         return(
-                          <ol class='list-disc list-inside'><li>{item}</li></ol>
+                          <ol className='list-disc list-inside'><li>{item}</li></ol>
                         )
                       })}
                   </div>

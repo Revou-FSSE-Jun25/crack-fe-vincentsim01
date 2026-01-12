@@ -108,7 +108,7 @@ export default function ProductClient({ product, id }: { product: Product; id: n
           <p className="text-gray-600 mt-2">{product?.description}</p>
 
           <Image
-            src={product?.images?.[0] || "/placeholder.png"}
+            src={product?.image || "/placeholder.png"}
             alt={product?.title || "Product image"}
             width={400}
             height={400}

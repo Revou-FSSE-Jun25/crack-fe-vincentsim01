@@ -303,7 +303,7 @@ function handleEditProduct(productId: number) {
                     }
                   />
 
-                  <label className="text-sm font-semibold">Category ID</label>
+                  {/* <label className="text-sm font-semibold">Category ID</label>
                   <input
                     className="border p-2 rounded w-full"
                     type="number"
@@ -314,7 +314,7 @@ function handleEditProduct(productId: number) {
                         categoryId: Number(e.target.value),
                       })
                     }
-                  />
+                  /> */}
 
                   <button
                     type="submit"

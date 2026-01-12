@@ -5,7 +5,10 @@ import Link from "next/link";
 import {Product, ProductFormData, updateProduct} from '@/types/product';
 import {useAuth} from '@/app/context/authContext';
 import { useRouter } from "next/navigation";
-import { handleEditProduct } from "@/app/products/[id]/edit/ProductClient";
+import { handleEditProduct } from "../../Products/[id]/edit/ProductClient";
+
+
+
 
 interface Props {
   productId: number;
@@ -69,7 +72,7 @@ function openUpdateProductModal() {
 
     return (
     <div>
-        {userRole === 'admin' && <button className='p-2 bg-blue-500 text-white rounded cursor-pointer hover:scale-105 active:90' onClick={() => openUpdateProductModal()}>Update</button>}
+        {userRole === 'ADMIN' && <button className='p-2 bg-blue-500 text-white rounded cursor-pointer hover:scale-105 active:90' onClick={() => openUpdateProductModal()}>Update</button>}
           <div className='hidden absolute top-30 left-35 w-80 h-80 bg-gray-300 bg-opacity-40 flex flex-col items-center justify-center' id='updateProductModal'>
           <h2>Update Product</h2>
           <br></br>

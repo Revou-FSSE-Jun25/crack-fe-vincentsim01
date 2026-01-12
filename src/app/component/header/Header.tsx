@@ -92,7 +92,7 @@ const Header = () => {
             <span className='mr-4 cursor-pointer hover:underline active:scale-95' onClick={logout}>Logout</span>
           </div>
         }
-        {userRole === 'admin' && (
+        {userRole === 'ADMIN' && (
           <span className='mr-4 cursor-pointer hover:underline active:scale-95'><Link href='/adminProduct'>Admin Dashboard</Link></span>
         )}
 

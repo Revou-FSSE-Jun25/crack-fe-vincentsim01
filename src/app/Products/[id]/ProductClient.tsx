@@ -154,14 +154,7 @@ export default function ProductClient({ product, id }: { product: Product; id: n
 
 
 
-          <Image
-            src={product?.images?.[0] || "/placeholder.png"}
-            alt={product?.title || "Product image"}
-            width={400}
-            height={400}
-            unoptimized
-            className="my-4 rounded-lg"
-          />
+
           <p className="text-gray-600 mt-2">{product?.description}</p>
           <p className="text-lg text-2xl">${product?.price}</p> */}
 
