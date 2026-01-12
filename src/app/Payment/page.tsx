@@ -31,7 +31,8 @@ export default function PaymentPage() {
 };
 
     const router = useRouter();
-    const userId = getCookie('userId');
+    const userId = getCookie('user-id');
+    console.log("the user id is"+ userId)
     const authToken = getCookie('auth-token');
 
   useEffect(() => {
@@ -39,10 +40,10 @@ export default function PaymentPage() {
     if (storedItems) {
       const items = JSON.parse(storedItems);
       setCheckoutItems(items);
-      const totalPrice = items.reduce(
+      const totalPrice = parseFloat(items.reduce(
         (sum: number, item: Product) => sum + item.price * (item.quantity || 1),
         0
-      );
+      ).toFixed(2));
       setTotal(totalPrice);
     }
   }, []);
@@ -51,22 +52,31 @@ export default function PaymentPage() {
 
   const handlePayment = async() => {
     alert(`Payment successful using ${paymentMethod}! Total: $${total}`);
+    console.log('All cookies:', document.cookie);
+    console.log("User ID:", userId);
+    console.log("Type of User ID:", typeof userId);
+    console.log("type of userid number "+ typeof Number(userId))
+    console.log("Auth Token:", authToken);
+    console.log("the total is"+ total)
+    console.log("Type of total"+typeof total)
+    console.log("type of total parsefloat decimal "+ parseFloat(total.toFixed(2)))
     try{
           const res =await fetch('https://revoubackend6-production.up.railway.app/transactions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json',
-        "Authorization": `Bearer ${authToken}`,
-       },
-      body: JSON.stringify({
-        userId: Number(userId),
-        total:Number(total)
-      })
-    })
-      const data = await res.json();
-      setTransactionId(data.id); 
-    }catch(error){
-      console.error("Error creating transaction", error);
-    }
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json',
+                "Authorization": `Bearer ${authToken}`,
+              },
+              body: JSON.stringify({
+                userId: Number(userId),
+                total:parseFloat(total.toFixed(2))
+              })
+            })
+              const data = await res.json();
+              console.log("transactionid are "+data.id);
+              setTransactionId(data.id); 
+            }catch(error){
+              console.error("Error creating transaction", error);
+            }
 
 
 
@@ -76,7 +86,12 @@ export default function PaymentPage() {
       : [];
 
     await Promise.all(
-      storedItems2items.map((item: Product) =>
+      storedItems2items.map((item: Product) =>{
+
+             console.log("stored2itemsid "+item.id)
+                          console.log("stored2itemstitle "+item.title)
+
+        
         fetch(
           'https://revoubackend6-production.up.railway.app/transaction-items',
           {
@@ -86,16 +101,22 @@ export default function PaymentPage() {
               'Authorization': `Bearer ${authToken}`,
             },
             body: JSON.stringify({
-              transactionId,
-              productId: Number(item.id),
+              transactionId:5,
+              productId: 9,
               quantity: 1,
-              price: Number(item.price),
+              price: "100.00",
             }),
           }
+          
         )
+      }
+   
       )
     );
+    
 
+    console.log("transactionId is "+ transactionId)
+    console.log("transactionId is type "+ typeof transactionId)
 
         await fetch('https://revoubackend6-production.up.railway.app/payments', {
           method: 'POST',
@@ -103,9 +124,9 @@ export default function PaymentPage() {
         "Authorization": `Bearer ${authToken}`, },
           body: JSON.stringify({
             provider: paymentMethod,
-            amount: total,
+            amount: parseFloat(total.toFixed(2)),
             status: "SUCCESS",
-            transactionId
+            transactionId: 1
 
           })
         })
