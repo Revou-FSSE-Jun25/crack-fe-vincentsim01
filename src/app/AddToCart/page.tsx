@@ -34,6 +34,7 @@ export default function CartPage() {
       selectedItems.includes(item.id)
     );
     localStorage.setItem("checkoutItems", JSON.stringify(selectedProducts));
+    console.log(selectedProducts)
     router.push("/Checkout");
   };
 

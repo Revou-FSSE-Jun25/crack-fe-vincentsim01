@@ -1,6 +1,6 @@
-
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Product = {
   id: number;
@@ -9,10 +9,30 @@ type Product = {
   quantity?: number;
 };
 
+interface CheckoutItem {
+  transactionId: number;
+  productId: number;
+  price: number; // or number if you convert it
+  quantity?: number;
+}
+
 export default function PaymentPage() {
   const [checkoutItems, setCheckoutItems] = useState<Product[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [paymentMethod, setPaymentMethod] = useState<string>("credit_card");
+  const [transactionId, setTransactionId] = useState<number | null>(null);
+
+      const getCookie = (name: string): string | null => {
+  if (typeof document === 'undefined') return null;
+  return document.cookie
+    .split('; ')
+    .find(row => row.startsWith(`${name}=`))
+    ?.split('=')[1] || null;
+};
+
+    const router = useRouter();
+    const userId = getCookie('userId');
+    const authToken = getCookie('auth-token');
 
   useEffect(() => {
     const storedItems = localStorage.getItem("checkoutItems");
@@ -27,10 +47,74 @@ export default function PaymentPage() {
     }
   }, []);
 
-  const handlePayment = () => {
+
+
+  const handlePayment = async() => {
     alert(`Payment successful using ${paymentMethod}! Total: $${total}`);
+    try{
+          const res =await fetch('https://revoubackend6-production.up.railway.app/transactions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json',
+        "Authorization": `Bearer ${authToken}`,
+       },
+      body: JSON.stringify({
+        userId: Number(userId),
+        total:Number(total)
+      })
+    })
+      const data = await res.json();
+      setTransactionId(data.id); 
+    }catch(error){
+      console.error("Error creating transaction", error);
+    }
+
+
+
+  const storedItems2 = localStorage.getItem('checkoutItems');
+    const storedItems2items: Product[] = storedItems2
+      ? JSON.parse(storedItems2)
+      : [];
+
+    await Promise.all(
+      storedItems2items.map((item: Product) =>
+        fetch(
+          'https://revoubackend6-production.up.railway.app/transaction-items',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${authToken}`,
+            },
+            body: JSON.stringify({
+              transactionId,
+              productId: Number(item.id),
+              quantity: 1,
+              price: Number(item.price),
+            }),
+          }
+        )
+      )
+    );
+
+
+        await fetch('https://revoubackend6-production.up.railway.app/payments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json',
+        "Authorization": `Bearer ${authToken}`, },
+          body: JSON.stringify({
+            provider: paymentMethod,
+            amount: total,
+            status: "SUCCESS",
+            transactionId
+
+          })
+        })
+        .then(response => response.json())
+
+
     
     localStorage.removeItem("checkoutItems");
+    router.push("/ThankYou");
   };
 
   return (
@@ -68,6 +152,10 @@ export default function PaymentPage() {
               value={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value)}
               className="border border-gray-300 rounded-md p-2 w-full mb-4"
+              style={{
+                background: "var(--background)",
+                color: "var(--foreground)",
+              }}
             >
               <option value="credit_card">💳 Credit Card</option>
               <option value="bank_transfer">🏦 Bank Transfer</option>
