@@ -32,7 +32,7 @@ export default function PaymentPage() {
 
     const router = useRouter();
     const userId = getCookie('user-id');
-    console.log("the user id is"+ userId)
+    console.log("the user id is "+ userId)
     const authToken = getCookie('auth-token');
 
   useEffect(() => {

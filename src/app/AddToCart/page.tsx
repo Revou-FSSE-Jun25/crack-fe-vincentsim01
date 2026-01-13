@@ -9,7 +9,7 @@ import CheckoutPhotoShoot from "@/app/component/checkoutPhotoShoot/page";
 
 export default function CartPage() {
   const { user, logout, isLoading } = useAuth();
-  const { cart, removeFromCart, getTotal, clearCart, addToCart } = useCart();
+  const { cart, removeFromCart, getTotal, clearCart, addToCart, updateQuantity } = useCart();
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const router = useRouter();
     const [isPhotoShootAdded, setIsPhotoShootAdded] = useState<boolean>(false);
@@ -47,6 +47,7 @@ export default function CartPage() {
       ) : (
         <div>
           {cart.map((item) => (
+            
             <div
               key={item.id}
               className="flex justify-between items-center border-b py-2"
@@ -57,10 +58,28 @@ export default function CartPage() {
                   checked={selectedItems.includes(item.id)}
                   onChange={() => handleSelectItem(item.id)}
                 />
-                <span>
+                {/* <span>
                   {item.title} × {item.quantity} — $
                   {item.price * (item.quantity || 1)}
-                </span>
+                </span> */}
+
+                <div className="flex items-center gap-3">
+  <span className="font-medium">{item.title}</span>
+
+    <input
+      type="number"
+      min={1}
+      value={item.quantity ?? 1}
+      onChange={(e) =>
+        updateQuantity(item.id, Math.max(1, Number(e.target.value)))
+      }
+      className="w-20 border border-gray-300 rounded px-2 py-1 text-center"
+    />
+
+          <span>
+            — ${ (item.price * (item.quantity ?? 1)).toFixed(2) }
+          </span>
+        </div>
               </div>
               <button
                 onClick={() => removeFromCart(item.id)}
