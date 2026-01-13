@@ -74,9 +74,13 @@ export default function PaymentPage() {
               const data = await res.json();
               console.log("transactionid are "+data.id);
               setTransactionId(data.id); 
+              localStorage.setItem("transId", data.id.toString());
+              console.log(transactionId)
             }catch(error){
               console.error("Error creating transaction", error);
             }
+
+            console.log("transaction id setelah fetch "+ transactionId )
 
 
 
@@ -85,14 +89,23 @@ export default function PaymentPage() {
       ? JSON.parse(storedItems2)
       : [];
 
+    const transId = localStorage.getItem("transId");
+    console.log("transId adalah "+transId)
+    console.log("transId type "+typeof transId)
+
     await Promise.all(
-      storedItems2items.map((item: Product) =>{
+      storedItems2items.map(async (item: Product) =>{
 
              console.log("stored2itemsid "+item.id)
-                          console.log("stored2itemstitle "+item.title)
+                          console.log("type of itemsid "+typeof item.id)
+            console.log("stored2itemstitle "+item.title)
+            console.log("stored2itemsqty "+item.quantity)
+                        console.log("stored2itemsqty typeof "+typeof item.quantity)
+            console.log("stored2itemsprice "+item.price)
+                        console.log("type of "+typeof item.price)
 
         
-        fetch(
+        const response = await fetch(
           'https://revoubackend6-production.up.railway.app/transaction-items',
           {
             method: 'POST',
@@ -101,22 +114,37 @@ export default function PaymentPage() {
               'Authorization': `Bearer ${authToken}`,
             },
             body: JSON.stringify({
-              transactionId:5,
-              productId: 9,
-              quantity: 1,
-              price: "100.00",
+              transactionId: Number(transId),
+              productId: item.id,
+              quantity: Number(item.quantity) || 1,
+              price: parseFloat(item.price.toString()).toFixed(2)
             }),
           }
           
-        )
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => null);
+          console.error("Failed to create transaction-item:", errorData);
+          console.error("Validation errors:", errorData?.message);
+          console.error("Request body was:", {
+            transactionId: Number(transId),
+            productId: item.id,
+            quantity: Number(item.quantity) || 1,
+            price: parseFloat(item.price.toString())
+          });
+          throw new Error(`Failed to create transaction-item for product ${item.id}: ${response.status} - ${JSON.stringify(errorData?.message)}`);
+        }
+
+        return response.json();
       }
    
       )
     );
     
 
-    console.log("transactionId is "+ transactionId)
-    console.log("transactionId is type "+ typeof transactionId)
+    // console.log("transactionId is "+ transactionId)
+    // console.log("transactionId is type "+ typeof transactionId)
 
         await fetch('https://revoubackend6-production.up.railway.app/payments', {
           method: 'POST',
