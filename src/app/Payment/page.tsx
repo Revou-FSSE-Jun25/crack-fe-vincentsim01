@@ -109,6 +109,7 @@ export default function PaymentPage() {
         const isBooking = [10001, 10002, 10003].includes(item.id);
 
         if(isBooking){
+          // For booking items, first create a transaction-item
           const response = await fetch('https://revoubackend6-production.up.railway.app/transaction-items', {
           method: 'POST',
           headers: {
@@ -123,10 +124,24 @@ export default function PaymentPage() {
             })
         });
 
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => null);
+          console.error("Failed to create transaction-item for booking:", errorData);
+          console.error("Response status:", response.status);
+          console.error("Attempted to create with body:", {
+            transactionId: Number(transId),
+            productId: item.id,
+            quantity: Number(item.quantity) || 1,
+            price: parseFloat(item.price.toString()).toFixed(2)
+          });
+          throw new Error(`Failed to create transaction-item for booking ${item.id}`);
+        }
+
         const responseData = await response.json();
         const transitid = responseData.id;
+        console.log("Transaction-item created with ID:", transitid);
 
-
+          // Then create the booking with the transaction-item ID
           const response2 = await fetch('https://revoubackend6-production.up.railway.app/booking', {
           method: 'POST',
           headers: {
@@ -142,9 +157,23 @@ export default function PaymentPage() {
             })
         });
         
+        if (!response2.ok) {
+          const errorData = await response2.json().catch(() => null);
+          console.error("Failed to create booking:", errorData);
+          console.error("Validation errors:", errorData?.message);
+          console.error("Request body was:", {
+            transactionId: Number(transId),
+            packageId: item.id,
+            userId: Number(userId),
+            bookingDate: new Date().toISOString(),
+            transactionitemId: Number(transitid)
+          });
+          throw new Error(`Failed to create booking for package ${item.id}: ${JSON.stringify(errorData?.message)}`);
+        }
+        
         return response2.json();
         } else{
-
+           // For regular products, only create transaction-item
            const response = await fetch('https://revoubackend6-production.up.railway.app/transaction-items', {
           method: 'POST',
           headers: {
@@ -158,6 +187,12 @@ export default function PaymentPage() {
               price: parseFloat(item.price.toString()).toFixed(2)
             })
         });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => null);
+          console.error("Failed to create transaction-item:", errorData);
+          throw new Error(`Failed to create transaction-item for product ${item.id}`);
+        }
 
         return response.json();
         }
