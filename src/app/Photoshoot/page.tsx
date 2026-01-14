@@ -33,27 +33,27 @@ const page = () => {
 
   const PhotoshootPackage = [
     {
-      id:101,
-      name: "BASIC",
+      id:10001,
+      title: "BASIC",
       price: 100,
       service: [
-        "5 photos","1 dedicated photographer", "1 hour"
+         "1 hour"
       ]
     },
     {
-      id:102,
-      name: "PREMIUM",
+      id:10002,
+      title: "PREMIUM",
       price: 200,
       service: [
-        "10 photos","2 dedicated photographer", "2 hours"
+        "2 hours"
       ]
     },
     {
-      id:103,
-      name: "DELUXE",
+      id:10003,
+      title: "PLATINUM",
       price: 300,
       service: [
-        "20 photos","5 dedicated photographer", "3 hours"
+        "3 hours"
       ]
     }
   ]
@@ -144,7 +144,7 @@ const page = () => {
     <div className='grid grid-cols-3 mt-5 mb-5 ml-3 mr-3 border rounded-md p-5 gap-5'>
           {PhotoshootPackage.map((pack) =>{
               const id = pack.id;
-              const name = pack.name;
+              const name = pack.title;
               const price = pack.price;
               function handlePackageButtonClick(){
                     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");

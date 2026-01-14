@@ -17,7 +17,7 @@ export async function deleteProductAction(id: number) {
 }
 
 const page = () => {
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(12);
   const [fetchedData, setFetchedData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -51,17 +51,17 @@ const page = () => {
     <div className='m-4 flex gap-4 justify-center'>
       <button 
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50" 
-        onClick={() => setLimit(Math.max(10, limit - 10))}
-        disabled={limit <= 10}
+        onClick={() => setLimit(Math.max(12, limit - 12))}
+        disabled={limit <= 12}
       >
-        Previous (Show {Math.max(10, limit - 10)})
+        Previous (Show {Math.max(12, limit - 12)})
       </button>
       <span className='flex items-center font-bold text-lg'>Showing: {limit}</span>
       <button 
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
-        onClick={() => setLimit(limit + 10)}
+        onClick={() => setLimit(limit + 12)}
       >
-        Next (Show {limit + 10})
+        Next (Show {limit + 12})
       </button>
     </div>
 
@@ -124,6 +124,23 @@ const page = () => {
         })}
 
         </div>
+
+            <div className='m-4 flex gap-4 justify-center'>
+      <button 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50" 
+        onClick={() => setLimit(Math.max(12, limit - 12))}
+        disabled={limit <= 12}
+      >
+        Previous (Show {Math.max(12, limit - 12)})
+      </button>
+      <span className='flex items-center font-bold text-lg'>Showing: {limit}</span>
+      <button 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+        onClick={() => setLimit(limit + 12)}
+      >
+        Next (Show {limit + 12})
+      </button>
+    </div>
       
     </div>
         </>

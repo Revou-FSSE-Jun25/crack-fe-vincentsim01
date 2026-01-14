@@ -51,20 +51,23 @@ export interface ProductFormData {
   // const [limit, setLimit] = useState(10);
 
 export const api = {
-  getProducts: async (limit: number = 10) => {
+  getProducts: async (limit: number = 12) => {
     const response = await fetch(`${BASE_URL}products`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
 
-    const start = Math.max(0, limit - 10);
+    const start = Math.max(0, limit - 12);
 
     const data = await response.json();
-    return data.slice(start, limit);
+    const sortedData = data.sort(
+    (a: { id: number }, b: { id: number }) => a.id - b.id
+  );
+    return sortedData.slice(start, limit);
   },
 
-    getProductsMock: async (limit: number = 10) => {
+    getProductsMock: async (limit: number = 12) => {
     const response = MockProducts;
 
     if (!response) {
