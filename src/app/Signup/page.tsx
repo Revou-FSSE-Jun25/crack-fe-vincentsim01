@@ -46,7 +46,7 @@ const Page = () => {
             try {
       console.log('🔑 Attempting signup...');
       
-      const response = await fetch('http://localhost:3001/user/signup', {
+      const response = await fetch('https://revoubackend6-production.up.railway.app/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

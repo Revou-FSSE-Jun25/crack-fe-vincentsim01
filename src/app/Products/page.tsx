@@ -11,7 +11,7 @@ import {MockProducts} from '@/app/data/Product';
 import BannerCosplayNight from '../component/banner/BannerCosplayNight';
 
 export async function deleteProductAction(id: number) {
-  await fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
+  await fetch(`https://revoubackend6-production.up.railway.app/products/${id}`, {
     method: "DELETE",
   });
 }

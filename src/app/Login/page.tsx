@@ -49,7 +49,7 @@ export default function LoginPage() {
     try {
       console.log('🔑 Attempting login...');
       
-      const response = await fetch('http://localhost:3001/auth/login', {
+      const response = await fetch('https://revoubackend6-production.up.railway.app/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -86,7 +86,7 @@ export default function LoginPage() {
       console.log(getCookie('auth-token'));
 
 
-      const userResponse = await fetch(`http://localhost:3001/user/id/${userId || 'me'}/`, {
+      const userResponse = await fetch(`https://revoubackend6-production.up.railway.app/user/id/${userId || 'me'}/`, {
         headers: {
           'Authorization': `Bearer ${getCookie('auth-token')}`,
         },
