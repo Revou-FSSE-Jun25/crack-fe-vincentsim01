@@ -48,12 +48,12 @@ const CheckoutPhotoShoot = () => {
         event.preventDefault();
         setIsLoading(true);
         try{
-            if (formData.package === 'basic') {
-              addToCart({id: 101, title: 'Basic Photoshoot Package', price: 100, quantity: 1});
+            if (formData.package === 'BASIC' || formData.package === 'basic') {
+              addToCart({id: 10001, title: 'Basic Photoshoot Package', price: 100, quantity: 1});
             } else if (formData.package === 'premium') {
-              addToCart({id: 102, title: 'Premium Photoshoot Package', price: 200, quantity: 1});
-            } else if (formData.package === 'deluxe') {
-              addToCart({id: 103, title: 'Deluxe Photoshoot Package', price: 300, quantity: 1});
+              addToCart({id: 10002, title: 'Premium Photoshoot Package', price: 200, quantity: 1});
+            } else if (formData.package === 'PLATINUM' || formData.package === 'platinum') {
+              addToCart({id: 10003, title: 'Platinum Photoshoot Package', price: 300, quantity: 1});
             }
             setIsLoading(false);
 
@@ -111,9 +111,9 @@ const CheckoutPhotoShoot = () => {
             <br></br> */}
             <label htmlFor="package">Select Package:</label>
             <select id="package" name="package" onChange={handleChange} value={formData.package} className='border p-2 rounded'>
-                <option value="basic">Basic</option>
-                <option value="premium">Premium</option>
-                <option value="deluxe">Deluxe</option>
+                <option value="BASIC">Basic</option>
+                <option value="PREMIUM">Premium</option>
+                <option value="PLATINUM">Platinum</option>
             </select>
             <br></br>
             {/* <label htmlFor='phone'>Phone Number:</label>

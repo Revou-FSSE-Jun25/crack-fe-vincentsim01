@@ -97,49 +97,71 @@ export default function PaymentPage() {
       storedItems2items.map(async (item: Product) =>{
 
              console.log("stored2itemsid "+item.id)
-                          console.log("type of itemsid "+typeof item.id)
+            console.log("type of itemsid "+typeof item.id)
             console.log("stored2itemstitle "+item.title)
             console.log("stored2itemsqty "+item.quantity)
-                        console.log("stored2itemsqty typeof "+typeof item.quantity)
+            console.log("stored2itemsqty typeof "+typeof item.quantity)
             console.log("stored2itemsprice "+item.price)
                         console.log("type of "+typeof item.price)
 
         
-        const response = await fetch(
-          'https://revoubackend6-production.up.railway.app/transaction-items',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${authToken}`,
-            },
-            body: JSON.stringify({
-              transactionId: Number(transId),
+        // Check if item is a booking (ID 10001, 10002, or 10003)
+        const isBooking = [10001, 10002, 10003].includes(item.id);
+
+        if(isBooking){
+          const response = await fetch('https://revoubackend6-production.up.railway.app/transaction-items', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({              
+            transactionId: Number(transId),
               productId: item.id,
               quantity: Number(item.quantity) || 1,
               price: parseFloat(item.price.toString()).toFixed(2)
-            }),
-          }
-          
-        );
+            })
+        });
 
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => null);
-          console.error("Failed to create transaction-item:", errorData);
-          console.error("Validation errors:", errorData?.message);
-          console.error("Request body was:", {
+        const responseData = await response.json();
+        const transitid = responseData.id;
+
+
+          const response2 = await fetch('https://revoubackend6-production.up.railway.app/booking', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({              
+              transactionId: Number(transId),
+              packageId: item.id,
+              userId: Number(userId),
+              bookingDate: new Date().toISOString(),
+              transactionitemId: Number(transitid)
+            })
+        });
+        
+        return response2.json();
+        } else{
+
+           const response = await fetch('https://revoubackend6-production.up.railway.app/transaction-items', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({              
             transactionId: Number(transId),
-            productId: item.id,
-            quantity: Number(item.quantity) || 1,
-            price: parseFloat(item.price.toString())
-          });
-          throw new Error(`Failed to create transaction-item for product ${item.id}: ${response.status} - ${JSON.stringify(errorData?.message)}`);
-        }
+              productId: item.id,
+              quantity: Number(item.quantity) || 1,
+              price: parseFloat(item.price.toString()).toFixed(2)
+            })
+        });
 
         return response.json();
-      }
-   
-      )
+        }
+      })
     );
     
 
@@ -154,7 +176,7 @@ export default function PaymentPage() {
             provider: paymentMethod,
             amount: parseFloat(total.toFixed(2)),
             status: "SUCCESS",
-            transactionId: 1
+            transactionId: Number(transId)
 
           })
         })
