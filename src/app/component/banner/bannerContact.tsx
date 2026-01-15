@@ -1,4 +1,6 @@
 
+"use client";
+
 const BannerContact = () => {
   return (
 <div className="relative w-full text-black">

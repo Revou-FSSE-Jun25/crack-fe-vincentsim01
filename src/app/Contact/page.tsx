@@ -1,7 +1,35 @@
+"use client";
 import React from 'react'
 import BannerContact from '../component/banner/bannerContact'
 
 const Contact = () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch('https://revoubackend6-production.up.railway.app/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const body = await res.text();
+        console.error('Contact API error:', res.status, body);
+        alert('Failed to send message. Please try again later.');
+        return;
+      }
+
+      alert('Your message has been sent!');
+      form.reset();
+    } catch (err) {
+      console.error('Error submitting contact form:', err);
+      alert('Network error. Please try again later.');
+    }
+  };
   return (
     <>
     <BannerContact></BannerContact>
@@ -35,14 +63,13 @@ const Contact = () => {
   </div>
 
   {/* Contact Form */}
-  <form className="flex flex-col gap-4" 
-
-      >
+  <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
     <div className="flex flex-col">
       <label htmlFor="name" className="mb-1 font-semibold ">Name</label>
       <input
         type="text"
         id="name"
+        name="name"
         placeholder="Arthur"
         className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-400"
       />
@@ -53,6 +80,7 @@ const Contact = () => {
       <input
         type="email"
         id="email"
+        name="email"
         placeholder="arthur@gmail.com"
         className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-400"
       />
@@ -63,6 +91,7 @@ const Contact = () => {
       <input
         type="tel"
         id="mobile"
+        name="mobile"
         placeholder="11112222"
         className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-400"
       />
@@ -72,6 +101,7 @@ const Contact = () => {
       <label htmlFor="message" className="mb-1 font-semibold ">Message</label>
       <textarea
         id="message"
+        name="message"
         placeholder="Hey, I want to send an enquiry"
         className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-400 resize-none h-24"
       />
