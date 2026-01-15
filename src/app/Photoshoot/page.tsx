@@ -38,7 +38,8 @@ const page = () => {
       price: 100,
       service: [
          "1 hour"
-      ]
+      ],
+        image:"/BASIC.png"
     },
     {
       id:10002,
@@ -46,7 +47,8 @@ const page = () => {
       price: 200,
       service: [
         "2 hours"
-      ]
+      ],
+        image:"/PREMIUM.png"
     },
     {
       id:10003,
@@ -54,7 +56,8 @@ const page = () => {
       price: 300,
       service: [
         "3 hours"
-      ]
+      ],
+        image:"/PLATINUM.png"
     }
   ]
 
@@ -120,19 +123,46 @@ const page = () => {
       </div>
     </div>
 
-    {/* SPECIAL OFFER */}
-    <div className="max-w-3xl mx-auto mb-10 text-center text-lg opacity-90 px-8">
-      Unik Loh menyediakan jasa foto untuk kamu yang telah menjadi pelanggan
-      setia kami.  
-      <br />
-      Dapatkan <b>1x sesi foto dengan potongan harga 40%</b> apabila kamu telah
-      belanja satu set baju.
+    {/* SPECIAL OFFER + GALLERY */}
+    <div className="max-w-5xl mx-auto mb-10 px-6">
+      <div className="bg-gradient-to-r from-green-50 to-white rounded-xl p-6 shadow-md flex flex-col md:flex-row items-center gap-6">
+        <div className="flex-1">
+          <h2 className="text-3xl font-bold">Capture Moments That Last</h2>
+          <p className="mt-3 text-gray-700">
+            Unik Loh menyediakan jasa foto untuk kamu yang telah menjadi pelanggan
+            setia kami. Dapatkan <strong>1x sesi foto dengan potongan harga 40%</strong>
+            apabila kamu telah belanja satu set baju.
+          </p>
+          <div className="mt-4">
+            <button
+              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+              onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
+            >
+              Book Now
+            </button>
+          </div>
+        </div>
+        <div className="flex-1 grid grid-cols-2 gap-3">
+          {/* small gallery */}
+          {[
+            '/cosplay.png',
+            '/cosplay2.png',
+            '/cosplay3.png',
+            '/cosplay4.png',
+          ].map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`Photoshoot ${i + 1}`}
+              className="w-full h-28 object-cover rounded-md shadow-sm"
+            />
+          ))}
+        </div>
+      </div>
     </div>
 
     {/* FORM TITLE */}
-    <h1 className="text-center text-4xl font-bold mt-5 mb-8">
-      BOOK A PHOTO SESSION HERE
-    </h1>
+    <h1 className="text-center text-4xl font-extrabold mt-5 mb-8">BOOK A PHOTO SESSION</h1>
 
     {/* <div className='grid grid-cols-3 mt-5 mb-5 ml-3 mr-3 border rounded-md p-5 gap-5'>
       <div className='border rounded-md flex flex-col items-center'>
@@ -141,55 +171,51 @@ const page = () => {
       <div className='border rounded-md'>PREMIUM</div>
       <div className='border rounded-md'>DELUXE</div>
     </div> */}
-    <div className='grid grid-cols-3 mt-5 mb-5 ml-3 mr-3 border rounded-md p-5 gap-5'>
-          {PhotoshootPackage.map((pack) =>{
-              const id = pack.id;
-              const name = pack.title;
-              const price = pack.price;
-              function handlePackageButtonClick(){
-                    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6 mb-10">
+      {PhotoshootPackage.map((pack) => {
+        const id = pack.id;
+        const name = pack.title;
+        const price = pack.price;
+        const image = pack.image;
 
-                      const isExisting = existingCart.some((item: Product) => item.id === id);
-
-                      if (isExisting) {
-                        alert("Item is already in your cart!");
-                        return;
-                      }
-                        addToCart({id: id, title: name, price: price, quantity: 1});
-
-                          const updatedCart = [...existingCart, {id: id, title: name, price: price, quantity: 1}];
-
-
-                        localStorage.setItem("cart", JSON.stringify(updatedCart));
-
-                        alert(`${name} Package added to cart!`);
-              }
-              return(
-                <div className='border rounded-md flex flex-col items-center p-5'>
-                  <h2 className='text-xl font-bold'>{name}</h2>
-                  <div>${price}</div>
-                  <div className='flex flex-col flex-start'>
-                      {pack.service.map((item) => {
-                        return(
-                          <ol className='list-disc list-inside'><li>{item}</li></ol>
-                        )
-                      })}
-                  </div>
-                  <br></br><br></br>
-                    <button 
-                      onClick={handlePackageButtonClick}
-                      className='p-3 border-radius rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-all duration-1000'              
-                      style={{
-                        background: "var(--foreground)",
-                        color: "var(--background)",
-                        borderColor: "var(--foreground)",
-                      }}
-                    >
-                      Add To Cart</button> 
-                </div>
-              )
-            })
+        function handlePackageButtonClick() {
+          const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+          const isExisting = existingCart.some((item: Product) => item.id === id);
+          if (isExisting) {
+            alert('Item is already in your cart!');
+            return;
           }
+          addToCart({ id: id, title: name, price: price, quantity: 1 });
+          const updatedCart = [...existingCart, { id: id, title: name, price: price, quantity: 1 }];
+          localStorage.setItem('cart', JSON.stringify(updatedCart));
+          alert(`${name} Package added to cart!`);
+        }
+
+        return (
+          <div
+            key={id}
+            className="border rounded-xl p-5 flex flex-col items-center text-center shadow-lg hover:shadow-2xl transition"
+            style={{ borderColor: 'var(--foreground)' }}
+          >
+            <div className="w-full h-48 mb-4">
+              <img src={image} alt={name} className="w-full h-full object-cover rounded-md" />
+            </div>
+            <h3 className="text-2xl font-semibold mb-1">{name}</h3>
+            <div className="text-green-700 font-bold text-lg mb-2">${price}</div>
+            <ul className="text-sm text-gray-600 mb-4">
+              {pack.service.map((item, idx) => (
+                <li key={idx}>• {item}</li>
+              ))}
+            </ul>
+            <button
+              onClick={handlePackageButtonClick}
+              className="mt-auto px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 transition"
+            >
+              Add to cart
+            </button>
+          </div>
+        );
+      })}
     </div>
 
 
