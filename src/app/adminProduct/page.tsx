@@ -9,6 +9,7 @@ import { api } from '@/lib/api/api';
 const AdminProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [offset, setOffset] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [limit, setLimit] = useState(10);
 
   let updateInitialProduct: updateProduct = {
@@ -19,20 +20,23 @@ const AdminProduct = () => {
   }
 
 
-const fetchProducts = () => {
-  fetch(`https://revoubackend6-production.up.railway.app/products`)
-    .then(res => res.json())
-    .then(data => setProducts(data));
+const fetchProducts = async (fetchLimit?: number) => {
+  setLoading(true);
+  try {
+    // use api helper when possible so pagination/limit logic stays consistent
+    const data = await api.getProducts(fetchLimit ?? limit);
+    setProducts(data as Product[]);
+  } catch (err) {
+    console.error("Failed to fetch products:", err);
+  } finally {
+    setLoading(false);
+  }
 };
 
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const data = await api.getProducts(limit);
-      setProducts(data);
-    };
-
-    fetchProducts();
+    // call the shared fetch function which toggles loading
+    fetchProducts(limit);
     // fetch(`https://revoubackend6-production.up.railway.app/products`, {
     //   method: "GET",
     //   headers: {}})
@@ -52,18 +56,26 @@ const fetchProducts = () => {
   const [formData, setFormData] = useState<ProductFormData>(initialAddProduct);
 
   function nextPagination (){
+    const currentLimit = limit;
+    setLoading(true);
+    setOffset((prev) => prev + currentLimit);
+    setLimit((prev) => prev + 10);
 
-    setOffset(offset + limit);
-    setLimit(limit + 10);
-
+    // ensure loading is visible for at least 1 second
+    setTimeout(() => setLoading(false), 2500);
   }
 
   function previousPagination (){
     if (offset === 0) {
       return;
     }
-    setOffset(offset - limit);
-    setLimit(limit - 10);
+    const currentLimit = limit;
+    setLoading(true);
+    setOffset((prev) => Math.max(0, prev - currentLimit));
+    setLimit((prev) => Math.max(10, prev - 10));
+
+    // ensure loading is visible for at least 1 second
+    setTimeout(() => setLoading(false), 2500);
   }
 
 function handleAddProduct(e: any) {
@@ -163,6 +175,9 @@ function handleEditProduct(productId: number) {
         <button className='border p-2 rounded bg-green-500 text-white m-2' onClick={previousPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Previous Page</button>
         <button className='border p-2 rounded bg-green-500 text-white' onClick={nextPagination} style={{background:"var(--foreground)", color:"var(--background)"}}>Next Page</button>
       </div>
+
+
+          {loading && <div className='text-center py-8 text-lg'>Loading products...</div>}
 
 
 

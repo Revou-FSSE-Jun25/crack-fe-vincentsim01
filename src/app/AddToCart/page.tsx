@@ -47,46 +47,71 @@ export default function CartPage() {
       ) : (
         <div>
           {cart.map((item) => (
-            
             <div
               key={item.id}
-              className="flex justify-between items-center border-b py-2"
+              className="flex items-center justify-between gap-4 py-4 border-b last:border-b-0"
             >
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center gap-4">
                 <input
                   type="checkbox"
                   checked={selectedItems.includes(item.id)}
                   onChange={() => handleSelectItem(item.id)}
+                  className="h-5 w-5 text-green-600"
+                  aria-label={`Select ${item.title}`}
                 />
-                {/* <span>
-                  {item.title} × {item.quantity} — $
-                  {item.price * (item.quantity || 1)}
-                </span> */}
 
-                <div className="flex items-center gap-3">
-  <span className="font-medium">{item.title}</span>
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  width={96}
+                  height={96}
+                  className="w-24 h-24 object-cover rounded-md shadow-sm"
+                />
 
-    <input
-      type="number"
-      min={1}
-      value={item.quantity ?? 1}
-      onChange={(e) =>
-        updateQuantity(item.id, Math.max(1, Number(e.target.value)))
-      }
-      className="w-20 border border-gray-300 rounded px-2 py-1 text-center"
-    />
+                <div className="min-w-0">
+                  <div className="text-lg font-semibold truncate" style={{
+                        background: "var(--background)",
+                        color: "var(--forekground)",
+                      }}>{item.title}</div>
+                  <div className="text-sm mt-1"       style={{
+                        background: "var(--background)",
+                        color: "var(--forekground)",
+                      }}>ID: {item.id}</div>
 
-          <span>
-            — ${ (item.price * (item.quantity ?? 1)).toFixed(2) }
-          </span>
-        </div>
+                  <div className="mt-3 flex items-center gap-3" style={{
+                        background: "var(--background)",
+                        color: "var(--forekground)",
+                      }}>
+                    <label className="text-sm text-gray-600">Qty</label>
+                    <input
+                      type="number"
+                      min={1}
+                      value={item.quantity ?? 1}
+                      onChange={(e) =>
+                        updateQuantity(item.id, Math.max(1, Number(e.target.value)))
+                      }
+                      style={{
+                        background: "var(--background)",
+                        color: "var(--forekground)",
+                      }}
+                      className="w-20 border border-gray-300 rounded px-2 py-1 text-center "
+                    />
+                  </div>
+                </div>
               </div>
-              <button
-                onClick={() => removeFromCart(item.id)}
-                className="text-red-500 hover:underline"
-              >
-                Remove
-              </button>
+
+              <div className="flex flex-col items-end justify-between h-full">
+                <div className="text-lg font-bold text-gray-900">${(item.price * (item.quantity ?? 1)).toFixed(2)}</div>
+                <div className="mt-2 flex gap-2">
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="text-sm text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-md transition"
+                    aria-label={`Remove ${item.title}`}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
 

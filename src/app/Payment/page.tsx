@@ -84,7 +84,7 @@ export default function PaymentPage() {
 
 
 
-  const storedItems2 = localStorage.getItem('checkoutItems');
+      const storedItems2 = localStorage.getItem('checkoutItems');
     const storedItems2items: Product[] = storedItems2
       ? JSON.parse(storedItems2)
       : [];
@@ -102,7 +102,7 @@ export default function PaymentPage() {
             console.log("stored2itemsqty "+item.quantity)
             console.log("stored2itemsqty typeof "+typeof item.quantity)
             console.log("stored2itemsprice "+item.price)
-                        console.log("type of "+typeof item.price)
+             console.log("type of "+typeof item.price)
 
         
         // Check if item is a booking (ID 10001, 10002, or 10003)
