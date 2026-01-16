@@ -42,11 +42,13 @@ const CheckoutPhotoShoot = () => {
       const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+
       }
     
       async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
         setIsLoading(true);
+        localStorage.setItem("photoshootDate", formData.photoshootDate);
         try{
             if (formData.package === 'BASIC' || formData.package === 'basic') {
               addToCart({id: 10001, title: 'Basic Photoshoot Package', price: 100, quantity: 1});

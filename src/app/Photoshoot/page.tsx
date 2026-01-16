@@ -181,6 +181,10 @@ const page = () => {
             <button
               className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
               onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
+            style={{
+              background:"var(--background)",
+              color:"var(--foreground)"
+            }}
             >
               Book Now
             </button>

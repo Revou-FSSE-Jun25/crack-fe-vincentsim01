@@ -90,19 +90,14 @@ export default function PaymentPage() {
       : [];
 
     const transId = localStorage.getItem("transId");
-    console.log("transId adalah "+transId)
-    console.log("transId type "+typeof transId)
+    const photoshootDate = localStorage.getItem("photoshootDate")
+    console.log("photoshootDate adalah "+photoshootDate)
+    console.log("photoshootDate type "+typeof photoshootDate)
 
     await Promise.all(
       storedItems2items.map(async (item: Product) =>{
 
-             console.log("stored2itemsid "+item.id)
-            console.log("type of itemsid "+typeof item.id)
-            console.log("stored2itemstitle "+item.title)
-            console.log("stored2itemsqty "+item.quantity)
-            console.log("stored2itemsqty typeof "+typeof item.quantity)
-            console.log("stored2itemsprice "+item.price)
-             console.log("type of "+typeof item.price)
+
 
         
         // Check if item is a booking (ID 10001, 10002, or 10003)
@@ -152,7 +147,8 @@ export default function PaymentPage() {
               transactionId: Number(transId),
               packageId: item.id,
               userId: Number(userId),
-              bookingDate: new Date().toISOString(),
+              // bookingDate: new Date().toISOString(),
+              bookingDate: new Date(photoshootDate),
               transactionitemId: Number(transitid)
             })
         });
