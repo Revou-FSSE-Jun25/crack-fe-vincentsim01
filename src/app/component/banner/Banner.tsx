@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react';  
+import Link from 'next/link';
 
 const Banner = () => {
   return (
@@ -40,7 +41,7 @@ const Banner = () => {
           {/* Call to action button */}
           <div className="mt-8">
             <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-red-600 text-white font-bold text-lg rounded-full overflow-hidden transform transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-red-500/50">
-              <span className="relative z-10">Explore Now</span>
+              <span className="relative z-10"><Link href="/Products">Explore Now</Link></span>
               <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
