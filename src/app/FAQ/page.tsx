@@ -21,8 +21,14 @@ const page = () => {
       <div className="space-y-6">
         {faqs.map((item, index) => (
           <div key={index}>
-            <h2 className="text-xl font-semibold">{item.question}</h2>
-            <p className="text-gray-700 mt-1">{item.answer}</p>
+            <h2 className="text-xl font-semibold"     style={{
+      background: "var(--background)",
+      color: "var(--foreground)",
+    }}>{item.question}</h2>
+            <p className="text-gray-700 mt-1"     style={{
+      background: "var(--background)",
+      color: "var(--foreground)",
+    }}>{item.answer}</p>
           </div>
         ))}
       </div>

@@ -1,16 +1,19 @@
 import React from 'react';
 import BannerBlog from '../component/banner/BannerBlog';
+import { blogPosts } from './data/data';
 
 export default async function BlogPost({ params }: any) {
-  const post = await fetch(
-    `https://shrimo.com/fake-api/blog`,
-    { 
-        method: 'GET',
-        next: { revalidate: 86400 } }
-  )
-  .then(r => r.json())
-  .then(data => data.blogs)
-  ;
+  // const post = await fetch(
+  //   `https://shrimo.com/fake-api/blog`,
+  //   { 
+  //       method: 'GET',
+  //       next: { revalidate: 86400 } }
+  // )
+  // .then(r => r.json())
+  // .then(data => data.blogs)
+  // ;
+
+  const post = blogPosts;
 
 
 
@@ -27,6 +30,7 @@ export default async function BlogPost({ params }: any) {
             key={item.id}
             className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-shadow duration-300"
           >
+            <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-md mb-4" />
             <h1 className="text-xl font-semibold mb-2 text-gray-800">{item.title}</h1>
             <p className="text-gray-600 mb-4">{item.content}</p>
             <p className="text-sm text-gray-400">By {item.author}</p>
