@@ -148,7 +148,7 @@ export default function PaymentPage() {
               packageId: item.id,
               userId: Number(userId),
               // bookingDate: new Date().toISOString(),
-              bookingDate: new Date(photoshootDate),
+              bookingDate: new Date(photoshootDate ?? new Date()).toISOString(),
               transactionitemId: Number(transitid)
             })
         });

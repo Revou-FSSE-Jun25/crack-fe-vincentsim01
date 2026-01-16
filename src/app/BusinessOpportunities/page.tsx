@@ -1,5 +1,5 @@
 import React from 'react'
-import BusinessBanner from '../component/banner/BusinessBanner.tsx';
+import BusinessBanner from '../component/banner/BusinessBanner';
 
 const page = () => {
   return (
