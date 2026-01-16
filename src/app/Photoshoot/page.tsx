@@ -37,7 +37,11 @@ const page = () => {
       title: "BASIC",
       price: 100,
       service: [
-         "1 hour"
+         "1 hour",
+        "1 Costume Look",
+        "5 Edited Photos",
+        "All Preview Files",
+        "Plain Backdrop"
       ],
         image:"/BASIC.png"
     },
@@ -46,7 +50,13 @@ const page = () => {
       title: "PREMIUM",
       price: 200,
       service: [
-        "2 hours"
+        "2 hours",
+        "2 Costume Looks",
+        "15 Edited Photos",
+        "Prop & Effects",
+        "Themed Backdrop"
+
+
       ],
         image:"/PREMIUM.png"
     },
@@ -55,7 +65,11 @@ const page = () => {
       title: "PLATINUM",
       price: 300,
       service: [
-        "3 hours"
+        "3 hours",
+        "Up to 4 People",
+        "20 Edited Photos",
+        "Group Posing Guide",
+        "Smoke/Fog Effect"
       ],
         image:"/PLATINUM.png"
     }
