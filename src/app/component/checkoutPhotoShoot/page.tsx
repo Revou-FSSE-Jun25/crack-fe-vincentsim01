@@ -82,6 +82,7 @@ const CheckoutPhotoShoot = () => {
 
         } finally {
             setIsLoading(false);
+            alert('Photoshoot Session Booked '+formData.package+ ' | '+formData.price+ ' | '+formData.photoshootDate);
         }
 
 

@@ -22,6 +22,7 @@ const page = () => {
 
   const { isLoading, setIsLoading } = useLoading();
   const { addToCart } = useCart();
+  const [thedate, setthedate] = useState('')
 
   const initialValue = {
     photoshootDate: '1 January 2024',
@@ -75,6 +76,16 @@ const page = () => {
     }
   ]
 
+    const saveDate = () => {
+    if (!thedate) {
+      alert("Please select a date");
+      return;
+    }
+
+    localStorage.setItem("photoshootDate",thedate);
+    console.log("Saved:", thedate);
+  };
+
   const [formData, setFormData] = useState(initialValue);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -100,6 +111,8 @@ const page = () => {
     }}
   >
     <PhotoshootBanner />
+
+
 
     {/* INFO GRID */}
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 mb-10 px-8">
@@ -212,6 +225,27 @@ const page = () => {
     {/* FORM TITLE */}
     <h1 className="text-center text-4xl font-extrabold mt-5 mb-8">BOOK A PHOTO SESSION</h1>
 
+{/* {!thedate && ( */}
+  <div className='flex justify-center  rounded-md'>
+  <input
+    type="date"
+    value={thedate}
+onChange={(e) => {
+  const value = e.target.value;
+  setthedate(value);
+  localStorage.setItem("photoshootDate", value);
+}}
+    className="border p-2 rounded-md m-3"
+  />
+  </div>
+{/* // )} */}
+
+    <div>
+
+
+
+    </div>
+
     {/* <div className='grid grid-cols-3 mt-5 mb-5 ml-3 mr-3 border rounded-md p-5 gap-5'>
       <div className='border rounded-md flex flex-col items-center'>
         BASIC
@@ -286,8 +320,10 @@ const page = () => {
             </ul>
             
             {/* Enhanced button with animation */}
+
+
             <button
-              onClick={handlePackageButtonClick}
+              onClick={handlePackageButtonClick, saveDate}
               className="mt-auto group/btn relative px-6 py-3 rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-bold overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/50 w-full"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
