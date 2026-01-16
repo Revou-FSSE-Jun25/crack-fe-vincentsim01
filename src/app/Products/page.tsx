@@ -48,20 +48,37 @@ const page = () => {
       color: "var(--foreground)",
     }}
     >
-    <div className='m-4 flex gap-4 justify-center'>
+    <div className='m-4 flex gap-6 justify-center items-center flex-wrap'>
       <button 
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50" 
+        className="group relative px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none" 
         onClick={() => setLimit(Math.max(12, limit - 12))}
         disabled={limit <= 12}
       >
-        Previous (Show {Math.max(12, limit - 12)})
+        <span className="relative z-10 flex items-center gap-2">
+          <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Previous ({Math.max(12, limit - 12)})
+        </span>
+        <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </button>
-      <span className='flex items-center font-bold text-lg'>Showing: {limit}</span>
+      
+      <div className='flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-100 to-red-100 dark:from-purple-900/30 dark:to-red-900/30 rounded-lg shadow-md'>
+        <span className='font-bold text-lg bg-gradient-to-r from-purple-600 to-red-600 bg-clip-text text-transparent'>Showing:</span>
+        <span className='text-2xl font-bold text-red-600 dark:text-red-400 animate-pulse-slow'>{limit}</span>
+      </div>
+      
       <button 
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+        className="group relative px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/50" 
         onClick={() => setLimit(limit + 12)}
       >
-        Next (Show {limit + 12})
+        <span className="relative z-10 flex items-center gap-2">
+          Next ({limit + 12})
+          <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+        <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </button>
     </div>
 
@@ -125,20 +142,37 @@ const page = () => {
 
         </div>
 
-            <div className='m-4 flex gap-4 justify-center'>
+            <div className='m-4 flex gap-6 justify-center items-center flex-wrap'>
       <button 
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50" 
+        className="group relative px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none" 
         onClick={() => setLimit(Math.max(12, limit - 12))}
         disabled={limit <= 12}
       >
-        Previous (Show {Math.max(12, limit - 12)})
+        <span className="relative z-10 flex items-center gap-2">
+          <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Previous ({Math.max(12, limit - 12)})
+        </span>
+        <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </button>
-      <span className='flex items-center font-bold text-lg'>Showing: {limit}</span>
+      
+      <div className='flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-100 to-red-100 dark:from-purple-900/30 dark:to-red-900/30 rounded-lg shadow-md'>
+        <span className='font-bold text-lg bg-gradient-to-r from-purple-600 to-red-600 bg-clip-text text-transparent'>Showing:</span>
+        <span className='text-2xl font-bold text-red-600 dark:text-red-400 animate-pulse-slow'>{limit}</span>
+      </div>
+      
       <button 
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+        className="group relative px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/50" 
         onClick={() => setLimit(limit + 12)}
       >
-        Next (Show {limit + 12})
+        <span className="relative z-10 flex items-center gap-2">
+          Next ({limit + 12})
+          <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+        <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </button>
     </div>
       

@@ -6,8 +6,8 @@ const ShortIntro = () => {
       {/* Image container - 40% width with animation */}
       <div className='w-[40%] animate-slide-in-left'>
         <img 
-          src='/Closet.jpg' 
-          alt='Closet' 
+          src='/cosplayergroup.png' 
+          alt='cosplayergroup' 
           className='w-full h-auto object-cover rounded-lg shadow-2xl hover:scale-105 transition-transform duration-500 hover:shadow-purple-500/30'
         />
       </div>
