@@ -323,7 +323,7 @@ onChange={(e) => {
 
 
             <button
-              onClick={handlePackageButtonClick, saveDate}
+              onClick={handlePackageButtonClick}
               className="mt-auto group/btn relative px-6 py-3 rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-bold overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/50 w-full"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
