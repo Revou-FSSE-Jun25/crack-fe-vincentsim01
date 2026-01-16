@@ -110,7 +110,10 @@ const CheckoutPhotoShoot = () => {
             <input type="email" id="email" name="email" onChange={handleChange} value={formData.email}   className='border p-2 rounded' placeholder='arthur@example.com'/>
             <br></br> */}
             <label htmlFor="package">Select Package:</label>
-            <select id="package" name="package" onChange={handleChange} value={formData.package} className='border p-2 rounded'>
+            <select id="package" name="package" onChange={handleChange} value={formData.package} className='border p-2 rounded'     style={{
+      background: "var(--background)",
+      color: "var(--foreground)",
+    }}>
                 <option value="BASIC">Basic</option>
                 <option value="PREMIUM">Premium</option>
                 <option value="PLATINUM">Platinum</option>
