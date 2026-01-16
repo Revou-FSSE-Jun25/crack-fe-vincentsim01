@@ -33,7 +33,7 @@ const Footer = () => {
                   <Link href="/Contact" className='hover:underline hover:translate-x-1 transition-all duration-200'>Contact Us</Link>
                   <Link href="/Privacy" className='hover:underline hover:translate-x-1 transition-all duration-200'>Privacy Policy</Link>
                   {/* <Link href="/FAQ" className='hover:underline hover:translate-x-1 transition-all duration-200'>Terms and Conditions</Link> */}
-                  <Link href="/Photoshoot" className='hover:underline hover:translate-x-1 transition-all duration-200'>Delivery and Pickup</Link>
+                  {/* <Link href="/Photoshoot" className='hover:underline hover:translate-x-1 transition-all duration-200'>Delivery and Pickup</Link> */}
               </div>
 
               <div className='flex flex-col justify-start mr-8 gap-2'>
