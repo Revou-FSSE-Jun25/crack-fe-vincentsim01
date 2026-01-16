@@ -50,7 +50,7 @@ const CheckoutPhotoShoot = () => {
         try{
             if (formData.package === 'BASIC' || formData.package === 'basic') {
               addToCart({id: 10001, title: 'Basic Photoshoot Package', price: 100, quantity: 1});
-            } else if (formData.package === 'premium') {
+            } else if (formData.package === 'PREMIUM' || formData.package === 'premium') {
               addToCart({id: 10002, title: 'Premium Photoshoot Package', price: 200, quantity: 1});
             } else if (formData.package === 'PLATINUM' || formData.package === 'platinum') {
               addToCart({id: 10003, title: 'Platinum Photoshoot Package', price: 300, quantity: 1});

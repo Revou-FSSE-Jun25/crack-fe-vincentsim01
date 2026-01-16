@@ -101,7 +101,10 @@ export default function CartPage() {
               </div>
 
               <div className="flex flex-col items-end justify-between h-full">
-                <div className="text-lg font-bold text-gray-900">${(item.price * (item.quantity ?? 1)).toFixed(2)}</div>
+                <div className="text-lg font-bold text-gray-900"     style={{
+      background: "var(--background)",
+      color: "var(--foreground)",
+    }}>${(item.price * (item.quantity ?? 1)).toFixed(2)}</div>
                 <div className="mt-2 flex gap-2">
                   <button
                     onClick={() => removeFromCart(item.id)}
@@ -129,9 +132,33 @@ export default function CartPage() {
               Add On Extra Photoshoot Session
           </button>
 
-          {isPhotoShootAdded ? (<><CheckoutPhotoShoot /> <button onClick={closePhotoShoot}>Close</button></>) : null}
+          {isPhotoShootAdded ? (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+              <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto animate-scale-in">
+                {/* Close button */}
+                <button
+                  onClick={closePhotoShoot}
+                  
+                  className="absolute top-4 right-4 z-10 group p-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-red-500/50"
+                  aria-label="Close checkout"
+                >
+                  <svg className="w-6 h-6 transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                
+                {/* Checkout content */}
+                <div className="p-6">
+                  <CheckoutPhotoShoot />
+                </div>
+              </div>
+            </div>
+          ) : null}
 
-          <h2 className="text-xl mt-4 font-semibold">
+          <h2 className="text-xl mt-4 font-semibold"     style={{
+      background: "var(--background)",
+      color: "var(--foreground)",
+    }}>
             Total: ${getTotal().toFixed(2)}
           </h2>
 

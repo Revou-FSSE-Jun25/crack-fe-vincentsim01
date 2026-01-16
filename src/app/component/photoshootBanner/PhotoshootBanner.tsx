@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useState, useEffect } from "react";
+import CheckoutPhotoShoot from '../checkoutPhotoShoot/page';
 
 
 const PhotoshootBanner = () => {
@@ -13,6 +14,7 @@ const PhotoshootBanner = () => {
     ];
 
     const [index, setIndex] = useState(0);
+    const [showCheckout, setShowCheckout] = useState(false);
 
       useEffect(() => {
         const interval = setInterval(() => {
@@ -22,6 +24,7 @@ const PhotoshootBanner = () => {
         return () => clearInterval(interval);
         }, []);
   return (
+    <>
     <div className="relative w-full overflow-hidden group">
       {/* Image slideshow with overlay */}
       <div className="relative">
@@ -82,7 +85,10 @@ const PhotoshootBanner = () => {
 
           {/* Call to action with pointer events */}
           <div className="mt-8 pointer-events-auto">
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-red-600 text-white font-bold text-lg rounded-full overflow-hidden transform transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-pink-500/50">
+            <button 
+              onClick={() => setShowCheckout(true)}
+              className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-red-600 text-white font-bold text-lg rounded-full overflow-hidden transform transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-pink-500/50"
+            >
               <span className="relative z-10 flex items-center gap-2">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -110,6 +116,29 @@ const PhotoshootBanner = () => {
         ))}
       </div>
     </div>
+
+    {/* Checkout Modal */}
+    {showCheckout && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+        <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto animate-scale-in">
+          {/* Close button */}
+          <button
+            onClick={() => setShowCheckout(false)}
+            className="absolute top-4 right-4 z-10 p-2 bg-red-600 hover:bg-red-700 text-white rounded-full transition-all duration-300 hover:scale-110 shadow-lg"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          {/* Checkout content */}
+          <div className="p-6">
+            <CheckoutPhotoShoot />
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   )
 }
 
