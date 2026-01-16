@@ -23,7 +23,7 @@ const Footer = () => {
                   <h2 className='font-bold text-2xl hover:scale-105 hover:underline'>About Us</h2>
                   <Link href="/Blog" className='hover:underline hover:translate-x-1 transition-all duration-200'>Our Story</Link>
                   <Link href="/Contact" className='hover:underline hover:translate-x-1 transition-all duration-200'>Stores Location</Link>
-                  <Link href="/Blog" className='hover:underline hover:translate-x-1 transition-all duration-200'>CSR</Link>
+                  <Link href="/CSR" className='hover:underline hover:translate-x-1 transition-all duration-200'>CSR</Link>
                   <Link href="/Contact" className='hover:underline hover:translate-x-1 transition-all duration-200'>Business Opportunities</Link>
                   <Link href="/Contact" className='hover:underline hover:translate-x-1 transition-all duration-200'>Careers</Link>
               </div>
@@ -32,7 +32,7 @@ const Footer = () => {
                   <h2 className='font-bold text-2xl hover:scale-105 hover:underline'>Need Help?</h2>
                   <Link href="/FAQ" className='hover:underline hover:translate-x-1 transition-all duration-200'>FAQ</Link>
                   <Link href="/Contact" className='hover:underline hover:translate-x-1 transition-all duration-200'>Contact Us</Link>
-                  <Link href="/FAQ" className='hover:underline hover:translate-x-1 transition-all duration-200'>Privacy Policy</Link>
+                  <Link href="/Privacy" className='hover:underline hover:translate-x-1 transition-all duration-200'>Privacy Policy</Link>
                   <Link href="/FAQ" className='hover:underline hover:translate-x-1 transition-all duration-200'>Terms and Conditions</Link>
                   <Link href="/Photoshoot" className='hover:underline hover:translate-x-1 transition-all duration-200'>Delivery and Pickup</Link>
               </div>
