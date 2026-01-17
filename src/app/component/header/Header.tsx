@@ -67,7 +67,7 @@ const Header = () => {
       </div>
       {/* Overlay for burger menu */}
       <div id='burgercontent-overlay' className='hidden fixed inset-0 z-40 bg-white/80'></div>
-      <div id='burgercontent' className='hidden flex flex-col h-full w-[60vw] max-w-md fixed top-0 left-0 z-50 bg-white border-r p-6 shadow-2xl'>
+      <div id='burgercontent' className='hidden flex flex-col h-full w-full md:w-[60vw] md:max-w-md fixed top-0 left-0 z-50 bg-white border-r p-6 shadow-2xl'>
         <button onClick={burgerIcon} className='absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition'>
           <img src='/rightIcon.png' alt='Close' className='w-6 h-6'/>
         </button>

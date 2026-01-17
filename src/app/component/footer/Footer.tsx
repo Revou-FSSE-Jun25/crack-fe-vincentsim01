@@ -3,29 +3,28 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
-    <div  className=' border border-white flex items-center justify-center'
-    
-                  style={{
-                      background: "var(--foreground)",
-                      color: "var(--background)",
-                  }}
-    
-    
+    <div
+      className='border border-white flex flex-col md:flex-row items-center justify-center'
+      style={{
+        background: "var(--foreground)",
+        color: "var(--background)",
+      }}
     >
-        <div className='w-[65%] inline-block'>
-          <div className='bottom-0 z-50 shadow h-[50vh] flex items-center justify-center font-bold'
+      <div className='w-full md:w-[65%] inline-block'>
+          <div className='bottom-0 z-50 shadow h-[50vh] text-center  md:flex items-center justify-center font-bold'
                   // style={{
                   //     background: "var(--foreground)",
                   //     color: "var(--background)",
                   // }}
             >
-              <div className='flex flex-col justify-start mr-8 gap-2'>
-                  <h2 className='font-bold text-2xl hover:scale-105 hover:underline'>About Us</h2>
+              <div className='flex flex-col justify-start mr-8 gap-2 mb-10'>
+                  <h2 className='font-bold text-2xl hover:scale-105 hover:underline '>About Us</h2>
                   <Link href="/Blog" className='hover:underline hover:translate-x-1 transition-all duration-200'>Our Story</Link>
                   <Link href="/CSR" className='hover:underline hover:translate-x-1 transition-all duration-200'>CSR</Link>
                   <Link href="/BusinessOpportunities" className='hover:underline hover:translate-x-1 transition-all duration-200'>Business Opportunities</Link>
                   {/* <Link href="/Contact" className='hover:underline hover:translate-x-1 transition-all duration-200'>Careers</Link> */}
               </div>
+              <br></br><br></br>
 
               <div className='flex flex-col justify-start mr-8 gap-2'>
                   <h2 className='font-bold text-2xl hover:scale-105 hover:underline'>Need Help?</h2>
@@ -35,6 +34,7 @@ const Footer = () => {
                   {/* <Link href="/FAQ" className='hover:underline hover:translate-x-1 transition-all duration-200'>Terms and Conditions</Link> */}
                   {/* <Link href="/Photoshoot" className='hover:underline hover:translate-x-1 transition-all duration-200'>Delivery and Pickup</Link> */}
               </div>
+              <br></br><br></br>
 
               <div className='flex flex-col justify-start mr-8 gap-2'>
                   <h2 className='font-bold text-2xl hover:scale-105 hover:underline'>Account</h2>
@@ -43,7 +43,7 @@ const Footer = () => {
               </div>
           </div>
         </div>
-        <div className='w-[30%] inline-block'>
+      <div className='w-full md:w-[30%] inline-block'>
           <div className='bottom flex flex-col justify-center items-center z-50 h-[50vh]'
           >
                 <h2 className='font-bold text-2xl hover:scale-105 hover:underline'>Sign Up For Our Newsletter!</h2>
