@@ -6,6 +6,7 @@ import { useLoading } from '../context/loadingContext';
 import PhotoshootBanner from '../component/photoshootBanner/PhotoshootBanner';
 import CheckoutPhotoShoot from "@/app/component/checkoutPhotoShoot/page";  
 import { useCart } from '@/app/context/cartContext';
+import Studio from '../component/Studio/Studio';
 
 interface Product {
   id?: number;
@@ -180,6 +181,8 @@ const page = () => {
       </div>
     </div>
 
+        <Studio></Studio>
+
     {/* SPECIAL OFFER + GALLERY */}
     <div className="max-w-5xl mx-auto mb-10 px-6">
       <div className="bg-gradient-to-r from-green-50 to-white rounded-xl p-6 shadow-md flex flex-col md:flex-row items-center gap-6">
@@ -245,6 +248,7 @@ onChange={(e) => {
 
 
     </div>
+
 
     {/* <div className='grid grid-cols-3 mt-5 mb-5 ml-3 mr-3 border rounded-md p-5 gap-5'>
       <div className='border rounded-md flex flex-col items-center'>
