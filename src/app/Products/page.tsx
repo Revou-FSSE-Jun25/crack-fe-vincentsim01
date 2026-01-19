@@ -86,31 +86,10 @@ const page = () => {
     {error && <div className='text-center py-8 text-lg text-red-600'>Error: {error}</div>}
 
         <div className='flex flex-wrap '>
-            {/* {MockProducts.map((item:any)=>{
-                    return (
-                      <div className='m-5 p-5 border-2 border-black w-[30%] relative flex flex-col items-center' key={item.id}>
-                        <Link href={`/products/${item.id}`}>              
-                          <h2 className='text-4xl font-bold flex justify-center'>{item.title.toUpperCase()}</h2>              
-                          <img className='mx-auto' src={item.images} alt={item.title} width={200} height={200}/>
-                          <div className='flex justify-center'>{item.description}</div>
-                          <div className='flex justify-center text-2xl'>${item.price}</div>
-                        </Link>
-                        <br></br>
-                        <AddToCartButton product={item} />
-                        <FormDeleteProduct productId={item.id} />
-                        <FormUpdateProduct
-                            productId={item?.id} 
-                            productTitle={item?.title} 
-                            productPrice={item?.price} 
-                            productDescription={item?.description} 
-                        />
-                      </div>
-                    )
-            })} */}
 
         {fetchedData.map((item:any)=>{
           return (
-            <div className='m-5 p-6 w-[30%] flex flex-col items-center rounded-xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-transform duration-300' key={item.id}>
+            <div className='m-5 p-6 md:w-[30%] w-[40%] flex flex-col items-center rounded-xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-transform duration-300' key={item.id}>
               <Link href={`/Products/${item.id}`} className="w-full text-center mb-5">              
 
                 <img className='w-full h-full object-cover rounded-lg' src={item.image} alt={item.title} width={150} height={150}/> 

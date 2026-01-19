@@ -66,47 +66,6 @@ export default function UserPage() {
           </div>
         )}
 
-                {/* {user2 && (
-          <div style={{
-            backgroundColor: '#f0f9ff',
-            padding: '20px',
-            borderRadius: '8px',
-            marginBottom: '20px',
-            textAlign: 'left',
-            maxWidth: '600px',
-            margin: '0 auto 20px'
-          }}>
-            <h3>User Profile</h3>
-            <p><strong>ID:</strong> {user2.id}</p>
-
-            <p><strong>Email:</strong> {user2.email}</p>'            
-            <p><strong>Name:</strong> {user2.name}</p>'
-
-            <p><strong>Role:</strong> <span style={{
-              color: userRole === 'admin' ? '#d97706' : '#059669',
-              fontWeight: 'bold'
-            }}>
-              {userRole?.toUpperCase()}
-            </span></p>
-
-            {user2.avatar && (
-              <div style={{ marginTop: '15px', textAlign: 'center' }}>
-                <img
-                  src={user2.avatar}
-                  alt="Profile"
-                  style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                    border: userRole === 'admin' ? '3px solid #d97706' : '3px solid #059669'
-                  }}
-                />
-              </div>
-            )}
-          </div>
-        )} */}
-
         <div style={{ marginBottom: '20px' }}>
           <p>This is a protected user page.</p>
           <p>Any logged-in user can access this dashboard.</p>

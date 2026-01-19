@@ -32,10 +32,7 @@ export const ThemeProvider = ({children}:{children: ReactNode}) => {
         const body = document.body;
         const header = document.getElementById('headerId');
         html.classList.remove(theme === "light" ? "dark" : "light");
-        html.classList.add(theme);
-        // header?.classList.remove(theme === "light" ? "headerIddark" : "headerIdlight");
-        // header?.classList.add(`headerId${theme}`);
-        
+        html.classList.add(theme); 
         localStorage.setItem('theme', theme);
     },[theme]);
 

@@ -61,18 +61,17 @@ export default function RootLayout({
 
         <UserProvider>
           <LoadingProvider>
-          <ThemeProvider>
-            <AuthProvider>
-            <CartProvider>
-            <Header />
-            {children}
-            <Footer />
-            </CartProvider>
-            </AuthProvider>
-          </ThemeProvider>
+            <ThemeProvider>
+              <AuthProvider>
+                <CartProvider>
+                  <Header />
+                    {children}
+                  <Footer />
+                </CartProvider>
+              </AuthProvider>
+            </ThemeProvider>
           </LoadingProvider>
         </UserProvider>
- 
 
       </body>
     </html>

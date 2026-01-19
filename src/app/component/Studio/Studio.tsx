@@ -8,7 +8,6 @@ const Studio = () => {
             <div className='text-center mt-4 text-lg font-semibold text-purple-600 dark:text-purple-400'>
                 Complete studio setup for your perfect photoshoot
             </div>
-
         </div>
       
       {/* Text container - 60% width with animation */}

@@ -10,10 +10,6 @@ const page = () => {
             <div>We are expanding and need your help to spread our wings and helped more people escape mundaness and have experience that is totally Unik Loh!</div>
             <div>Contact Us at opportunities@unikloh.com or call 0812 1111 2222</div>
         </div>
-
-      
-
-  
   )
 }
 

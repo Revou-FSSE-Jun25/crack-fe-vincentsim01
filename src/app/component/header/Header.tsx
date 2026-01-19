@@ -71,6 +71,7 @@ const Header = () => {
         <button onClick={burgerIcon} className='absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition'>
           <img src='/rightIcon.png' alt='Close' className='w-6 h-6'/>
         </button>
+
         <span className='mb-4 text-lg font-semibold'>Menu</span>
         <span className='mb-2 cursor-pointer hover:underline active:scale-95'><Link href="/">Home</Link></span>
         <span className='mb-2 cursor-pointer hover:underline active:scale-95'><Link href='/Products'>Product</Link></span>
@@ -88,10 +89,7 @@ const Header = () => {
                         unoptimized
                         className='hover:scale-105 transition-transform cursor-pointer active:scale-95'
                     />
-            </Link>
-          
-
-            
+            </Link>  
         </span> 
 
         <div className='flex md:hidden items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 bg-white rounded-full shadow-lg p-4' onClick={RightIcon}>
@@ -166,13 +164,7 @@ const Header = () => {
             )}
 
             <ThemeToggle></ThemeToggle>
-
-
         </div>
-
- 
-
-    
     </div>
   )
 }
