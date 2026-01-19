@@ -51,19 +51,18 @@ export default function RootLayout({
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Welcome to Vincent Kiathadi's portfolio website. Let's connect and explore my work." />
+        <meta name="description" content="Welcome to Unik Loh!. Let's escape the mundane and enter the world of fantasy." />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Website Developer In Town | Vincent Kiathadi" />
-        <meta property="og:description" content="Discover award-winning website developer in town. Let's connect and explore all possibilities" />
-        <meta property="og:image" content="https://i.ibb.co/k2pYPYTf/Screenshot-2025-07-03-102851.png" />
+        <meta property="og:title" content="Unik Loh! | Unique Lifestyle Apparel" />
+        <meta property="og:description" content="Start your cosplay journey with Unik Loh! Explore complete unique lifestyle apparel from purchase to photoshoot." />
+        <meta property="og:image" content="/favicon_io/apple-touch-icon.png" />
         <meta property="og:type" content="website" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
         <link rel="icon" href="../assets/icons8-star-48.png" type="image/x-icon" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io" />
         <title>Unik Loh!</title>
       </head>
       {/* ${geistSans.variable} ${geistMono.variable} */}
