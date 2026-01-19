@@ -89,7 +89,7 @@ const page = () => {
 
         {fetchedData.map((item:any)=>{
           return (
-            <div className='m-5 p-6 md:w-[30%] w-[40%] flex flex-col items-center rounded-xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-transform duration-300' key={item.id}>
+            <div className='m-5 p-6 md:w-[30%] w-[35%] flex flex-col items-center rounded-xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-transform duration-300' key={item.id}>
               <Link href={`/Products/${item.id}`} className="w-full text-center mb-5">              
 
                 <img className='w-full h-full object-cover rounded-lg' src={item.image} alt={item.title} width={150} height={150}/> 
