@@ -1,10 +1,10 @@
 
-"use client";
+// "use client";
 // const BASE_URL = 'https://api.escuelajs.co/api/v1/';
 const BASE_URL = 'https://revoubackend6-production.up.railway.app/';
 import { MockProducts } from '@/app/data/Product';
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+// import {useState, useEffect} from 'react';
 
 export interface Product{
     id:number;

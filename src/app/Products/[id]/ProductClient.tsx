@@ -126,14 +126,14 @@ export default function ProductClient({ product, id }: { product: Product; id: n
 
       <div className="flex gap-4 mt-4">
         {product && <AddToCartButton product={product} />}
-        {showAct && (
+        {/* {showAct && (
           <button
             className="border border-gray-800 rounded-md px-4 py-2 text-sm shadow hover:scale-105 active:scale-95 transition-transform"
             onClick={() => (window.location.href = `/Products/${id}/edit`)}
           >
             Edit Product
           </button>
-        )}
+        )} */}
       </div>
     </div>
   </div>
