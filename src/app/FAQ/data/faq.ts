@@ -10,5 +10,13 @@ export const faqs = [
   {
     question: "How long is delivery?",
     answer: "Delivery takes 3–5 business days."
+  },
+  {
+    question: "Can I reschedule the photoshoot?",
+    answer: "Yes, you can reschedule the photoshoot up to 24 hours in advance."
+  },
+  {
+    question: "Is there any warranty?",
+    answer: "Yes, we offer a one-year warranty on all products."
   }
 ];
