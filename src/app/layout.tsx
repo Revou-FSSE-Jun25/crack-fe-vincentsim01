@@ -8,6 +8,7 @@ import {ThemeProvider} from './context/themeContext';
 import { LoadingProvider } from './context/loadingContext';
 import {AuthProvider} from './context/authContext';
 import { CartProvider } from "./context/cartContext";
+// import {link} from "next/link";
 
 
 import "./globals.css";
@@ -83,6 +84,20 @@ export default function RootLayout({
             </ThemeProvider>
           </LoadingProvider>
         </UserProvider>
+
+<a
+  href="https://wa.me/6281211112222"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    src="/whatsapp.png"
+    alt="WhatsApp Chat"
+    className="fixed bottom-5 right-5 w-[50px] h-[50px] z-10"
+  />
+</a>
+
+
 
       </body>
     </html>
