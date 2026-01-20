@@ -69,7 +69,7 @@ const Header = () => {
       <div id='burgercontent-overlay' className='hidden fixed inset-0 z-40 bg-white/80'></div>
       <div id='burgercontent' className='hidden flex flex-col h-full w-full md:w-[60vw] md:max-w-md fixed top-0 left-0 z-50 bg-white border-r p-6 shadow-2xl'>
         <button onClick={burgerIcon} className='absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition'>
-          <img src='/rightIcon.png' alt='Close' className='w-6 h-6'/>
+          <img src='/X.png' alt='Close' className='w-6 h-6'/>
         </button>
 
         <span className='mb-4 text-lg font-semibold'>Menu</span>
@@ -79,21 +79,21 @@ const Header = () => {
         <span className='mb-2 cursor-pointer hover:underline active:scale-95'><Link href="/Blog">Blog</Link></span>
         <span className='mb-2 cursor-pointer hover:underline active:scale-95'><Link href="/FAQ">FAQ</Link></span>
       </div>
-        <span className='mr-4 cursor-pointer hover:underline active:scale-95'>
-            <Link href='/   '>
-                  <Image
-                        src="/logo.png"   // Path in public folder
-                        alt="Logo"
-                        width={80}
-                        height={80}
-                        unoptimized
-                        className='hover:scale-105 transition-transform cursor-pointer active:scale-95'
-                    />
-            </Link>  
-        </span> 
+        <span className='flex justify-center items-end absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' style={{position: 'absolute', left: '50%', top: '100%', transform: 'translate(-50%, -50%)'}}>
+          <Link href='/'>
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={80}
+              height={80}
+              unoptimized
+              className='hover:scale-105 transition-transform cursor-pointer active:scale-95'
+            />
+          </Link>
+        </span>
 
-        <div className='flex md:hidden items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 bg-white rounded-full shadow-lg p-4' onClick={RightIcon}>
-          <img className='w-8 h-8' src='/rightIcon.png' alt='Close menu'/>
+        <div className='flex md:hidden items-center justify-end ml-auto z-40 bg-white rounded-full shadow-lg p-4' onClick={RightIcon}>
+          <img className='w-8 h-8' src='/rightIcon.png' alt='Open right menu'/>
         </div>
 
 
@@ -101,7 +101,7 @@ const Header = () => {
         <div id='righticon-overlay' className='hidden fixed inset-0 z-50 bg-white/90'></div>
         <div id='righticon' className='hidden flex flex-col w-[60vw] max-w-lg h-full justify-start items-start fixed top-0 right-0 border-l p-6 bg-white shadow-2xl z-50'>
           <button onClick={RightIcon} className='absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition'>
-            <img src='/rightIcon.png' alt='Close' className='w-6 h-6'/>
+            <img src='/X.png' alt='Close' className='w-6 h-6'/>
           </button>
           <div className='w-full mt-12 flex flex-col gap-4'>
             <Link href='/Contact/'>Contact Us</Link>
