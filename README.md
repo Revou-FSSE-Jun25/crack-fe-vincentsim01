@@ -48,7 +48,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 Unik Loh! – Readme
 
-![Project Logo](/logo.png)
+![Project Logo](/image/logo.png)
 Unik Loh! 🎭✨
 
 Unik Loh! is a cosplay shop platform built for cosplay enthusiasts. The platform allows users to buy and rent costumes, as well as book professional photography services using either a physical photo studio or a portable photo studio.
@@ -123,7 +123,7 @@ Core Pages
 
 🛍️ Product Page – Browse cosplay costumes for sale or rent
 
-![Product Page](/productpage.png)
+![Product Page](/image/productpage.png)
 
 👤 User Page – User profile and related actions
 
