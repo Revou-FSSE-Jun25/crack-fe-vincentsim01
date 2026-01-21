@@ -123,7 +123,7 @@ Core Pages
 
 🛍️ Product Page – Browse cosplay costumes for sale or rent
 
-(/productpage.png)
+![Product Page](/productpage.png)
 
 👤 User Page – User profile and related actions
 
