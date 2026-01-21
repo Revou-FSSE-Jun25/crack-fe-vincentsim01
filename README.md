@@ -129,6 +129,8 @@ Core Pages
 
 🔐 Login Page
 
+![Login Page](/image/loginpage.png)
+
 📝 Signup Page
 
 🚪 Logout Functionality
@@ -152,6 +154,8 @@ Unik Loh! also offers photography services:
 🏢 Physical Photo Studio – On-site professional photoshoots
 
 🎒 Portable Photo Studio – Mobile setup for flexible locations
+
+![Photoshoot Page](/image/photoshootpage.png)
 
 📦 Deployment Architecture
 
