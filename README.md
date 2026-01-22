@@ -175,6 +175,8 @@ API requests & responses
 
 Database models
 
+![ERD](/image/EDB.png)
+
 Frontend state and props
 
 📌 Summary
