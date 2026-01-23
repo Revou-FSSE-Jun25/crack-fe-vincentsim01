@@ -10,7 +10,7 @@ export const metadata = {
 
 export const revalidate = 0; 
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <Banner2></Banner2>
@@ -37,4 +37,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
