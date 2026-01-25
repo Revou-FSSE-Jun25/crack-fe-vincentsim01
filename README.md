@@ -175,7 +175,7 @@ API requests & responses
 
 Database models
 
-![ERD](/image/EDB.png)
+![ERD](/image/ERD.png)
 
 Frontend state and props
 
