@@ -8,6 +8,7 @@ Netlify (Frontend): https://uniklohfe.netlify.app/
 
 Postman: https://cloudy-rocket-335939.postman.co/workspace/UniklohRailway~4990efb5-2859-427a-9fdb-79453b473d87/request/27407956-5e00e1eb-0003-4ec6-b6e2-12e3d9308378?action=share&creator=27407956&ctx=documentation
 
+Video: https://www.loom.com/share/61a133564e6148d89d9db653ad4143de
 
 ## Getting Started
 
@@ -98,6 +99,8 @@ Testing & Tooling
 
 Postman – API testing
 
+![Postman](/image/postman.png)
+
 GitHub Copilot – Debugging & productivity
 
 ChatGPT & Claude Code – Troubleshooting and development assistance
@@ -139,7 +142,11 @@ Additional Pages
 
 📰 Blog Page – Built using Static Site Generation (SSG)
 
+![Blog Page](/image/blog.png)
+
 ❓ FAQ Page – Also using Static Site Generation (SSG)
+
+![FAQ Page](/image/faq.png)
 
 🧠 State Management
 
@@ -161,9 +168,15 @@ Unik Loh! also offers photography services:
 
 Frontend: Netlify
 
+![Netlify](/image/netlify.png)
+
 Backend: Railway
 
+![Railway](/image/railway.png)
+
 Database: Supabase
+
+![Supabase](/image/supabase.png)
 
 🧑‍💻 Development Notes
 
