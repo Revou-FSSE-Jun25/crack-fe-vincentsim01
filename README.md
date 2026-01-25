@@ -136,6 +136,8 @@ Core Pages
 
 📝 Signup Page
 
+![Signup Page](/image/signup.png)
+
 🚪 Logout Functionality
 
 Additional Pages
